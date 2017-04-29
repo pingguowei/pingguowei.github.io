@@ -94,10 +94,10 @@
 <meta name="keywords" content="苹果味,灵感">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第一篇博客">
-<meta property="og:url" content="http://yoursite.com/2017/04/22/第一篇博客/index.html">
+<meta property="og:url" content="http://itcabin.com/2017/04/22/第一篇博客/index.html">
 <meta property="og:site_name" content="PingGuoWei'Notes">
 <meta property="og:description" content="1234567891011121314151617namespace LWP.CRM.IRepository&amp;#123;    using System;    using System.Collections.Generic;        using LWP.CRM.Model;        /// &amp;lt;summary&amp;gt;    /// 负责每个数据表的数据操作    /// &amp;lt">
-<meta property="og:updated_time" content="2017-04-22T08:16:40.333Z">
+<meta property="og:updated_time" content="2017-04-22T14:12:19.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第一篇博客">
 <meta name="twitter:description" content="1234567891011121314151617namespace LWP.CRM.IRepository&amp;#123;    using System;    using System.Collections.Generic;        using LWP.CRM.Model;        /// &amp;lt;summary&amp;gt;    /// 负责每个数据表的数据操作    /// &amp;lt">
@@ -128,7 +128,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/22/第一篇博客/"/>
+  <link rel="canonical" href="http://itcabin.com/2017/04/22/第一篇博客/"/>
 
 
 
@@ -273,7 +273,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/22/第一篇博客/">
+    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/04/22/第一篇博客/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="pingguowei">
@@ -345,11 +345,27 @@
 
           
             
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/04/22/第一篇博客/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/04/22/第一篇博客/" itemprop="commentsCount"></span>
+                </a>
+              
+            
           
 
           
           
 
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
           
 
           
@@ -369,12 +385,6 @@
         <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">namespace LWP.CRM.IRepository</div><div class="line">&#123;</div><div class="line">    using System;</div><div class="line">    using System.Collections.Generic;</div><div class="line">    </div><div class="line">    using LWP.CRM.Model;</div><div class="line">    </div><div class="line">    /// &lt;summary&gt;</div><div class="line">    /// 负责每个数据表的数据操作</div><div class="line">    /// &lt;/summary&gt;</div><div class="line">    public partial interface IsysUserInfoRepository:IBaseRepository&lt;sysUserInfo&gt;</div><div class="line">    &#123;</div><div class="line">    	#region 针对此表的特殊操作约定写在此处</div><div class="line">    </div><div class="line">        #endregion</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>以上是C#代码，接下来是JS代码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">//单击“单选按钮”完成权限的分配</div><div class="line">    function bindRadioClickEvent() &#123;</div><div class="line">        $(&quot;.selectActions&quot;).click(function () &#123;</div><div class="line">            var actionId = $(this).attr(&quot;ids&quot;);//获取权限编号</div><div class="line">            var isPass=$(this).val();</div><div class="line">            $.post(&quot;/UserInfo/SetUserAction&quot;, &#123; &quot;actionId&quot;: actionId, &quot;userId&quot;: &apos;@userInfo.ID&apos;, &quot;isPass&quot;: isPass &#125;, function (data) &#123;</div><div class="line">                if (data == &quot;ok&quot;) &#123;</div><div class="line">                    $.messager.show(&#123;</div><div class="line">                        title: &apos;提示&apos;,</div><div class="line">                        msg: &apos;权限分配成功&apos;,</div><div class="line">                        showType: &apos;show&apos;</div><div class="line">                    &#125;);</div><div class="line"></div><div class="line">                &#125; else &#123;</div><div class="line">                    $.messager.show(&#123;</div><div class="line">                        title: &apos;提示&apos;,</div><div class="line">                        msg: &apos;权限分配失败&apos;,</div><div class="line">                        showType: &apos;show&apos;</div><div class="line">                    &#125;);</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">    //清除权限</div><div class="line">    function bindClearBtnClickEvent() &#123;</div><div class="line">        $(&quot;.btnClear&quot;).click(function () &#123;</div><div class="line">            var actionId = $(this).attr(&quot;ids&quot;);//获取权限编号</div><div class="line">            var $control = $(this);</div><div class="line">            $.post(&quot;/UserInfo/ClearUserAction&quot;, &#123; &quot;actionId&quot;: actionId, &quot;userId&quot;: &apos;@userInfo.ID&apos; &#125;, function (data) &#123;</div><div class="line">                var serverData = data.split(&apos;:&apos;);</div><div class="line">                if (serverData[0] == &quot;ok&quot;) &#123;</div><div class="line">                    $control.parent().find(&quot;.selectActions&quot;).removeAttr(&quot;checked&quot;);</div><div class="line">                    showMsg(serverData[1]);</div><div class="line">                &#125; else &#123;</div><div class="line">                    showMsg(serverData[1]);</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        &#125;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-      
-    </div>
-
-    <div>
-      
-        
 
       
     </div>
@@ -389,6 +399,28 @@
     <div>
       
         
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      pingguowei
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://itcabin.com/2017/04/22/第一篇博客/" title="第一篇博客">http://itcabin.com/2017/04/22/第一篇博客/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
 
       
     </div>
@@ -445,6 +477,8 @@
 
           
   <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
     
   </div>
 
@@ -568,6 +602,26 @@
 
 
         
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
 
         
       </div>
@@ -692,6 +746,21 @@
 
 
 
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysXxUbdY';
+      var conf = 'c9827a47febaff8473e65037e09159c4';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
 
 
 

@@ -93,7 +93,7 @@
 <meta name="description" content="记录有价值的东西。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="PingGuoWei'Notes">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://itcabin.com/index.html">
 <meta property="og:site_name" content="PingGuoWei'Notes">
 <meta property="og:description" content="记录有价值的东西。">
 <meta name="twitter:card" content="summary">
@@ -126,7 +126,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://itcabin.com/"/>
 
 
 
@@ -273,7 +273,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/22/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/04/22/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="pingguowei">
@@ -347,6 +347,17 @@
           
 
           
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/04/22/hello-world/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://itcabin.com/2017/04/22/hello-world/" class="cy_cmt_count" data-xid="2017/04/22/hello-world/" itemprop="commentsCount" ></span>
+                </a>
+              
             
           
 
@@ -423,7 +434,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/22/第一篇博客/">
+    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/04/22/第一篇博客/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="pingguowei">
@@ -498,6 +509,17 @@
 
           
             
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/04/22/第一篇博客/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://itcabin.com/2017/04/22/第一篇博客/" class="cy_cmt_count" data-xid="2017/04/22/第一篇博客/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
           
 
           
@@ -524,6 +546,7 @@
             <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">namespace LWP.CRM.IRepository</div><div class="line">&#123;</div><div class="line">    using System;</div><div class="line">    using System.Collections.Generic;</div><div class="line">    </div><div class="line">    using LWP.CRM.Model;</div><div class="line">    </div><div class="line">    /// &lt;summary&gt;</div><div class="line">    /// 负责每个数据表的数据操作</div><div class="line">    /// &lt;/summary&gt;</div><div class="line">    public partial interface IsysUserInfoRepository:IBaseRepository&lt;sysUserInfo&gt;</div><div class="line">    &#123;</div><div class="line">    	#region 针对此表的特殊操作约定写在此处</div><div class="line">    </div><div class="line">        #endregion</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>以上是C#代码，接下来是JS代码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">//单击“单选按钮”完成权限的分配</div><div class="line">    function bindRadioClickEvent() &#123;</div><div class="line">        $(&quot;.selectActions&quot;).click(function () &#123;</div><div class="line">            var actionId = $(this).attr(&quot;ids&quot;);//获取权限编号</div><div class="line">            var isPass=$(this).val();</div><div class="line">            $.post(&quot;/UserInfo/SetUserAction&quot;, &#123; &quot;actionId&quot;: actionId, &quot;userId&quot;: &apos;@userInfo.ID&apos;, &quot;isPass&quot;: isPass &#125;, function (data) &#123;</div><div class="line">                if (data == &quot;ok&quot;) &#123;</div><div class="line">                    $.messager.show(&#123;</div><div class="line">                        title: &apos;提示&apos;,</div><div class="line">                        msg: &apos;权限分配成功&apos;,</div><div class="line">                        showType: &apos;show&apos;</div><div class="line">                    &#125;);</div><div class="line"></div><div class="line">                &#125; else &#123;</div><div class="line">                    $.messager.show(&#123;</div><div class="line">                        title: &apos;提示&apos;,</div><div class="line">                        msg: &apos;权限分配失败&apos;,</div><div class="line">                        showType: &apos;show&apos;</div><div class="line">                    &#125;);</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">    //清除权限</div><div class="line">    function bindClearBtnClickEvent() &#123;</div><div class="line">        $(&quot;.btnClear&quot;).click(function () &#123;</div><div class="line">            var actionId = $(this).attr(&quot;ids&quot;);//获取权限编号</div><div class="line">            var $control = $(this);</div><div class="line">            $.post(&quot;/UserInfo/ClearUserAction&quot;, &#123; &quot;actionId&quot;: actionId, &quot;userId&quot;: &apos;@userInfo.ID&apos; &#125;, function (data) &#123;</div><div class="line">                var serverData = data.split(&apos;:&apos;);</div><div class="line">                if (serverData[0] == &quot;ok&quot;) &#123;</div><div class="line">                    $control.parent().find(&quot;.selectActions&quot;).removeAttr(&quot;checked&quot;);</div><div class="line">                    showMsg(serverData[1]);</div><div class="line">                &#125; else &#123;</div><div class="line">                    showMsg(serverData[1]);</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        &#125;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+
           
         
       
@@ -687,6 +710,26 @@
 
 
         
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
 
         
       </div>
@@ -807,6 +850,10 @@
 
 
 
+
+  
+    <script id="cy_cmt_num" src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cysXxUbdY"></script>
+  
 
 
 

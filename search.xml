@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2017%2F04%2F22%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+        <tag>编程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[第一篇博客]]></title>
+    <url>%2F2017%2F04%2F22%2F%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%2F</url>
+    <content type="text"><![CDATA[1234567891011121314151617namespace LWP.CRM.IRepository&#123; using System; using System.Collections.Generic; using LWP.CRM.Model; /// &lt;summary&gt; /// 负责每个数据表的数据操作 /// &lt;/summary&gt; public partial interface IsysUserInfoRepository:IBaseRepository&lt;sysUserInfo&gt; &#123; #region 针对此表的特殊操作约定写在此处 #endregion &#125;&#125; 以上是C#代码，接下来是JS代码 123456789101112131415161718192021222324252627282930313233343536373839//单击“单选按钮”完成权限的分配 function bindRadioClickEvent() &#123; $(&quot;.selectActions&quot;).click(function () &#123; var actionId = $(this).attr(&quot;ids&quot;);//获取权限编号 var isPass=$(this).val(); $.post(&quot;/UserInfo/SetUserAction&quot;, &#123; &quot;actionId&quot;: actionId, &quot;userId&quot;: &apos;@userInfo.ID&apos;, &quot;isPass&quot;: isPass &#125;, function (data) &#123; if (data == &quot;ok&quot;) &#123; $.messager.show(&#123; title: &apos;提示&apos;, msg: &apos;权限分配成功&apos;, showType: &apos;show&apos; &#125;); &#125; else &#123; $.messager.show(&#123; title: &apos;提示&apos;, msg: &apos;权限分配失败&apos;, showType: &apos;show&apos; &#125;); &#125; &#125;); &#125;); &#125; //清除权限 function bindClearBtnClickEvent() &#123; $(&quot;.btnClear&quot;).click(function () &#123; var actionId = $(this).attr(&quot;ids&quot;);//获取权限编号 var $control = $(this); $.post(&quot;/UserInfo/ClearUserAction&quot;, &#123; &quot;actionId&quot;: actionId, &quot;userId&quot;: &apos;@userInfo.ID&apos; &#125;, function (data) &#123; var serverData = data.split(&apos;:&apos;); if (serverData[0] == &quot;ok&quot;) &#123; $control.parent().find(&quot;.selectActions&quot;).removeAttr(&quot;checked&quot;); showMsg(serverData[1]); &#125; else &#123; showMsg(serverData[1]); &#125; &#125;); &#125;); &#125; document.getElementById(“sohuplayer”).innerHTML = createSHPlayer({ bid: 88945109, autoplay: false, vars:{“enforceHTML5”: true}, width: 640, height: 480, getHTML: true, showCtrlBar: 0, channelSrc: 11510001, lqd :17819, lcode:”AAAAGCNk-Z-D1OxzBPwySTX1pmGcM9g0Qq2GNQ..xdl”});]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>苹果味</tag>
+        <tag>灵感</tag>
+      </tags>
+  </entry>
+</search>

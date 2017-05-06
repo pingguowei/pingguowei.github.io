@@ -1,0 +1,1059 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript,编码规范," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="前言好的编码规范可以尽可能的减少一个软件的维护成本，并且几乎没有任何一个软件，在其整个生命周期中，均由最初的开发人员来维护；好的编码规范可以改善软件的可读性，可以让开发人员尽快而彻底地理解新的代码；好的编码规范可以最大限度的提高团队开发的合作效率；长期的规范性编码还可以让开发人员养成好的编码习惯，甚至锻炼出更加严谨的思维。 不规范写法举例句尾没有分号1var isHotel = json.type">
+<meta name="keywords" content="javascript,编码规范">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript编码规范">
+<meta property="og:url" content="http://itcabin.com/2017/05/06/JavaScript编码规范/index.html">
+<meta property="og:site_name" content="PingGuoWei'Notes">
+<meta property="og:description" content="前言好的编码规范可以尽可能的减少一个软件的维护成本，并且几乎没有任何一个软件，在其整个生命周期中，均由最初的开发人员来维护；好的编码规范可以改善软件的可读性，可以让开发人员尽快而彻底地理解新的代码；好的编码规范可以最大限度的提高团队开发的合作效率；长期的规范性编码还可以让开发人员养成好的编码习惯，甚至锻炼出更加严谨的思维。 不规范写法举例句尾没有分号1var isHotel = json.type">
+<meta property="og:updated_time" content="2017-05-06T07:43:40.179Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript编码规范">
+<meta name="twitter:description" content="前言好的编码规范可以尽可能的减少一个软件的维护成本，并且几乎没有任何一个软件，在其整个生命周期中，均由最初的开发人员来维护；好的编码规范可以改善软件的可读性，可以让开发人员尽快而彻底地理解新的代码；好的编码规范可以最大限度的提高团队开发的合作效率；长期的规范性编码还可以让开发人员养成好的编码习惯，甚至锻炼出更加严谨的思维。 不规范写法举例句尾没有分号1var isHotel = json.type">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '苹果味'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://itcabin.com/2017/05/06/JavaScript编码规范/"/>
+
+
+
+
+
+  <title>JavaScript编码规范 | PingGuoWei'Notes</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PingGuoWei'Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/05/06/JavaScript编码规范/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pingguowei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/freeofwing.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PingGuoWei'Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JavaScript编码规范
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-06T12:25:43+08:00">
+                2017-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/05/06/JavaScript编码规范/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/05/06/JavaScript编码规范/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>好的编码规范可以尽可能的减少一个软件的维护成本，并且几乎没有任何一个软件，在其整个生命周期中，均由最初的开发人员来维护；好的编码规范可以改善软件的可读性，可以让开发人员尽快而彻底地理解新的代码；好的编码规范可以最大限度的提高团队开发的合作效率；长期的规范性编码还可以让开发人员养成好的编码习惯，甚至锻炼出更加严谨的思维。</p>
+<h3 id="不规范写法举例"><a href="#不规范写法举例" class="headerlink" title="不规范写法举例"></a>不规范写法举例</h3><h4 id="句尾没有分号"><a href="#句尾没有分号" class="headerlink" title="句尾没有分号"></a>句尾没有分号</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> isHotel = json.type == <span class="string">"hotel"</span> ? <span class="literal">true</span> : <span class="literal">false</span></div></pre></td></tr></table></figure>
+<h4 id="变量命名各种各样"><a href="#变量命名各种各样" class="headerlink" title="变量命名各种各样"></a>变量命名各种各样</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> is_hotel;</div><div class="line"><span class="keyword">var</span> isHotel;</div><div class="line"><span class="keyword">var</span> ishotel;</div></pre></td></tr></table></figure>
+<h4 id="if缩写"><a href="#if缩写" class="headerlink" title="if缩写"></a>if缩写</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (isHotel)</div><div class="line">    <span class="built_in">console</span>.log(<span class="literal">true</span>)</div><div class="line"><span class="keyword">else</span></div><div class="line">    <span class="built_in">console</span>.log(<span class="literal">false</span>)</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h4 id="使用eval"><a href="#使用eval" class="headerlink" title="使用eval"></a>使用eval</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> json = <span class="built_in">eval</span>(jsonText);</div><div class="line"></div><div class="line"><span class="comment">/* eval 好不好取决于怎么使用它，一般认为的缺点：</span></div><div class="line">   1. 可读性非常差</div><div class="line">   2. 不好再做优化和编译</div><div class="line">   3. 会轻微增加性能消耗</div><div class="line">   4. 不安全，比如 eval input 的值 */</div></pre></td></tr></table></figure>
+<h4 id="变量未定义到处都是"><a href="#变量未定义到处都是" class="headerlink" title="变量未定义到处都是"></a>变量未定义到处都是</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> isHotel = <span class="string">'true'</span>;</div><div class="line">    .......</div><div class="line"></div><div class="line">    var html = isHotel ? <span class="string">'&lt;p&gt;hotel&lt;/p&gt;'</span> : <span class="string">""</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="超长函数"><a href="#超长函数" class="headerlink" title="超长函数"></a>超长函数</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> isHotel = <span class="string">'true'</span>;</div><div class="line">    <span class="comment">//....... 此处省略500行</span></div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="………"><a href="#………" class="headerlink" title="………."></a>……….</h4><p><strong>书写不规范的代码让我们难以维护，有时候也让我们头疼。</strong></p>
+<p><strong>（禁止）、（必须）等字眼，在这里只是表示强调，未严格要求。</strong></p>
+<h3 id="前端规范之JavaScript"><a href="#前端规范之JavaScript" class="headerlink" title="前端规范之JavaScript"></a>前端规范之JavaScript</h3><h4 id="tab键用（必须）用四个空格代替"><a href="#tab键用（必须）用四个空格代替" class="headerlink" title="tab键用（必须）用四个空格代替"></a>tab键用（必须）用四个空格代替</h4><p>​    因为在不同系统的编辑工具对tab解析不一样，windows下的tab键是占四个空格的位置，而在linux下会变成占八个空格的位置（除非你自己设定了tab键所占的位置长度）。</p>
+<p>　　一些童鞋可能会有疑问，tab键换成四个空格，多麻烦啊~</p>
+<p>　　其实不然，我平时用sublime text比较多，在这个工具中可以对tab键进行设置。</p>
+<h4 id="每句代码后（必须）加”-”"><a href="#每句代码后（必须）加”-”" class="headerlink" title="每句代码后（必须）加”;”"></a>每句代码后（<strong>必须</strong>）加”;”</h4><p> 这个是要引起注意的，比如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">a = b        <span class="comment">// 赋值</span></div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">//....</span></div><div class="line">&#125;)()         <span class="comment">// 自执行函数</span></div></pre></td></tr></table></figure>
+<p> 未加分号，结果被解析成</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a = b(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//...&#125;)()  //将b()()返回的结果赋值给a</span></div></pre></td></tr></table></figure>
+<p>这是截然不同的两个结果，所以对于这个问题必须引起重视！！！</p>
+<h4 id="变量、常量、类的命名按（必须）以下规则执行："><a href="#变量、常量、类的命名按（必须）以下规则执行：" class="headerlink" title="变量、常量、类的命名按（必须）以下规则执行："></a>变量、常量、类的命名按（必须）以下规则执行：</h4><ol>
+<li><h5 id="变量：必须采用骆驼峰的命名且首字母小写"><a href="#变量：必须采用骆驼峰的命名且首字母小写" class="headerlink" title="变量：必须采用骆驼峰的命名且首字母小写"></a><strong>变量：必须采用骆驼峰的命名且首字母小写</strong></h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 正确的命名</span></div><div class="line"> <span class="keyword">var</span> isHotel,</div><div class="line">     isHotelBeijing,</div><div class="line">     isHotelBeijingHandian;</div><div class="line"></div><div class="line"> <span class="comment">// 不推荐的命名</span></div><div class="line"> <span class="keyword">var</span> is_Hotel,</div><div class="line">     ishotelbeijing,</div><div class="line">     IsHotelBeiJing;</div></pre></td></tr></table></figure>
+</li>
+<li><p>常量：必须采用全大写的命名，且单词以_分割**，常量通常用于ajax请求url，和一些不会改变的数据</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 正确的命名</span></div><div class="line">  <span class="keyword">var</span> HOTEL_GET_URL = <span class="string">'http://map.baidu.com/detail'</span>,</div><div class="line">      PLACE_TYPE = <span class="string">'hotel'</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><h5 id="类：必须采用骆驼峰的命名且首字母大写，如："><a href="#类：必须采用骆驼峰的命名且首字母大写，如：" class="headerlink" title="类：必须采用骆驼峰的命名且首字母大写，如："></a><strong>类：必须采用骆驼峰的命名且首字母大写</strong>，如：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 正确的写法</span></div><div class="line"> <span class="keyword">var</span> FooAndToo = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">     <span class="keyword">this</span>.name = name;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><h5 id="空格的使用"><a href="#空格的使用" class="headerlink" title="空格的使用"></a><strong>空格的使用</strong></h5><p><strong>1.if中的空格，先上例子</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">//正确的写法</span></div><div class="line">  <span class="keyword">if</span> (isOk) &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">"ok"</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">//不推荐的写法</span></div><div class="line">  <span class="keyword">if</span>(isOk)&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">"ok"</span>);</div><div class="line">  &#125;</div><div class="line"><span class="comment">/* ()中的判断条件前后都(必须)加空格</span></div><div class="line">   ()里的判断前后(禁止)加空格，如：正确的写法: if (isOk)；不推荐的写法:    if ( isOk ) */</div></pre></td></tr></table></figure>
+<p>2.<strong>switch中的空格, 先上例子</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//正确的写法</span></div><div class="line">  <span class="keyword">switch</span>(name) &#123;</div><div class="line">      <span class="keyword">case</span> <span class="string">"hotel"</span>:</div><div class="line">          <span class="built_in">console</span>.log(name);</div><div class="line">          <span class="keyword">break</span>;</div><div class="line"></div><div class="line">      <span class="keyword">case</span> <span class="string">"moive"</span>:</div><div class="line">          <span class="built_in">console</span>.log(name);</div><div class="line">          <span class="keyword">break</span>;</div><div class="line"></div><div class="line">      <span class="keyword">default</span>:</div><div class="line">          <span class="comment">// code</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">//不推荐的写法</span></div><div class="line">  <span class="keyword">switch</span> (name) &#123;                     <span class="comment">// switch 后不应该有空格, 正确的写法: switch(name) &#123; // code</span></div><div class="line">      <span class="keyword">case</span> <span class="string">"hotel"</span>:</div><div class="line">          <span class="built_in">console</span>.log(name);</div><div class="line">      <span class="keyword">break</span>;                          <span class="comment">// break; 应该和console.log对齐</span></div><div class="line">      <span class="keyword">case</span> <span class="string">"movie"</span>:                   <span class="comment">// 每个case之前需要有换行</span></div><div class="line">          <span class="built_in">console</span>.log(name);</div><div class="line">      <span class="keyword">break</span>;                          <span class="comment">// break; 应该和console.log对齐</span></div><div class="line"></div><div class="line">      <span class="keyword">default</span>:</div><div class="line">          <span class="comment">// code</span></div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>3.<strong>for中的空格，先上例子</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">// 正确的写法</span></div><div class="line">  <span class="keyword">var</span> names = [<span class="string">"hotel"</span>, <span class="string">"movie"</span>],</div><div class="line">      i, len;</div><div class="line"></div><div class="line">  <span class="keyword">for</span> (i=<span class="number">0</span>, len=names.length; i &lt; len; i++) &#123;</div><div class="line">      <span class="comment">// code</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 不推荐的写法</span></div><div class="line">  <span class="keyword">var</span> names = [<span class="string">"hotel"</span>, <span class="string">"movie"</span>],</div><div class="line">      i, len;</div><div class="line"></div><div class="line">  <span class="keyword">for</span>(i = <span class="number">0</span>, len = names.length;i &lt; len;i++) &#123;          <span class="comment">// for后应该有空格，每个`;`号后需要有空格，变量的赋值不应该有空格</span></div><div class="line">      <span class="comment">// code</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line"><span class="comment">/* for后（必须）加空格</span></div><div class="line">   每个;后（必须）加空格</div><div class="line">   ()中禁止用var声明变量; 且变量的赋值 = 前后（禁止）加空格 */</div></pre></td></tr></table></figure>
+<p>4.<strong>function 中的空格, 先上例子</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">// 正确的写法</span></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">call</span>(<span class="params">name</span>) </span>&#123;</div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">var</span> cell = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">  &#125;;</div><div class="line"></div><div class="line">  <span class="comment">// 不推荐的写法</span></div><div class="line">  <span class="keyword">var</span> call = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123; </div><div class="line">      <span class="comment">// code</span></div><div class="line">  &#125;</div><div class="line">  </div><div class="line"><span class="comment">/* 参数的反括号后（必须）加空格</span></div><div class="line">   function 后（必须）加空格 */</div></pre></td></tr></table></figure>
+<p>5.<strong>var 中空格及定义，先上例子</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">// 一个推荐的var写法组</span></div><div class="line">  <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</div><div class="line">      <span class="keyword">var</span> code = <span class="number">1</span> + <span class="number">1</span>,</div><div class="line">          json = <span class="built_in">JSON</span>.parse(res),</div><div class="line">          type, html;</div><div class="line"></div><div class="line">      <span class="comment">// code</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line"><span class="comment">/* 声明变量 = 前后（必须）添加空格</span></div><div class="line">   每个变量的赋值声明以,结束后（必须）换行进行下一个变量赋值声明</div><div class="line"> （推荐）将所有不需要进行赋值的变量声明放置最后一行，且变量之间不需要换行</div><div class="line"> （推荐）当一组变量声明完成后，空一行后编写其余代码 */</div></pre></td></tr></table></figure>
+<p>6.<strong>在同一个函数内部，局部变量的声明必须置于顶端</strong></p>
+<p>因为即使放到中间，js解析器也会提升至顶部（hosting）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 正确的书写</span></div><div class="line"><span class="keyword">var</span> clear = <span class="function"><span class="keyword">function</span>(<span class="params">el</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> id = el.id,</div><div class="line">        name = el.getAttribute(<span class="string">"data-name"</span>);</div><div class="line"></div><div class="line">    .........</div><div class="line">    return <span class="literal">true</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 不推荐的书写</span></div><div class="line"><span class="keyword">var</span> clear = <span class="function"><span class="keyword">function</span>(<span class="params">el</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> id = el.id;</div><div class="line"></div><div class="line">    ......</div><div class="line"></div><div class="line">    var name = el.getAttribute(<span class="string">"data-name"</span>);</div><div class="line"></div><div class="line">    .........</div><div class="line">    return <span class="literal">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>7.<strong>块内函数必须用局部变量声明</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 错误的写法</span></div><div class="line"> <span class="keyword">var</span> call = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">     <span class="keyword">if</span> (name == <span class="string">"hotel"</span>) &#123;</div><div class="line">         <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">             <span class="built_in">console</span>.log(<span class="string">"hotel foo"</span>);</div><div class="line">         &#125;</div><div class="line">     &#125;</div><div class="line"></div><div class="line">     foo &amp;&amp; foo();</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="comment">// 推荐的写法</span></div><div class="line"> <span class="keyword">var</span> call = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">     <span class="keyword">var</span> foo;</div><div class="line"></div><div class="line">     <span class="keyword">if</span> (name == <span class="string">"hotel"</span>) &#123;</div><div class="line">         foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">             <span class="built_in">console</span>.log(<span class="string">"hotel foo"</span>);</div><div class="line">         &#125;</div><div class="line">     &#125;</div><div class="line"></div><div class="line">     foo &amp;&amp; foo();</div><div class="line"> &#125;</div><div class="line"><span class="comment">/* 引起的bug：第一种写法foo的声明被提前了; 调用call时：第一种写法会调用foo函数，第二种写法不会调用foo函数 */</span></div></pre></td></tr></table></figure>
+<p>8.<strong>（禁止）使用eval，采取$.parseJSON</strong></p>
+<p><strong>三个原因：</strong></p>
+<ul>
+<li><p>有<strong>注入</strong>风险，尤其是ajax返回数据</p>
+</li>
+<li><p>不方便<strong>debug</strong></p>
+</li>
+<li><p><strong>效率低</strong>，eval是一个执行效率很低的函数</p>
+</li>
+<li><p><strong>建议：</strong></p>
+<p>　　使用<strong>new Function</strong>来代替eval的使用，最好就别用。</p>
+</li>
+</ul>
+<p>9.<strong>除了三目运算，if,else等（禁止）简写</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 正确的书写</span></div><div class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</div><div class="line">    alert(name);</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(name);</div><div class="line"><span class="comment">// 不推荐的书写</span></div><div class="line"><span class="keyword">if</span> (<span class="literal">true</span>)</div><div class="line">    alert(name);</div><div class="line"><span class="built_in">console</span>.log(name);</div><div class="line"><span class="comment">// 不推荐的书写</span></div><div class="line"><span class="keyword">if</span> (<span class="literal">true</span>)</div><div class="line">alert(name);</div><div class="line"><span class="built_in">console</span>.log(name)</div></pre></td></tr></table></figure>
+<p>10.<strong>（推荐）在需要以{}闭合的代码段前增加换行，如：for if</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 没有换行，小的代码段无法区分</span></div><div class="line"> <span class="keyword">if</span> (wl &amp;&amp; wl.length) &#123;</div><div class="line">     <span class="keyword">for</span> (i = <span class="number">0</span>, l = wl.length; i &lt; l; ++i) &#123;</div><div class="line">         p = wl[i];</div><div class="line">         type = Y.Lang.type(r[p]);</div><div class="line">         <span class="keyword">if</span> (s.hasOwnProperty(p)) &#123;</div><div class="line">             <span class="keyword">if</span> (merge &amp;&amp; type == <span class="string">'object'</span>) &#123;</div><div class="line">                 Y.mix(r[p], s[p]);</div><div class="line">             &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ov || !(p <span class="keyword">in</span> r)) &#123;</div><div class="line">                 r[p] = s[p];</div><div class="line">             &#125;</div><div class="line">         &#125;</div><div class="line">     &#125;</div><div class="line"> &#125;</div><div class="line"> <span class="comment">// 有了换行，逻辑清楚多了</span></div><div class="line"> <span class="keyword">if</span> (wl &amp;&amp; wl.length) &#123;</div><div class="line"></div><div class="line">     <span class="keyword">for</span> (i = <span class="number">0</span>, l = wl.length; i &lt; l; ++i) &#123;</div><div class="line">         p = wl[i];</div><div class="line">         type = Y.Lang.type(r[p]);</div><div class="line"></div><div class="line">         <span class="keyword">if</span> (s.hasOwnProperty(p)) &#123;</div><div class="line">             <span class="comment">// 处理merge逻辑</span></div><div class="line">             <span class="keyword">if</span> (merge &amp;&amp; type == <span class="string">'object'</span>) &#123;</div><div class="line">                 Y.mix(r[p], s[p]);</div><div class="line">             &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ov || !(p <span class="keyword">in</span> r)) &#123;</div><div class="line">                 r[p] = s[p];</div><div class="line">             &#125;</div><div class="line">         &#125;</div><div class="line">     &#125;</div><div class="line"> &#125;</div><div class="line"><span class="comment">/* 换行可以是空行，也可以是注释 */</span></div></pre></td></tr></table></figure>
+<p>11.<strong>（推荐）使用Function进行类的定义，(不推荐)继承，如需继承采用成熟的类库实现继承</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 类的实现</span></div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">     <span class="keyword">this</span>.name = name;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> Person.prototype.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">     alert(<span class="keyword">this</span>.name);</div><div class="line"> &#125;;</div><div class="line"></div><div class="line"> <span class="keyword">var</span> me = <span class="keyword">new</span> Person(<span class="string">"Nicholas"</span>);</div><div class="line"></div><div class="line"> <span class="comment">// 将this放到局部变量self</span></div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Persion</span>(<span class="params">name, sex</span>) </span>&#123;</div><div class="line">     <span class="keyword">var</span> self = <span class="keyword">this</span>;</div><div class="line"></div><div class="line">     self.name = name;</div><div class="line">     self.sex = sex;</div><div class="line"> &#125;</div><div class="line"><span class="comment">/*  平时咱们写代码，基本都是小程序，真心用不上什么继承，而且继承并不是JS的擅长的语言特性，尽量少用。如果非要使用的话，注意一点： */</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">//...</span></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">//...</span></div><div class="line">&#125;</div><div class="line">B.prototype = <span class="keyword">new</span> A();</div><div class="line">B.prototype.constructor = B; <span class="comment">//原则上，记得把这句话加上</span></div><div class="line"><span class="comment">/*  继承从原则上来讲，别改变他的构造函数，否则这个继承就显得很别扭了~  */</span></div></pre></td></tr></table></figure>
+<p>12.<strong>(推荐)使用局部变量缓存反复查找的对象(包括但不限于全局变量、dom查询结果、作用域链较深的对象)</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 缓存对象</span></div><div class="line"><span class="keyword">var</span> getComment = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> dom = $(<span class="string">"#common-container"</span>),               <span class="comment">// 缓存dom</span></div><div class="line">        appendTo = $.appendTo,                      <span class="comment">// 缓存全局变量</span></div><div class="line">        data = <span class="keyword">this</span>.json.data;                      <span class="comment">// 缓存作用域链较深的对象</span></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>13.<strong>当需要缓存 this 时必须使用 self 变量进行缓存</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 缓存this</span></div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Row</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">     <span class="keyword">var</span> self = <span class="keyword">this</span>;</div><div class="line"></div><div class="line">     self.name = name;</div><div class="line">     $(<span class="string">".row"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">         self.getName();</div><div class="line">     &#125;);</div><div class="line"> &#125;</div><div class="line"><span class="comment">/*  self是一个保留字，不过用它也没关系。在这里，看个人爱好吧，可以用_this, that, me等这些词，都行，但是团队开发的时候统一下比较好。 */</span></div></pre></td></tr></table></figure>
+<p>14.<strong>（不推荐）超长函数, 当函数超过100行，就要想想是否能将函数拆为两个或多个函数</strong></p>
+<p>15.<strong>待挖掘</strong>…</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>​    规范是死的，罗列这些东西，目的是为了让程序猿们对这些东西引起注意，平时写代码的时候注意格式，不仅仅方便了自己，也让其他阅读者看得舒服。</p>
+</li>
+</ol>
+<p>　　可能还有一些点没有涉及到，<strong>如果你有好的建议，欢迎提出来补充！</strong></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      pingguowei
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://itcabin.com/2017/05/06/JavaScript编码规范/" title="JavaScript编码规范">http://itcabin.com/2017/05/06/JavaScript编码规范/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/编码规范/" rel="tag"># 编码规范</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/freeofwing.jpeg"
+               alt="pingguowei" />
+          <p class="site-author-name" itemprop="name">pingguowei</p>
+           
+              <p class="site-description motion-element" itemprop="description">记录有价值的东西。</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不规范写法举例"><span class="nav-number">2.</span> <span class="nav-text">不规范写法举例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#句尾没有分号"><span class="nav-number">2.1.</span> <span class="nav-text">句尾没有分号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量命名各种各样"><span class="nav-number">2.2.</span> <span class="nav-text">变量命名各种各样</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#if缩写"><span class="nav-number">2.3.</span> <span class="nav-text">if缩写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用eval"><span class="nav-number">2.4.</span> <span class="nav-text">使用eval</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量未定义到处都是"><span class="nav-number">2.5.</span> <span class="nav-text">变量未定义到处都是</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#超长函数"><span class="nav-number">2.6.</span> <span class="nav-text">超长函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#………"><span class="nav-number">2.7.</span> <span class="nav-text">……….</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端规范之JavaScript"><span class="nav-number">3.</span> <span class="nav-text">前端规范之JavaScript</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tab键用（必须）用四个空格代替"><span class="nav-number">3.1.</span> <span class="nav-text">tab键用（必须）用四个空格代替</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#每句代码后（必须）加”-”"><span class="nav-number">3.2.</span> <span class="nav-text">每句代码后（必须）加”;”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量、常量、类的命名按（必须）以下规则执行："><span class="nav-number">3.3.</span> <span class="nav-text">变量、常量、类的命名按（必须）以下规则执行：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#变量：必须采用骆驼峰的命名且首字母小写"><span class="nav-number">3.3.1.</span> <span class="nav-text">变量：必须采用骆驼峰的命名且首字母小写</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#类：必须采用骆驼峰的命名且首字母大写，如："><span class="nav-number">3.3.2.</span> <span class="nav-text">类：必须采用骆驼峰的命名且首字母大写，如：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#空格的使用"><span class="nav-number">3.3.3.</span> <span class="nav-text">空格的使用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pingguowei</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysXxUbdY';
+      var conf = 'c9827a47febaff8473e65037e09159c4';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

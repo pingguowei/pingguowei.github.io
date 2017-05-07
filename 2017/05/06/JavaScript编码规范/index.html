@@ -97,7 +97,7 @@
 <meta property="og:url" content="http://itcabin.com/2017/05/06/JavaScript编码规范/index.html">
 <meta property="og:site_name" content="PingGuoWei'Notes">
 <meta property="og:description" content="前言好的编码规范可以尽可能的减少一个软件的维护成本，并且几乎没有任何一个软件，在其整个生命周期中，均由最初的开发人员来维护；好的编码规范可以改善软件的可读性，可以让开发人员尽快而彻底地理解新的代码；好的编码规范可以最大限度的提高团队开发的合作效率；长期的规范性编码还可以让开发人员养成好的编码习惯，甚至锻炼出更加严谨的思维。 不规范写法举例句尾没有分号1var isHotel = json.type">
-<meta property="og:updated_time" content="2017-05-06T07:43:40.179Z">
+<meta property="og:updated_time" content="2017-05-06T08:54:07.396Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript编码规范">
 <meta name="twitter:description" content="前言好的编码规范可以尽可能的减少一个软件的维护成本，并且几乎没有任何一个软件，在其整个生命周期中，均由最初的开发人员来维护；好的编码规范可以改善软件的可读性，可以让开发人员尽快而彻底地理解新的代码；好的编码规范可以最大限度的提高团队开发的合作效率；长期的规范性编码还可以让开发人员养成好的编码习惯，甚至锻炼出更加严谨的思维。 不规范写法举例句尾没有分号1var isHotel = json.type">
@@ -419,8 +419,8 @@
         <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>好的编码规范可以尽可能的减少一个软件的维护成本，并且几乎没有任何一个软件，在其整个生命周期中，均由最初的开发人员来维护；好的编码规范可以改善软件的可读性，可以让开发人员尽快而彻底地理解新的代码；好的编码规范可以最大限度的提高团队开发的合作效率；长期的规范性编码还可以让开发人员养成好的编码习惯，甚至锻炼出更加严谨的思维。</p>
 <h3 id="不规范写法举例"><a href="#不规范写法举例" class="headerlink" title="不规范写法举例"></a>不规范写法举例</h3><h4 id="句尾没有分号"><a href="#句尾没有分号" class="headerlink" title="句尾没有分号"></a>句尾没有分号</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> isHotel = json.type == <span class="string">"hotel"</span> ? <span class="literal">true</span> : <span class="literal">false</span></div></pre></td></tr></table></figure>
 <h4 id="变量命名各种各样"><a href="#变量命名各种各样" class="headerlink" title="变量命名各种各样"></a>变量命名各种各样</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> is_hotel;</div><div class="line"><span class="keyword">var</span> isHotel;</div><div class="line"><span class="keyword">var</span> ishotel;</div></pre></td></tr></table></figure>
-<h4 id="if缩写"><a href="#if缩写" class="headerlink" title="if缩写"></a>if缩写</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (isHotel)</div><div class="line">    <span class="built_in">console</span>.log(<span class="literal">true</span>)</div><div class="line"><span class="keyword">else</span></div><div class="line">    <span class="built_in">console</span>.log(<span class="literal">false</span>)</div></pre></td></tr></table></figure>
 <a id="more"></a>
+<h4 id="if缩写"><a href="#if缩写" class="headerlink" title="if缩写"></a>if缩写</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (isHotel)</div><div class="line">    <span class="built_in">console</span>.log(<span class="literal">true</span>)</div><div class="line"><span class="keyword">else</span></div><div class="line">    <span class="built_in">console</span>.log(<span class="literal">false</span>)</div></pre></td></tr></table></figure>
 <h4 id="使用eval"><a href="#使用eval" class="headerlink" title="使用eval"></a>使用eval</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> json = <span class="built_in">eval</span>(jsonText);</div><div class="line"></div><div class="line"><span class="comment">/* eval 好不好取决于怎么使用它，一般认为的缺点：</span></div><div class="line">   1. 可读性非常差</div><div class="line">   2. 不好再做优化和编译</div><div class="line">   3. 会轻微增加性能消耗</div><div class="line">   4. 不安全，比如 eval input 的值 */</div></pre></td></tr></table></figure>
 <h4 id="变量未定义到处都是"><a href="#变量未定义到处都是" class="headerlink" title="变量未定义到处都是"></a>变量未定义到处都是</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> isHotel = <span class="string">'true'</span>;</div><div class="line">    .......</div><div class="line"></div><div class="line">    var html = isHotel ? <span class="string">'&lt;p&gt;hotel&lt;/p&gt;'</span> : <span class="string">""</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="超长函数"><a href="#超长函数" class="headerlink" title="超长函数"></a>超长函数</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> isHotel = <span class="string">'true'</span>;</div><div class="line">    <span class="comment">//....... 此处省略500行</span></div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -434,15 +434,11 @@
 <p> 未加分号，结果被解析成</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a = b(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//...&#125;)()  //将b()()返回的结果赋值给a</span></div></pre></td></tr></table></figure>
 <p>这是截然不同的两个结果，所以对于这个问题必须引起重视！！！</p>
-<h4 id="变量、常量、类的命名按（必须）以下规则执行："><a href="#变量、常量、类的命名按（必须）以下规则执行：" class="headerlink" title="变量、常量、类的命名按（必须）以下规则执行："></a>变量、常量、类的命名按（必须）以下规则执行：</h4><ol>
-<li><h5 id="变量：必须采用骆驼峰的命名且首字母小写"><a href="#变量：必须采用骆驼峰的命名且首字母小写" class="headerlink" title="变量：必须采用骆驼峰的命名且首字母小写"></a><strong>变量：必须采用骆驼峰的命名且首字母小写</strong></h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 正确的命名</span></div><div class="line"> <span class="keyword">var</span> isHotel,</div><div class="line">     isHotelBeijing,</div><div class="line">     isHotelBeijingHandian;</div><div class="line"></div><div class="line"> <span class="comment">// 不推荐的命名</span></div><div class="line"> <span class="keyword">var</span> is_Hotel,</div><div class="line">     ishotelbeijing,</div><div class="line">     IsHotelBeiJing;</div></pre></td></tr></table></figure>
-</li>
-<li><p>常量：必须采用全大写的命名，且单词以_分割**，常量通常用于ajax请求url，和一些不会改变的数据</p>
+<h4 id="变量、常量、类的命名按（必须）以下规则执行："><a href="#变量、常量、类的命名按（必须）以下规则执行：" class="headerlink" title="变量、常量、类的命名按（必须）以下规则执行："></a>变量、常量、类的命名按（必须）以下规则执行：</h4><h5 id="变量：必须采用骆驼峰的命名且首字母小写"><a href="#变量：必须采用骆驼峰的命名且首字母小写" class="headerlink" title="变量：必须采用骆驼峰的命名且首字母小写"></a><strong>变量：必须采用骆驼峰的命名且首字母小写</strong></h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 正确的命名</span></div><div class="line"> <span class="keyword">var</span> isHotel,</div><div class="line">     isHotelBeijing,</div><div class="line">     isHotelBeijingHandian;</div><div class="line"></div><div class="line"> <span class="comment">// 不推荐的命名</span></div><div class="line"> <span class="keyword">var</span> is_Hotel,</div><div class="line">     ishotelbeijing,</div><div class="line">     IsHotelBeiJing;</div></pre></td></tr></table></figure>
+<p>常量：必须采用全大写的命名，且单词以_分割**，常量通常用于ajax请求url，和一些不会改变的数据</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 正确的命名</span></div><div class="line">  <span class="keyword">var</span> HOTEL_GET_URL = <span class="string">'http://map.baidu.com/detail'</span>,</div><div class="line">      PLACE_TYPE = <span class="string">'hotel'</span>;</div></pre></td></tr></table></figure>
-</li>
-<li><h5 id="类：必须采用骆驼峰的命名且首字母大写，如："><a href="#类：必须采用骆驼峰的命名且首字母大写，如：" class="headerlink" title="类：必须采用骆驼峰的命名且首字母大写，如："></a><strong>类：必须采用骆驼峰的命名且首字母大写</strong>，如：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 正确的写法</span></div><div class="line"> <span class="keyword">var</span> FooAndToo = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">     <span class="keyword">this</span>.name = name;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
-</li>
-<li><h5 id="空格的使用"><a href="#空格的使用" class="headerlink" title="空格的使用"></a><strong>空格的使用</strong></h5><p><strong>1.if中的空格，先上例子</strong></p>
+<h5 id="类：必须采用骆驼峰的命名且首字母大写，如："><a href="#类：必须采用骆驼峰的命名且首字母大写，如：" class="headerlink" title="类：必须采用骆驼峰的命名且首字母大写，如："></a><strong>类：必须采用骆驼峰的命名且首字母大写</strong>，如：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 正确的写法</span></div><div class="line"> <span class="keyword">var</span> FooAndToo = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">     <span class="keyword">this</span>.name = name;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h5 id="空格的使用"><a href="#空格的使用" class="headerlink" title="空格的使用"></a><strong>空格的使用</strong></h5><p><strong>1.if中的空格，先上例子</strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">//正确的写法</span></div><div class="line">  <span class="keyword">if</span> (isOk) &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">"ok"</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">//不推荐的写法</span></div><div class="line">  <span class="keyword">if</span>(isOk)&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">"ok"</span>);</div><div class="line">  &#125;</div><div class="line"><span class="comment">/* ()中的判断条件前后都(必须)加空格</span></div><div class="line">   ()里的判断前后(禁止)加空格，如：正确的写法: if (isOk)；不推荐的写法:    if ( isOk ) */</div></pre></td></tr></table></figure>
 <p>2.<strong>switch中的空格, 先上例子</strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//正确的写法</span></div><div class="line">  <span class="keyword">switch</span>(name) &#123;</div><div class="line">      <span class="keyword">case</span> <span class="string">"hotel"</span>:</div><div class="line">          <span class="built_in">console</span>.log(name);</div><div class="line">          <span class="keyword">break</span>;</div><div class="line"></div><div class="line">      <span class="keyword">case</span> <span class="string">"moive"</span>:</div><div class="line">          <span class="built_in">console</span>.log(name);</div><div class="line">          <span class="keyword">break</span>;</div><div class="line"></div><div class="line">      <span class="keyword">default</span>:</div><div class="line">          <span class="comment">// code</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">//不推荐的写法</span></div><div class="line">  <span class="keyword">switch</span> (name) &#123;                     <span class="comment">// switch 后不应该有空格, 正确的写法: switch(name) &#123; // code</span></div><div class="line">      <span class="keyword">case</span> <span class="string">"hotel"</span>:</div><div class="line">          <span class="built_in">console</span>.log(name);</div><div class="line">      <span class="keyword">break</span>;                          <span class="comment">// break; 应该和console.log对齐</span></div><div class="line">      <span class="keyword">case</span> <span class="string">"movie"</span>:                   <span class="comment">// 每个case之前需要有换行</span></div><div class="line">          <span class="built_in">console</span>.log(name);</div><div class="line">      <span class="keyword">break</span>;                          <span class="comment">// break; 应该和console.log对齐</span></div><div class="line"></div><div class="line">      <span class="keyword">default</span>:</div><div class="line">          <span class="comment">// code</span></div><div class="line">  &#125;</div></pre></td></tr></table></figure>
@@ -482,11 +478,8 @@
 <p>13.<strong>当需要缓存 this 时必须使用 self 变量进行缓存</strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 缓存this</span></div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Row</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">     <span class="keyword">var</span> self = <span class="keyword">this</span>;</div><div class="line"></div><div class="line">     self.name = name;</div><div class="line">     $(<span class="string">".row"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">         self.getName();</div><div class="line">     &#125;);</div><div class="line"> &#125;</div><div class="line"><span class="comment">/*  self是一个保留字，不过用它也没关系。在这里，看个人爱好吧，可以用_this, that, me等这些词，都行，但是团队开发的时候统一下比较好。 */</span></div></pre></td></tr></table></figure>
 <p>14.<strong>（不推荐）超长函数, 当函数超过100行，就要想想是否能将函数拆为两个或多个函数</strong></p>
-<p>15.<strong>待挖掘</strong>…</p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>​    规范是死的，罗列这些东西，目的是为了让程序猿们对这些东西引起注意，平时写代码的时候注意格式，不仅仅方便了自己，也让其他阅读者看得舒服。</p>
-</li>
-</ol>
-<p>　　可能还有一些点没有涉及到，<strong>如果你有好的建议，欢迎提出来补充！</strong></p>
+<p>15.待挖掘…</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>规范是死的，罗列这些东西，目的是为了让程序猿们对这些东西引起注意，平时写代码的时候注意格式，不仅仅方便了自己，也让其他阅读者看得舒服。可能还有一些地方没有涉及到，<strong>如果你有好的建议，欢迎提出来补充！</strong></p>
 
       
     </div>
@@ -542,6 +535,22 @@
         
       
 
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/06/javascript之DOM操作/" rel="next" title="javascript之DOM操作">
+                <i class="fa fa-chevron-left"></i> javascript之DOM操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
@@ -650,7 +659,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -672,7 +681,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -899,7 +908,7 @@
   
     <script type="text/javascript">
     (function(){
-      var appid = 'cysXxUbdY';
+      var appid = 'cysYWLmXQ';
       var conf = 'c9827a47febaff8473e65037e09159c4';
       var width = window.innerWidth || document.documentElement.clientWidth;
       if (width < 960) {

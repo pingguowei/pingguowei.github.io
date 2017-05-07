@@ -95,9 +95,9 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="javascript之DOM操作">
 <meta property="og:url" content="http://itcabin.com/2017/05/06/javascript之DOM操作/index.html">
-<meta property="og:site_name" content="PingGuoWei'Notes">
+<meta property="og:site_name" content="苹果味博客">
 <meta property="og:description" content="前言DOM 中的三个字母，D（文档）可以理解为整个 Web 加载的网页文档；O（对象）可以理解为类似 window 对象之类的东西，可以调用属性和方法，这里我们说的是 document对象；M（模型）可以理解为网页文档的树型结构。 一、document.getElementById()    根据Id获取元素节点1234567891011&amp;lt;div id=&quot;div1&quot;&amp;gt;    &amp;lt;p">
-<meta property="og:updated_time" content="2017-05-07T05:09:15.509Z">
+<meta property="og:updated_time" content="2017-05-07T05:14:59.942Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javascript之DOM操作">
 <meta name="twitter:description" content="前言DOM 中的三个字母，D（文档）可以理解为整个 Web 加载的网页文档；O（对象）可以理解为类似 window 对象之类的东西，可以调用属性和方法，这里我们说的是 document对象；M（模型）可以理解为网页文档的树型结构。 一、document.getElementById()    根据Id获取元素节点1234567891011&amp;lt;div id=&quot;div1&quot;&amp;gt;    &amp;lt;p">
@@ -134,7 +134,7 @@
 
 
 
-  <title>javascript之DOM操作 | PingGuoWei'Notes</title>
+  <title>javascript之DOM操作 | 苹果味博客</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -170,12 +170,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">PingGuoWei'Notes</span>
+        <span class="site-title">苹果味博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <h1 class="site-subtitle" itemprop="description"></h1>
       
   </div>
 
@@ -316,7 +316,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="PingGuoWei'Notes">
+      <meta itemprop="name" content="苹果味博客">
     </span>
 
     
@@ -324,14 +324,14 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
             
             
               
                 javascript之DOM操作
               
             
-          </h1>
+          </h2>
         
 
         <div class="post-meta">
@@ -461,6 +461,7 @@
 <h5 id="2、replaceChild-删除一个子节点，并用一个新节点代替它，第一个参数为新建的节点，第二个节点为被替换的节点"><a href="#2、replaceChild-删除一个子节点，并用一个新节点代替它，第一个参数为新建的节点，第二个节点为被替换的节点" class="headerlink" title="2、replaceChild()    //删除一个子节点，并用一个新节点代替它，第一个参数为新建的节点，第二个节点为被替换的节点"></a>2、replaceChild()    //删除一个子节点，并用一个新节点代替它，第一个参数为新建的节点，第二个节点为被替换的节点</h5><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;div id="div1"&gt;</div><div class="line">	&lt;p id="p1"&gt;我是第一个P&lt;/p&gt;</div><div class="line">	&lt;p id="p2"&gt;我是第二个P&lt;/p&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">window.onload = function () &#123;</div><div class="line">	var div1 = document.getElementById("div1");</div><div class="line">	var span1 = document.createElement("span");</div><div class="line">	span1.textContent = "我是一个新建的span";</div><div class="line">	div1.replaceChild(span1,document.getElementById("p2"));</div><div class="line">&#125;</div><div class="line"></div><div class="line">/* 执行完成后HTML代码变为：</div><div class="line">    &lt;div id="div1"&gt;</div><div class="line">        &lt;p id="p1"&gt;我是第一个P&lt;/p&gt;</div><div class="line">        &lt;span&gt;我是一个新建的span&lt;/span&gt;    //留意到p2节点已经被替换为span1节点了</div><div class="line">    &lt;/div&gt; */</div></pre></td></tr></table></figure>
 <h4 id="十一、javascript操作元素CSS"><a href="#十一、javascript操作元素CSS" class="headerlink" title="十一、javascript操作元素CSS"></a>十一、javascript操作元素CSS</h4><p>通过元素的style属性可以随意读取和设置元素的CSS样式，例子：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;head&gt;</div><div class="line">    &lt;title&gt;&lt;/title&gt;</div><div class="line">    &lt;script type="text/javascript"&gt;</div><div class="line">        window.onload = function () &#123;</div><div class="line">            alert(document.getElementById("div1").style.backgroundColor);</div><div class="line">            document.getElementById("div1").style.backgroundColor = "yellow";</div><div class="line">        &#125;</div><div class="line">    &lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">    &lt;div id="div1" style="width:100px; height:100px; background-color:red"&gt;&lt;/div&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -518,6 +519,10 @@
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/07/JavaScript事件/" rel="next" title="JavaScript 事件">
+                <i class="fa fa-chevron-left"></i> JavaScript 事件
+              </a>
             
           </div>
 
@@ -631,15 +636,15 @@
                alt="pingguowei" />
           <p class="site-author-name" itemprop="name">pingguowei</p>
            
-              <p class="site-description motion-element" itemprop="description">记录有价值的东西。</p>
-          
+              <p class="site-description motion-element" itemprop="description"></p>
+           
         </div>
         <nav class="site-state motion-element">
 
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -661,7 +666,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

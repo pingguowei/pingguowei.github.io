@@ -1,0 +1,1097 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="jQuery,函数,选择器," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="jQuery常用函数总结这篇文章主要介绍了jQuery自带的一些常用方法总结,包括$.trim 、$.contains、$.each、$.map、$.inArray、$.extend等,需要的朋友可以参考下 常用工具方法（1）$.trim $.trim方法用于移除字符串头部和尾部多余的空格。复制代码 代码如下: 1$.trim(&apos;   Hello   &apos;) 	// Hello">
+<meta name="keywords" content="jQuery,函数,选择器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery常用函数总结">
+<meta property="og:url" content="http://itcabin.com/2017/05/13/jQuery常用函数总结/index.html">
+<meta property="og:site_name" content="苹果味博客">
+<meta property="og:description" content="jQuery常用函数总结这篇文章主要介绍了jQuery自带的一些常用方法总结,包括$.trim 、$.contains、$.each、$.map、$.inArray、$.extend等,需要的朋友可以参考下 常用工具方法（1）$.trim $.trim方法用于移除字符串头部和尾部多余的空格。复制代码 代码如下: 1$.trim(&apos;   Hello   &apos;) 	// Hello">
+<meta property="og:updated_time" content="2017-05-13T14:23:58.514Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jQuery常用函数总结">
+<meta name="twitter:description" content="jQuery常用函数总结这篇文章主要介绍了jQuery自带的一些常用方法总结,包括$.trim 、$.contains、$.each、$.map、$.inArray、$.extend等,需要的朋友可以参考下 常用工具方法（1）$.trim $.trim方法用于移除字符串头部和尾部多余的空格。复制代码 代码如下: 1$.trim(&apos;   Hello   &apos;) 	// Hello">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '苹果味'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://itcabin.com/2017/05/13/jQuery常用函数总结/"/>
+
+
+
+
+
+  <title>jQuery常用函数总结 | 苹果味博客</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">苹果味博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/05/13/jQuery常用函数总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pingguowei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/freeofwing.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="苹果味博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                jQuery常用函数总结
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-13T20:46:29+08:00">
+                2017-05-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jQuery/" itemprop="url" rel="index">
+                    <span itemprop="name">jQuery</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/05/13/jQuery常用函数总结/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/05/13/jQuery常用函数总结/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="jQuery常用函数总结"><a href="#jQuery常用函数总结" class="headerlink" title="jQuery常用函数总结"></a>jQuery常用函数总结</h4><p>这篇文章主要介绍了jQuery自带的一些常用方法总结,包括$.trim 、$.contains、$.each、$.map、$.inArray、$.extend等,需要的朋友可以参考下</p>
+<h5 id="常用工具方法"><a href="#常用工具方法" class="headerlink" title="常用工具方法"></a>常用工具方法</h5><p>（1）$.trim</p>
+<p>$.trim方法用于移除字符串头部和尾部多余的空格。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$.trim(<span class="string">'   Hello   '</span>) 	<span class="comment">// Hello</span></div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>（2）$.contains</p>
+<p>$.contains方法返回一个布尔值，表示某个DOM元素（第二个参数）是否为另一个DOM元素（第一个参数）的下级元素。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$.contains(<span class="built_in">document</span>.documentElement, <span class="built_in">document</span>.body); </div><div class="line"><span class="comment">// true</span></div><div class="line">$.contains(<span class="built_in">document</span>.body, <span class="built_in">document</span>.documentElement); </div><div class="line"><span class="comment">// false</span></div></pre></td></tr></table></figure>
+<p>（3）$.each， $.map</p>
+<p>$.each方法用于遍历数组和对象，然后返回原始对象。它接受两个参数，分别是数据集合和回调函数。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$.each([ <span class="number">52</span>, <span class="number">97</span> ], <span class="function"><span class="keyword">function</span>(<span class="params"> index, value </span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log( index + <span class="string">": "</span> + value );</div><div class="line">&#125;);</div><div class="line"><span class="comment">// 0: 52 </span></div><div class="line"><span class="comment">// 1: 97 </span></div><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">	<span class="attr">p1</span>: <span class="string">"hello"</span>,</div><div class="line">	<span class="attr">p2</span>: <span class="string">"world"</span></div><div class="line">&#125;;</div><div class="line">$.each( obj, <span class="function"><span class="keyword">function</span>(<span class="params"> key, value </span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log( key + <span class="string">": "</span> + value );</div><div class="line">&#125;);</div><div class="line"><span class="comment">// p1: hello</span></div><div class="line"><span class="comment">// p2: world</span></div></pre></td></tr></table></figure>
+<p>需要注意的，jQuery对象实例也有一个each方法（$.fn.each），两者的作用差不多。<br>$.map方法也是用来遍历数组和对象，但是会返回一个新对象。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>, <span class="string">"e"</span>];</div><div class="line">a = $.map(a, <span class="function"><span class="keyword">function</span> (<span class="params">n, i</span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> (n.toUpperCase() + i);</div><div class="line">&#125;);</div><div class="line"><span class="built_in">console</span>.log(a);</div><div class="line"><span class="comment">// ["A0", "B1", "C2", "D3", "E4"]</span></div></pre></td></tr></table></figure>
+<p>（4）$.inArray</p>
+<p>$.inArray方法<strong>返回一个值在数组中的位置（从0开始）</strong>。如果该值不在数组中，则返回-1。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</div><div class="line">$.inArray(<span class="number">4</span>,a) <span class="comment">// 3</span></div></pre></td></tr></table></figure>
+<p>（5）$.extend</p>
+<p>$.extend方法用于将多个对象<strong>合并进第一个对象</strong>。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o1 = &#123;<span class="attr">p1</span>:<span class="string">'a'</span>,<span class="attr">p2</span>:<span class="string">'b'</span>&#125;;</div><div class="line"><span class="keyword">var</span> o2 = &#123;<span class="attr">p1</span>:<span class="string">'c'</span>&#125;;</div><div class="line">$.extend(o1,o2);</div><div class="line">o1.p1 <span class="comment">// "c"</span></div></pre></td></tr></table></figure>
+<p>$.extend的另一种用法是生成一个新对象，用来继承原有对象。<strong>这时，它的第一个参数应该是一个空对象</strong>。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o1 = &#123;<span class="attr">p1</span>:<span class="string">'a'</span>,<span class="attr">p2</span>:<span class="string">'b'</span>&#125;;</div><div class="line"><span class="keyword">var</span> o2 = &#123;<span class="attr">p1</span>:<span class="string">'c'</span>&#125;;</div><div class="line"><span class="keyword">var</span> o = $.extend(&#123;&#125;,o1,o2);</div><div class="line">o</div><div class="line"><span class="comment">// Object &#123;p1: "c", p2: "b"&#125;</span></div></pre></td></tr></table></figure>
+<p>默认情况下，extend方法生成的对象是“浅拷贝”，也就是说，如果某个属性是对象或数组，那么只会生成指向这个对象或数组的指针，而不会复制值。如果想要“深拷贝”，可以在extend方法的第一个参数传入布尔值true。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o1 = &#123;<span class="attr">p1</span>:[<span class="string">'a'</span>,<span class="string">'b'</span>]&#125;;</div><div class="line"><span class="keyword">var</span> o2 = $.extend(&#123;&#125;,o1);</div><div class="line"><span class="keyword">var</span> o3 = $.extend(<span class="literal">true</span>,&#123;&#125;,o1);  <span class="comment">// 深拷贝 复制值</span></div><div class="line">o1.p1[<span class="number">0</span>]=<span class="string">'c'</span>;	<span class="comment">// 赋值</span></div><div class="line">o2.p1 <span class="comment">// ["c", "b"]	浅拷贝 指针 没有复制值</span></div><div class="line">o3.p1 <span class="comment">// ["a", "b"] 深拷贝 复制的值</span></div></pre></td></tr></table></figure>
+<p>上面代码中，o2是浅拷贝，o3是深拷贝。结果，改变原始数组的属性，o2会跟着一起变，而o3不会。</p>
+<p>（6）$.proxy</p>
+<p>$.proxy方法类似于ECMAScript 5的bind方法，可以绑定函数的上下文（也就是this对象）和参数，返回一个新函数。<br>jQuery.proxy()的主要用处是为回调函数绑定上下文对象。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = &#123;</div><div class="line">    <span class="attr">type</span>: <span class="string">"object"</span>,</div><div class="line">    <span class="attr">test</span>: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.type);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">$(<span class="string">"#button"</span>)</div><div class="line">  .on(<span class="string">"click"</span>, o.test) <span class="comment">// 无输出</span></div><div class="line">  .on(<span class="string">"click"</span>, $.proxy(o.test, o)) <span class="comment">// object</span></div></pre></td></tr></table></figure>
+<p>上面的代码中，第一个回调函数没有绑定上下文，所以结果为空，没有任何输出；第二个回调函数将上下文绑定为对象o，结果就为object。<br>这个例子的另一种等价的写法是：<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"#button"</span>).on( <span class="string">"click"</span>, $.proxy(o, test))</div></pre></td></tr></table></figure>
+<p>上面代码的$.proxy(o, test)的意思是，将o的方法test与o绑定。<br>这个例子表明，proxy方法的写法主要有两种。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">jQuery.proxy(<span class="function"><span class="keyword">function</span>, <span class="title">context</span>)</span></div><div class="line">// <span class="title">or</span></div><div class="line"><span class="title">jQuery</span>.<span class="title">proxy</span>(<span class="params">context, name</span>)</div></pre></td></tr></table></figure>
+<p>第一种写法是为函数（function）指定上下文对象（context），第二种写法是指定上下文对象（context）和它的某个方法名（name）。<br>再看一个例子。正常情况下，下面代码中的this对象指向发生click事件的DOM对象。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#myElement'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    $(<span class="keyword">this</span>).addClass(<span class="string">'aNewClass'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>如果我们想让回调函数延迟运行，使用setTimeout方法，代码就会出错，因为setTimeout使得回调函数在全局环境运行，this将指向全局对象。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#myElement'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        $(<span class="keyword">this</span>).addClass(<span class="string">'aNewClass'</span>);</div><div class="line">    &#125;, <span class="number">1000</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><strong>上面代码中的this，将指向全局对象window，导致出错</strong>。<br>这时，就可以用proxy方法，将this对象绑定到myElement对象。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#myElement'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    setTimeout($.proxy(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        $(<span class="keyword">this</span>).addClass(<span class="string">'aNewClass'</span>); </div><div class="line">    &#125;, <span class="keyword">this</span>), <span class="number">1000</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>（7）$.data，$.removeData<br>$.data方法可以用来在DOM节点上储存数据。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 存入数据</span></div><div class="line">$.data(<span class="built_in">document</span>.body, <span class="string">"foo"</span>, <span class="number">52</span> );</div><div class="line"><span class="comment">// 读取数据</span></div><div class="line">$.data(<span class="built_in">document</span>.body, <span class="string">"foo"</span>);</div><div class="line"><span class="comment">// 读取所有数据</span></div><div class="line">$.data(<span class="built_in">document</span>.body);</div></pre></td></tr></table></figure>
+<p>上面代码<strong>在网页元素body</strong>上储存了一个键值对，键名为“foo”，键值为52。</p>
+<p>$.removeData方法用于移除.data方法所储存的数据。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$.data(div, <span class="string">"test1"</span>, <span class="string">"VALUE-1"</span>);</div><div class="line">$.removeData(div, <span class="string">"test1"</span>);</div></pre></td></tr></table></figure>
+<p>（8）$.parseHTML，$.parseJSON，.parseXML</p>
+<p>$.parseHTML方法用于<strong>将字符串解析为DOM对象</strong>。<br>$.parseJSON方法用于<strong>将JSON字符串解析为JavaScript对象</strong>，作用与原生的JSON.parse()类似。但是，jQuery没有提供类似JSON.stringify()的方法，即不提供将JavaScript对象转为JSON对象的方法。<br>$.parseXML方法用于<strong>将字符串解析为XML对象</strong>。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> html = $.parseHTML(<span class="string">"hello, &lt;b&gt;my name is&lt;/b&gt; jQuery."</span>);</div><div class="line"><span class="keyword">var</span> obj = $.parseJSON(<span class="string">'&#123;"name": "John"&#125;'</span>);</div><div class="line"><span class="keyword">var</span> xml = <span class="string">"&lt;rss version='2.0'&gt;&lt;channel&gt;&lt;title&gt;RSS Title&lt;/title&gt;&lt;/channel&gt;&lt;/rss&gt;"</span>;</div><div class="line"><span class="keyword">var</span> xmlDoc = $.parseXML(xml);</div></pre></td></tr></table></figure>
+<p>（9）$.makeArray<br>$.makeArray方法<strong>将一个类似数组的对象，转化为真正的数组</strong>。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = $.makeArray(<span class="built_in">document</span>.getElementsByTagName(<span class="string">"div"</span>));</div></pre></td></tr></table></figure>
+<p>（10）$.merge</p>
+<p>$.merge方法用于将一个数组（第二个参数）合并到另一个数组（第一个参数）之中。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a1 = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>];</div><div class="line"><span class="keyword">var</span> a2 = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</div><div class="line">$.merge(a1, a2);</div><div class="line">a1</div><div class="line"><span class="comment">// [0, 1, 2, 2, 3, 4]</span></div></pre></td></tr></table></figure>
+<p>（11）$.now</p>
+<p>$.now方法返回当前时间距离1970年1月1日00:00:00 UTC对应的毫秒数，等同于(new Date).getTime()。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$.now()</div><div class="line"><span class="comment">// 1388212221489</span></div></pre></td></tr></table></figure>
+<p>（12）判断数据类型的方法<br>jQuery提供一系列工具方法，用来判断数据类型，以弥补JavaScript原生的typeof运算符的不足。以下方法对参数进行判断，<strong>返回一个布尔值</strong>。<br>jQuery.isArray()：<strong>是否为数组</strong>。<br>jQuery.isEmptyObject()：<strong>是否为空对象（不含可枚举的属性）</strong>。<br>jQuery.isFunction()：<strong>是否为函数</strong>。<br>jQuery.isNumeric()：<strong>是否为数组</strong>。<br>jQuery.isPlainObject()：<strong>是否为使用“{}”或“new Object”生成的对象，而不是浏览器原生提供的对象</strong>。<br>jQuery.isWindow()：<strong>是否为window对象</strong>。<br>jQuery.isXMLDoc()：<strong>判断一个DOM节点是否处于XML文档之中</strong>。<br>下面是一些例子。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$.isEmptyObject(&#123;&#125;) <span class="comment">// true</span></div><div class="line">$.isPlainObject(<span class="built_in">document</span>.location) <span class="comment">// false</span></div><div class="line">$.isWindow(<span class="built_in">window</span>) <span class="comment">// true</span></div><div class="line">$.isXMLDoc(<span class="built_in">document</span>.body) <span class="comment">// false</span></div></pre></td></tr></table></figure>
+<p>除了上面这些方法以外，还有一个$.type方法，可以返回一个变量的数据类型。它的实质是用Object.prototype.toString方法读取对象内部的[[Class]]属性（参见《标准库》的Object对象一节）。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$.type(<span class="regexp">/test/</span>) <span class="comment">// "regexp"</span></div></pre></td></tr></table></figure>
+<p>（13）Ajax操作</p>
+<p>$.ajax<br>jQuery对象上面还定义了Ajax方法（$.ajax()），用来处理Ajax操作。调用该方法后，浏览器就会向服务器发出一个HTTP请求。<br>$.ajax()的用法有多种，最常见的是提供一个对象参数。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">$.ajax(&#123;</div><div class="line">  <span class="attr">async</span>: <span class="literal">true</span>,</div><div class="line">  <span class="attr">url</span>: <span class="string">'/url/to/json'</span>,</div><div class="line">  <span class="attr">type</span>: <span class="string">'GET'</span>,</div><div class="line">  <span class="attr">data</span> : &#123; <span class="attr">id</span> : <span class="number">123</span> &#125;,</div><div class="line">  <span class="attr">dataType</span>: <span class="string">'json'</span>,</div><div class="line">  <span class="attr">timeout</span>: <span class="number">30000</span>,</div><div class="line">  <span class="attr">success</span>: successCallback,</div><div class="line">  <span class="attr">error</span>: errorCallback,</div><div class="line">  <span class="attr">complete</span>: completeCallback</div><div class="line">&#125;)</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">successCallback</span>(<span class="params">json</span>) </span>&#123;</div><div class="line">    $(<span class="string">'&lt;h1/&gt;'</span>).text(json.title).appendTo(<span class="string">'body'</span>);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">errorCallback</span>(<span class="params">xhr, status</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'出问题了！'</span>);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">completeCallback</span>(<span class="params">xhr, status</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'Ajax请求已结束。'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面代码的对象参数有多个属性，含义如下：<br>async：<strong>该项默认为true，如果设为false，则表示发出的是同步请求</strong>。<br>cache: <strong>该项默认为true，如果设为false，则浏览器不缓存返回服务器返回的数据。注意，浏览器本身就不会缓存POST请求返回的数据，所以即使设为false，也只对HEAD和GET请求有效</strong>。<br>url：<strong>服务器端网址。这是唯一必需的一个属性，其他属性都可以省略</strong>。<br>type：<strong>向服务器发送信息所使用的HTTP动词，默认为GET，其他动词有POST、PUT、DELETE</strong>。<br>dataType：<strong>向服务器请求的数据类型，可以设为text、html、script、json、jsonp和xml</strong>。<br>data：<strong>向服务器发送的数据，如果使用GET方法，此项将转为查询字符串，附在网址的最后</strong>。<br>success：<strong>请求成功时的回调函数，函数参数为服务器传回的数据、状态信息、发出请求的原始对象</strong>。<br>timeout: <strong>等待的最长毫秒数。如果过了这个时间，请求还没有返回，则自动将请求状态改为失败</strong>。<br>error：<strong>请求失败时的回调函数，函数参数为发出请求的原始对象以及返回的状态信息</strong>。<br>complete：<strong>不管请求成功或失败，都会执行的回调函数，函数参数为发出请求的原始对象以及返回的状态信息</strong>。<br>这些参数之中，<strong>url可以独立出来，作为ajax方法的第一个参数</strong>。也就是说，上面代码还可以写成下面这样。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$.ajax(<span class="string">'/url/to/json'</span>,&#123;</div><div class="line">  <span class="attr">type</span>: <span class="string">'GET'</span>,</div><div class="line">  <span class="attr">dataType</span>: <span class="string">'json'</span>,</div><div class="line">  <span class="attr">success</span>: successCallback,</div><div class="line">  <span class="attr">error</span>: errorCallback</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>简便写法<br>ajax方法还有一些简便写法。<br>$.get()：发出GET请求。<br>$.getScript()：读取一个JavaScript脚本文件并执行。<br>$.getJSON()：发出GET请求，读取一个JSON文件。<br>$.post()：发出POST请求。<br>$.fn.load()：读取一个html文件，并将其放入当前元素之中。<br>一般来说，这些简便方法依次接受三个参数：url、数据、成功时的回调函数。</p>
+<p>（1）$.get()，$.post()</p>
+<p>这两个方法分别对应HTTP的GET方法和POST方法。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$.get(<span class="string">'/data/people.html'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">html</span>)</span>&#123;</div><div class="line">  $(<span class="string">'#target'</span>).html(html);</div><div class="line">&#125;);</div><div class="line">$.post(<span class="string">'/data/save'</span>, &#123;<span class="attr">name</span>: <span class="string">'Rebecca'</span>&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">resp</span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="built_in">JSON</span>.parse(resp));</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>get方法接受两个参数，分别为服务器端网址和请求成功后的回调函数。post方法在这两个参数中间，还有一个参数，表示发给服务器的数据。<br>上面的post方法对应的ajax写法如下。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$.ajax(&#123;</div><div class="line">    <span class="attr">type</span>: <span class="string">'POST'</span>,</div><div class="line">    <span class="attr">url</span>: <span class="string">'/data/save'</span>,</div><div class="line">    <span class="attr">data</span>: &#123;<span class="attr">name</span>: <span class="string">'Rebecca'</span>&#125;,</div><div class="line">    <span class="attr">dataType</span>: <span class="string">'json'</span>,</div><div class="line">    <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params">resp</span>)</span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="built_in">JSON</span>.parse(resp));</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>（2）$.getJSON()</p>
+<p>ajax方法的另一个简便写法是getJSON方法。当服务器端返回JSON格式的数据，可以用这个方法代替$.ajax方法。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$.getJSON(<span class="string">'url/to/json'</span>, &#123;<span class="string">'a'</span>: <span class="number">1</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(data);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>上面的代码等同于下面的写法。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$.ajax(&#123;</div><div class="line">  <span class="attr">dataType</span>: <span class="string">"json"</span>,</div><div class="line">  <span class="attr">url</span>: <span class="string">'/url/to/data'</span>,</div><div class="line">  <span class="attr">data</span>: &#123;<span class="string">'a'</span>: <span class="number">1</span>&#125;,</div><div class="line">  <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(data);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>（3）$.getScript()<br>$.getScript方法用于从服务器端加载一个脚本文件。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$.getScript(<span class="string">'/static/js/myScript.js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    functionFromMyScript();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>上面代码先从服务器加载myScript.js脚本，然后在回调函数中执行该脚本提供的函数。<br>getScript的回调函数接受三个参数，分别是脚本文件的内容，HTTP响应的状态信息和ajax对象实例。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$.getScript( <span class="string">"ajax/test.js"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data, textStatus, jqxhr</span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log( data ); <span class="comment">// test.js的内容</span></div><div class="line">	<span class="built_in">console</span>.log( textStatus ); <span class="comment">// Success</span></div><div class="line">	<span class="built_in">console</span>.log( jqxhr.status ); <span class="comment">// 200</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>getScript是ajax方法的简便写法，因此返回的是一个deferred对象，可以使用deferred接口。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">jQuery.getScript(<span class="string">"/path/to/myscript.js"</span>)</div><div class="line">    .done(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="comment">// ...</span></div><div class="line">    &#125;)</div><div class="line">    .fail(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="comment">// ...</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>（4）$.fn.load()</p>
+<p>$.fn.load不是jQuery的工具方法，而是定义在jQuery对象实例上的方法，用于获取服务器端的HTML文件，将其放入当前元素。由于该方法也属于ajax操作，所以放在这里一起讲。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#newContent'</span>).load(<span class="string">'/foo.html'</span>);</div></pre></td></tr></table></figure>
+<p>$.fn.load方法还可以指定一个选择器，将远程文件中匹配选择器的部分，放入当前元素，并指定操作完成时的回调函数。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#newContent'</span>).load(<span class="string">'/foo.html #myDiv h1:first'</span>,</div><div class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">html</span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'内容更新！'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>上面代码只加载foo.html中匹配“#myDiv h1:first”的部分，加载完成后会运行指定的回调函数。<br>Ajax事件<br>jQuery提供以下一些方法，用于指定特定的AJAX事件的回调函数。<br>.ajaxComplete()：ajax请求完成。<br>.ajaxError()：ajax请求出错。<br>.ajaxSend()：ajax请求发出之前。<br>.ajaxStart()：第一个ajax请求开始发出，即没有还未完成ajax请求。<br>.ajaxStop()：所有ajax请求完成之后。<br>.ajaxSuccess()：ajax请求成功之后。<br>下面是示例。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#loading_indicator'</span>)</div><div class="line">.ajaxStart(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;$(<span class="keyword">this</span>).show();&#125;)</div><div class="line">.ajaxStop(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;$(<span class="keyword">this</span>).hide();&#125;);</div></pre></td></tr></table></figure>
+<p>返回值<br>ajax方法返回的是一个deferred对象，可以用then方法为该对象指定回调函数（详细解释参见《deferred对象》一节）。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$.ajax(&#123;</div><div class="line">	<span class="attr">url</span>: <span class="string">'/data/people.json'</span>,</div><div class="line">	<span class="attr">dataType</span>: <span class="string">'json'</span></div><div class="line">&#125;).then(<span class="function"><span class="keyword">function</span> (<span class="params">resp</span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(resp.people);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>JSONP<br>由于浏览器存在“同域限制”，ajax方法只能向当前网页所在的域名发出HTTP请求。但是，通过在当前网页中插入script元素（\<script>），可以向不同的域名发出GET请求，这种变通方法叫做JSONP（JSON with Padding）。<br><strong>ajax方法可以发出JSONP请求，方法是在对象参数中指定dataType为JSONP</strong>。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$.ajax(&#123;</div><div class="line">	<span class="attr">url</span>: <span class="string">'/data/search.jsonp'</span>,</div><div class="line">	<span class="attr">data</span>: &#123;<span class="attr">q</span>: <span class="string">'a'</span>&#125;,</div><div class="line">	<span class="attr">dataType</span>: <span class="string">'jsonp'</span>,</div><div class="line">	<span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">resp</span>) </span>&#123;</div><div class="line">		$(<span class="string">'#target'</span>).html(<span class="string">'Results: '</span> + resp.results.length);</div><div class="line">	&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>JSONP的通常做法是，在所要请求的URL后面加在回调函数的名称。ajax方法规定，如果所请求的网址以类似“callback=?”的形式结尾，则自动采用JSONP形式。所以，上面的代码还可以写成下面这样。<br>复制代码 代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$.getJSON(<span class="string">'/data/search.jsonp?q=a&amp;callback=?'</span>,</div><div class="line">	<span class="function"><span class="keyword">function</span>(<span class="params">resp</span>) </span>&#123;</div><div class="line">		$(<span class="string">'#target'</span>).html(<span class="string">'Results: '</span> + resp.results.length);</div><div class="line">	&#125;</div><div class="line">);</div></pre></td></tr></table></figure></script></p>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      pingguowei
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://itcabin.com/2017/05/13/jQuery常用函数总结/" title="jQuery常用函数总结">http://itcabin.com/2017/05/13/jQuery常用函数总结/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jQuery/" rel="tag"># jQuery</a>
+          
+            <a href="/tags/函数/" rel="tag"># 函数</a>
+          
+            <a href="/tags/选择器/" rel="tag"># 选择器</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/13/jQuery常用语法/" rel="prev" title="jQuery常用语法">
+                jQuery常用语法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/freeofwing.jpeg"
+               alt="pingguowei" />
+          <p class="site-author-name" itemprop="name">pingguowei</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#jQuery常用函数总结"><span class="nav-number">1.</span> <span class="nav-text">jQuery常用函数总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#常用工具方法"><span class="nav-number">1.1.</span> <span class="nav-text">常用工具方法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pingguowei</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysYWLmXQ';
+      var conf = 'c9827a47febaff8473e65037e09159c4';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

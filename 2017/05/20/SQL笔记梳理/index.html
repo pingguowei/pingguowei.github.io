@@ -1,0 +1,1061 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="SQL基础," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="什么是SQL语句sql语言：结构化的查询语言。（Structured Query Language），是关系数据库管理系统的标准语言。 它是一种解释语言：写一句执行一句，不需要整体编译执行。语法特点：  没有“ ”，字符串使用‘ ’包含 没有逻辑相等，赋值和逻辑相等都是= 类型不再是最严格的。任何数据都可以包含在‘ ’以内 没有bool值的概念，但是在视图中可以输入true/false 它也有关系">
+<meta name="keywords" content="SQL基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL笔记梳理">
+<meta property="og:url" content="http://itcabin.com/2017/05/20/SQL笔记梳理/index.html">
+<meta property="og:site_name" content="苹果味博客">
+<meta property="og:description" content="什么是SQL语句sql语言：结构化的查询语言。（Structured Query Language），是关系数据库管理系统的标准语言。 它是一种解释语言：写一句执行一句，不需要整体编译执行。语法特点：  没有“ ”，字符串使用‘ ’包含 没有逻辑相等，赋值和逻辑相等都是= 类型不再是最严格的。任何数据都可以包含在‘ ’以内 没有bool值的概念，但是在视图中可以输入true/false 它也有关系">
+<meta property="og:updated_time" content="2017-05-20T09:21:03.779Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL笔记梳理">
+<meta name="twitter:description" content="什么是SQL语句sql语言：结构化的查询语言。（Structured Query Language），是关系数据库管理系统的标准语言。 它是一种解释语言：写一句执行一句，不需要整体编译执行。语法特点：  没有“ ”，字符串使用‘ ’包含 没有逻辑相等，赋值和逻辑相等都是= 类型不再是最严格的。任何数据都可以包含在‘ ’以内 没有bool值的概念，但是在视图中可以输入true/false 它也有关系">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '苹果味'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://itcabin.com/2017/05/20/SQL笔记梳理/"/>
+
+
+
+
+
+  <title>SQL笔记梳理 | 苹果味博客</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">苹果味博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/05/20/SQL笔记梳理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pingguowei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/freeofwing.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="苹果味博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                SQL笔记梳理
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-20T15:31:06+08:00">
+                2017-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SQL/" itemprop="url" rel="index">
+                    <span itemprop="name">SQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/05/20/SQL笔记梳理/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/05/20/SQL笔记梳理/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="什么是SQL语句"><a href="#什么是SQL语句" class="headerlink" title="什么是SQL语句"></a>什么是SQL语句</h3><p>sql语言：结构化的查询语言。（Structured Query Language），是关系数据库管理系统的标准语言。</p>
+<p>它是一种解释语言：<strong>写一句执行一句，不需要整体编译执行</strong>。<br>语法特点：</p>
+<ol>
+<li>没有“ ”，字符串使用‘ ’包含</li>
+<li>没有逻辑相等，赋值和逻辑相等都是=</li>
+<li>类型不再是最严格的。任何数据都可以包含在‘ ’以内</li>
+<li>没有bool值的概念，但是在视图中可以输入true/false</li>
+<li>它也有关系运算符：&gt; &lt; &gt;= &lt;= = &lt;&gt; != ,它返回一个bool值</li>
+<li>它也有逻辑运算符： ！(not) &amp;&amp;(and) ||(or)</li>
+<li>它不区别大小写</li>
+</ol>
+<h3 id="使用sql语句创建数据库和表"><a href="#使用sql语句创建数据库和表" class="headerlink" title="使用sql语句创建数据库和表"></a>使用sql语句创建数据库和表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">语法：</div><div class="line">create database 数据库名称</div><div class="line">on primary –默认在主文件组上</div><div class="line">(</div><div class="line">	name=’逻辑名称_data’ , –当你发现它不是一句完整的sql语句，而仅仅是一个处理结构中的某一句的时候，就需要添加 ,</div><div class="line">	size=初始大小,–数值不包含在‘’以内</div><div class="line">	filegrowth=文件增长 ,</div><div class="line">	maxsize=最大容量,</div><div class="line">	filename=’物理路径’</div><div class="line">)</div><div class="line">log on</div><div class="line">(</div><div class="line">	name=’逻辑名称_log’ , –当你发现它不是一句完整的sql语句，而仅仅是一个处理结构中的某一句的时候，就需要添加 ,</div><div class="line">	size=初始大小,–数值不包含在‘’以内</div><div class="line">	filegrowth=文件增长 ,</div><div class="line">	maxsize=最大容量, –一般来说日志文件不限制最大容量</div><div class="line">	filename=’物理路径’</div><div class="line">)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">--判断数据库文件是否已经存在 ：数据库的记录都存储在master库中的sysdatabases表中</div><div class="line">--自动切换当前数据库</div><div class="line">--使用代码开启外围应该配置器</div><div class="line">exec sp_configure &apos;show advanced options&apos; ,1</div><div class="line">RECONFIGURE</div><div class="line">exec sp_configure &apos;xp_cmdshell&apos;,1</div><div class="line">RECONFIGURE</div><div class="line">--自定义目录  xp_cmdshell可以创建出目录   &apos;mkdir f:\project&apos;：指定创建目录</div><div class="line">exec xp_cmdshell &apos;mkdir f:\project&apos;</div><div class="line"></div><div class="line">use master</div><div class="line">--exists 函数判断（）中的查询语句是否返回结果集，如果返回了结果集则得到true,否则得到false</div><div class="line">if exists( select * from sysdatabases where name=&apos;School&apos;)</div><div class="line">    drop database School --删除当前指定名称的数据库</div><div class="line">create database School</div><div class="line">on primary</div><div class="line">(</div><div class="line">   name=&apos;School_data&apos;,--逻辑名称.说明最多能够存储100mb数据，如果没有限制就可以将硬盘存储满</div><div class="line">   size=3mb,--初始大小</div><div class="line">   maxsize=100mb,--最大容量</div><div class="line">   filegrowth=10%,--文件增长一次增长10%</div><div class="line">   filename=&apos;f:\project\School_data.mdf&apos;    </div><div class="line">),</div><div class="line">--创建文件组</div><div class="line">filegroup mygroup</div><div class="line">(</div><div class="line">   name=&apos;School_data1&apos;,--逻辑名称.说明最多能够存储100mb数据，如果没有限制就可以将硬盘存储满</div><div class="line">   size=3mb,--初始大小</div><div class="line">   maxsize=100mb,--最大容量</div><div class="line">   filegrowth=10%,--文件增长一次增长10%</div><div class="line">   filename=&apos;F:\qiyi\School_data1.ndf&apos;    </div><div class="line">)</div><div class="line">log on</div><div class="line">(</div><div class="line">   name=&apos;School_log&apos;,--逻辑名称</div><div class="line">   size=3mb,--初始大小</div><div class="line">   --maxsize=100mb,--最大容量</div><div class="line">   filegrowth=10%,--文件增长一次增长10%</div><div class="line">   filename=&apos;f:\project\School_log.ldf&apos;    </div><div class="line">),</div><div class="line">(</div><div class="line">   name=&apos;School_log1&apos;,--逻辑名称</div><div class="line">   size=3mb,--初始大小</div><div class="line">   --maxsize=100mb,--最大容量</div><div class="line">   filegrowth=10%,--文件增长一次增长10%</div><div class="line">   filename=&apos;F:\qiyi\School_log1.ldf&apos;    </div><div class="line">)</div></pre></td></tr></table></figure>
+<h3 id="创建数据表"><a href="#创建数据表" class="headerlink" title="创建数据表"></a>创建数据表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">语法：</div><div class="line">create table 表名</div><div class="line">(</div><div class="line">	字段名称 字段类型 字段特征(是否为null,默认值 标识列 主键 唯一键 外键 check约束),</div><div class="line">	字段名称 字段类型 字段特征(是否为null,默认值 标识列 主键 唯一键 外键 check约束)</div><div class="line">)</div><div class="line">创建老师表Teacher :Id、Name、Gender、Age、Salary、Birthday</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">use School</div><div class="line">if exists(select * from sysobjects where name=&apos;Classes&apos;)</div><div class="line">  drop table Classes</div><div class="line">create table Classes</div><div class="line">(</div><div class="line">	 Classid int identity(1,1) primary key,</div><div class="line">	 ClassName nvarchar(50) not null </div><div class="line">)</div><div class="line">if exists(select * from sysobjects where name=&apos;teacher&apos;)</div><div class="line">  drop table teacher</div><div class="line">create table Teacher</div><div class="line">(</div><div class="line">	Id int identity(1,1) primary key,--可以同时创建多个特征，用空格 分隔开。 identity是标识列，第一个参数是种子，第二个是增量</div><div class="line">	Name nvarchar(50)  not null,-- not null标记它的值不能为null--不能不填写</div><div class="line">	ClassId int not null,</div><div class="line">	Gender bit not null,</div><div class="line">	Age int   ,</div><div class="line">	Salary money, --如果不标记为 not null.那么就相当于标记了null</div><div class="line">	Birthday datetime  </div><div class="line">)</div></pre></td></tr></table></figure>
+<h3 id="数据完整性约束"><a href="#数据完整性约束" class="headerlink" title="数据完整性约束"></a>数据完整性约束</h3><p><strong>实体完整性</strong>：实体就是指一条记录。这种完整性就是为了保证每一条记录不是重复记录。是有意义的</p>
+<p>主键：非空和唯一.一个表只有一个主键，但是一个主键可以是由多个字段组成的 组合键</p>
+<p>标识列：系统自动生成，永远不重复</p>
+<p>唯一键：唯一，但是可以为null,只能null一次</p>
+<p><strong>域完整性</strong>：域就是指字段，它是为了保证字段的值是准和有效，合理值</p>
+<ol>
+<li>类型 是否null，默认值，check约束，关系</li>
+</ol>
+<p><strong>自定义完整性</strong>：</p>
+<ol>
+<li>check约束 ， 存储过程 触发器</li>
+</ol>
+<p><strong>引用完整性</strong>：一个表的某个字段的值是引用自另外一个表的某个字段的值。引用的表就是外键表，被引用的表就是主键表</p>
+<ol>
+<li><p>建立引用的字段类型必须一致</p>
+</li>
+<li><p>建立引用的字段的意义一样</p>
+</li>
+<li><p>建立主外键关系的时候选择 外键表 去建立主外键关系</p>
+</li>
+<li><p>建立主外键关系的字段在主表中必须是主键或者唯一键</p>
+</li>
+<li><p>对于操作的影响 ：</p>
+<p>在添加数据时，先添加主键表再添加外键表数据<br>在删除的时候先外键表数据再删除主键表数据</p>
+</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">主键约束（PK Primary key） 唯一键约束(UQ unique) 外键约束(FK foreign key) 默认值约束(DF default) <span class="keyword">check</span>约束(CK <span class="keyword">check</span>)</div><div class="line">语法：</div><div class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名</div><div class="line"><span class="keyword">add</span> <span class="keyword">constraint</span> 前缀_约束名称 约束类型 约束说明（字段 关系表达式 值)</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> School</div><div class="line"><span class="keyword">if</span> <span class="keyword">exists</span>(<span class="keyword">select</span> * <span class="keyword">from</span> sysobjects <span class="keyword">where</span> <span class="keyword">name</span>=<span class="string">'PK_Classes_Classid'</span>)</div><div class="line"><span class="keyword">alter</span> <span class="keyword">table</span> classes  <span class="keyword">drop</span> <span class="keyword">constraint</span> PK_Classes_Classid</div><div class="line"><span class="keyword">alter</span> <span class="keyword">table</span> classes </div><div class="line"><span class="keyword">add</span> <span class="keyword">constraint</span> PK_Classes_Classid primary <span class="keyword">key</span>(classid)</div><div class="line"><span class="comment">--为id添加主键</span></div><div class="line"><span class="keyword">alter</span> <span class="keyword">table</span> teacher </div><div class="line"><span class="keyword">add</span> <span class="keyword">constraint</span> PK_teacher_id primary <span class="keyword">key</span>(<span class="keyword">id</span>)</div><div class="line"><span class="comment">--为name添加唯一键</span></div><div class="line"><span class="keyword">alter</span> <span class="keyword">table</span> teacher</div><div class="line"><span class="keyword">add</span> <span class="keyword">constraint</span> UQ_Teacher_Name <span class="keyword">unique</span>(<span class="keyword">Name</span>)</div><div class="line"><span class="comment">--同时创建salary的默认约束和age的check约束</span></div><div class="line"><span class="keyword">alter</span> <span class="keyword">table</span> teacher</div><div class="line"><span class="keyword">add</span> <span class="keyword">constraint</span> DF_Teacher_Salary <span class="keyword">default</span>(<span class="number">5000</span>) <span class="keyword">for</span> salary,</div><div class="line"><span class="keyword">constraint</span> CK_Teacher_Age <span class="keyword">check</span>(age&gt;<span class="number">0</span> <span class="keyword">and</span> age&lt;=<span class="number">100</span>)</div><div class="line"><span class="comment">--为teacher表的classid字段创建主外键</span></div><div class="line"><span class="keyword">if</span> <span class="keyword">exists</span>(<span class="keyword">select</span> * <span class="keyword">from</span> sysobjects <span class="keyword">where</span> <span class="keyword">name</span>=<span class="string">'FK_Teacher_Classes_Classid'</span>)</div><div class="line"> <span class="keyword">alter</span> <span class="keyword">table</span> teacher  <span class="keyword">drop</span> <span class="keyword">constraint</span> FK_Teacher_Classes_Classid</div><div class="line"><span class="keyword">alter</span> <span class="keyword">table</span> teacher</div><div class="line"><span class="keyword">with</span> <span class="keyword">nocheck</span> <span class="comment">--不检查现有数据</span></div><div class="line"><span class="keyword">add</span> <span class="keyword">constraint</span> FK_Teacher_Classes_Classid foreign <span class="keyword">key</span>(classid) <span class="keyword">references</span> classes(classid)</div><div class="line"><span class="comment">--on delete set default  级联操作</span></div><div class="line"><span class="comment">--不执行任何操作：该报错就报错，该删除就删除  --no action --默认选择</span></div><div class="line"><span class="comment">--级联：删除主表记录，从表引用该值的记录也被删除 --cascade</span></div><div class="line"><span class="comment">--设置null:删除主表记录，从表对应的字段值设置为null,前提是可以为null   --set null</span></div><div class="line"><span class="comment">--设置为default:删除主表记录，从表对应的字段值设置为default,前提是可以为default  --set default</span></div></pre></td></tr></table></figure>
+<h3 id="四中基本字符类型说明"><a href="#四中基本字符类型说明" class="headerlink" title="四中基本字符类型说明"></a>四中基本字符类型说明</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--len(参数) --获取指定参数内容的字符个数</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">LEN</span>(<span class="string">'abcd'</span>) 【<span class="number">4</span>】运行结果</div><div class="line"><span class="keyword">select</span> <span class="keyword">LEN</span>(<span class="string">'中华人民共和国'</span>) 【<span class="number">7</span>】</div><div class="line"><span class="comment">--DataLength(参数)：获取指定内占据的字节数--空间大小</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">DataLength</span>(<span class="string">'abcd'</span>) 【<span class="number">4</span>】</div><div class="line"><span class="keyword">select</span> <span class="keyword">DataLength</span>(<span class="string">'中华人民共和国'</span>) 【<span class="number">14</span>】</div><div class="line"><span class="comment">--char类型：当空间分配后，不会因为存储的内容比分配的空间小就回收分配的空间。但是如果存储的内容超出了指定的空间大小，就会报错，当你存储的内容的长度变化区间不大的时候可以考虑使用char</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">LEN</span>(<span class="built_in">char</span>) <span class="keyword">from</span> CharTest 【<span class="number">2</span>】</div><div class="line"><span class="keyword">select</span> <span class="keyword">DataLength</span>(<span class="built_in">char</span>) <span class="keyword">from</span> CharTest 【<span class="number">10</span>】</div><div class="line"><span class="comment">--varchar  var--变化的：当你存储的内容小于分配的空间的时候，多余的空间会自动收缩。但是如果存储的内容超出了指定的空间大小，就会报错 当存储的内容波动区间比较大时候使用varchar</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">LEN</span>(<span class="built_in">varchar</span>) <span class="keyword">from</span> CharTest 【<span class="number">2</span>】</div><div class="line"><span class="keyword">select</span> <span class="keyword">DataLength</span>(<span class="built_in">varchar</span>) <span class="keyword">from</span> CharTest 【<span class="number">2</span>】</div><div class="line"><span class="comment">--nchar--  n代表它是一个unicode字符。规定不管什么样的字符都占据两个字节。  char:空间是固定的</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">LEN</span>(<span class="keyword">nchar</span>) <span class="keyword">from</span> CharTest 【<span class="number">10</span>】</div><div class="line"><span class="keyword">select</span> <span class="keyword">DataLength</span>(<span class="keyword">nchar</span>) <span class="keyword">from</span> CharTest 【<span class="number">20</span>】</div><div class="line"><span class="comment">--nvarchar  n  var  char </span></div><div class="line"><span class="keyword">select</span> <span class="keyword">LEN</span>(<span class="keyword">nvarchar</span>) <span class="keyword">from</span> CharTest 【<span class="number">2</span>】</div><div class="line"><span class="keyword">select</span> <span class="keyword">DataLength</span>(<span class="keyword">nvarchar</span>) <span class="keyword">from</span> CharTest 【<span class="number">4</span>】</div></pre></td></tr></table></figure>
+<h3 id="SQL基本语句"><a href="#SQL基本语句" class="headerlink" title="SQL基本语句"></a>SQL基本语句</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">数据插入</div><div class="line">调用方法 一 一对应原则：类型对应，数量对应，顺序对应</div><div class="line">语法： 形参 实参</div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> 表名([字段列表]) <span class="keyword">values</span>(值列表) –数据必须要符合数据完整性</div><div class="line">插入操作是单个表的操作</div><div class="line">插入操作<span class="keyword">insert</span>一次只能插入一条记录</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> School</div><div class="line"><span class="comment">--插入teacher所有字段的数据.如果在表后没有指定需要插入的字段名称，那么就默认为所有字段添加值</span></div><div class="line"><span class="comment">--但是一定需要注意的是：标识列永远不能自定义值--不能人为插入值</span></div><div class="line"><span class="comment">--仅当使用了列列表并且 IDENTITY_INSERT 为 ON 时，才能为表'Teacher'中的标识列指定显式值。</span></div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Teacher <span class="keyword">values</span>(<span class="string">'张三'</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">30</span>,<span class="number">4000</span>,<span class="string">'1984-9-11'</span>)</div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Teacher(<span class="keyword">Name</span>,ClassId,Gender,Age,Salary,Birthday) <span class="keyword">values</span>(<span class="string">'张三'</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">30</span>,<span class="number">4000</span>,<span class="string">'1984-9-11'</span>)</div><div class="line"><span class="comment">--不为可以为null的字段插入值  :可以null的字段可以不赋值 </span></div><div class="line"><span class="comment">--列名或所提供值的数目与表定义不匹配</span></div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Teacher(<span class="keyword">Name</span>,ClassId,Gender,Age,Salary) <span class="keyword">values</span>(<span class="string">'李四'</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">30</span>,<span class="number">4000</span>)</div><div class="line"><span class="comment">--非空字段一定需要赋值 ：不能将值 NULL 插入列 'Gender'，表 'School.dbo.Teacher'；列不允许有 Null 值。INSERT 失败</span></div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Teacher(<span class="keyword">Name</span>,ClassId,Age,Salary) <span class="keyword">values</span>(<span class="string">'李四'</span>,<span class="number">5</span>,<span class="number">30</span>,<span class="number">4000</span>)</div><div class="line"><span class="comment">--为有默认值的字段插入值：</span></div><div class="line"><span class="comment">--1.不写这一列让系统自动赋值</span></div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Teacher(<span class="keyword">Name</span>,ClassId,Gender,Age) <span class="keyword">values</span>(<span class="string">'王五'</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">30</span>)</div><div class="line"><span class="comment">--指定 null或者default</span></div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Teacher(<span class="keyword">Name</span>,ClassId,Gender,Age,Salary,Birthday) <span class="keyword">values</span>(<span class="string">'赵六'</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">30</span>,<span class="keyword">default</span>,<span class="literal">null</span>)</div><div class="line"><span class="comment">--数据必须完全符合表的完整性约束</span></div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Teacher(<span class="keyword">Name</span>,ClassId,Gender,Age,Salary,Birthday) <span class="keyword">values</span>(<span class="string">'赵六1'</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">300</span>,<span class="keyword">default</span>,<span class="literal">null</span>)</div><div class="line"></div><div class="line"><span class="comment">--任意类型的数据都可以包含在''以内,     不包括关键字</span></div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Teacher(<span class="keyword">Name</span>,ClassId,Gender,Age,Salary,Birthday) <span class="keyword">values</span>(<span class="string">'马鹏飞'</span>,<span class="string">'5'</span>,<span class="string">'0'</span>,<span class="string">'15'</span>,<span class="keyword">default</span>,<span class="literal">null</span>)</div><div class="line"><span class="comment">--但是字符串值如果没有包含在''以内.会报错   列名 '兰鹏' 无效。</span></div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Teacher(<span class="keyword">Name</span>,ClassId,Gender,Age,Salary,Birthday) <span class="keyword">values</span>(<span class="string">'兰鹏'</span>,<span class="string">'5'</span>,<span class="string">'0'</span>,<span class="string">'15'</span>,<span class="keyword">default</span>,<span class="literal">null</span>)</div><div class="line"><span class="comment">--但是数值组成的字符串可以不使用''包含</span></div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Teacher(<span class="keyword">Name</span>,ClassId,Gender,Age,Salary,Birthday) <span class="keyword">values</span>(<span class="number">123</span>,<span class="string">'5'</span>,<span class="string">'0'</span>,<span class="string">'15'</span>,<span class="keyword">default</span>,<span class="literal">null</span>)</div><div class="line"><span class="comment">--日期值必须包含在’‘以内，否则就是默认值</span></div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Teacher(<span class="keyword">Name</span>,ClassId,Gender,Age,Salary,Birthday) <span class="keyword">values</span>(<span class="string">'邹元标2'</span>,<span class="string">'5'</span>,<span class="string">'0'</span>,<span class="string">'15'</span>,<span class="keyword">default</span>,<span class="string">'1991-9-11'</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">数据删除</div><div class="line">语法:</div><div class="line"><span class="keyword">delete</span> [<span class="keyword">from</span>] 表名 <span class="keyword">where</span> 条件</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">delete</span> <span class="keyword">from</span> Teacher <span class="keyword">where</span> Age&lt;<span class="number">20</span></div><div class="line"><span class="comment">--特点:</span></div><div class="line"><span class="comment">--1.删除是一条一条进行删除的</span></div><div class="line"><span class="comment">--2.每一条记录的删除都需要将操作写入到日志文件中</span></div><div class="line"><span class="comment">--3.标识列不会从种子值重新计算,以从上次最后一条标识列值往下计算</span></div><div class="line"><span class="comment">--4.这种删除可以触发delete触发器</span></div><div class="line"></div><div class="line"><span class="comment">--truncate table 表名 --没有条件，它是一次性删除所有数据</span></div><div class="line"><span class="comment">--特点：</span></div><div class="line"><span class="comment">--1.一次性删除所有数据，没有条件，那么日志文件只以最小化的数据写入</span></div><div class="line"><span class="comment">--2.它可以使用标识列从种子值重新计算</span></div><div class="line"><span class="comment">--3.它不能触发delete触发器</span></div><div class="line"><span class="keyword">truncate</span> <span class="keyword">table</span> teacher</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">数据更新(数据修改)：一定需要考虑是否有条件</div><div class="line">语法:</div><div class="line"><span class="keyword">update</span> 表名 <span class="keyword">set</span> 字段=值，字段=值 。。<span class="keyword">where</span> 条件</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">update</span> Teacher <span class="keyword">set</span> Gender=<span class="string">'true'</span></div><div class="line"><span class="comment">--修改时添加条件</span></div><div class="line"><span class="keyword">update</span> Teacher <span class="keyword">set</span> Gender=<span class="number">0</span> <span class="keyword">where</span> <span class="keyword">Id</span>=<span class="number">20</span></div><div class="line"><span class="comment">--多字段修改</span></div><div class="line"><span class="keyword">update</span> Teacher <span class="keyword">set</span> ClassId=<span class="number">4</span>,Age+=<span class="number">5</span>,Salary=<span class="number">5000</span> <span class="keyword">where</span> <span class="keyword">Id</span>=<span class="number">22</span></div><div class="line"><span class="comment">--修改班级id=4，同时年龄》20岁的人员工资+500</span></div><div class="line"><span class="keyword">update</span> Teacher <span class="keyword">set</span> Salary=Salary+<span class="number">500</span> <span class="keyword">where</span> ClassId=<span class="number">4</span> <span class="keyword">and</span> Age&gt;<span class="number">20</span></div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">数据检索–查询</div><div class="line">语法： *代表所有字段</div><div class="line">select */字段名称列表 from 表列表</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> StudentNo,StudentName,Sex,[Address] <span class="keyword">from</span> Student</div><div class="line"><span class="comment">--可以为标题设置  别名，别名可以是中文别名</span></div><div class="line"><span class="keyword">select</span> StudentNo <span class="keyword">as</span> 学号,StudentName 姓名,性别=Sex,[Address] <span class="keyword">from</span> Student</div><div class="line"><span class="comment">--添加常量列</span></div><div class="line"><span class="keyword">select</span> StudentNo <span class="keyword">as</span> 学号,StudentName 姓名,性别=Sex,[Address] ,国籍=<span class="string">'中华人民共和国'</span> <span class="keyword">from</span> Student</div></pre></td></tr></table></figure>
+<h3 id="select的作用"><a href="#select的作用" class="headerlink" title="select的作用"></a>select的作用</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--select的作用</span></div><div class="line"><span class="comment">--1.查询</span></div><div class="line"><span class="comment">--2.输出</span></div><div class="line"><span class="keyword">select</span> <span class="number">1</span>+<span class="number">1</span></div><div class="line"><span class="comment">--+是运算符,系统会自动为你做类型转换</span></div><div class="line"><span class="keyword">select</span> <span class="number">1</span>+<span class="string">'1'</span></div><div class="line"><span class="keyword">select</span> <span class="string">'1'</span>+<span class="number">1</span></div><div class="line"><span class="comment">--如果+两边都是字符串,那么它就是一字符串连接符</span></div><div class="line"><span class="keyword">select</span> <span class="string">'1'</span>+<span class="string">'1'</span></div><div class="line"><span class="keyword">select</span> <span class="string">'a'</span>+<span class="number">1</span></div><div class="line"><span class="comment">--可以输出多列值</span></div><div class="line"><span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">34</span>,<span class="number">3</span>,<span class="number">545</span>,<span class="number">67</span>,<span class="number">567</span>,<span class="number">6</span>,<span class="number">7</span></div><div class="line"><span class="comment">--Top、Distinct</span></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> Student</div><div class="line"><span class="comment">--top可以获取指定的记录数,值可以大于总记录数.但是不能是负值</span></div><div class="line"><span class="keyword">select</span> top <span class="number">100</span> * <span class="keyword">from</span> Student</div><div class="line"><span class="comment">--百分比是取ceiling()</span></div><div class="line"><span class="keyword">select</span> top <span class="number">10</span> <span class="keyword">percent</span> * <span class="keyword">from</span> Student</div><div class="line"></div><div class="line"><span class="comment">--重复记录与原始的数据表数据无关,只与你查询的结果集有关系 distinct可以去除结果集中的重复记录--结果集中每一列的值都一样</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> LoginPwd,Sex,Email <span class="keyword">from</span> Student</div><div class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> Sex <span class="keyword">from</span> Student</div></pre></td></tr></table></figure>
+<h3 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--聚合函数：</span></div><div class="line"><span class="comment">--1.对null过滤</span></div><div class="line"><span class="comment">--2.都需要有一个参数</span></div><div class="line"><span class="comment">--3.都是返回一个数值</span></div><div class="line"><span class="comment">--sum()：求和:只能对数值而言,对字符串和日期无效</span></div><div class="line"><span class="comment">--avg()：求平均值</span></div><div class="line"><span class="comment">--count()：计数：得到满足条件的记录数</span></div><div class="line"><span class="comment">--max()：求最大值:可以对任意类型的数据进行聚合，如果是字符串就比较拼音字母进行排序</span></div><div class="line"><span class="comment">--min()：求最小值</span></div><div class="line"><span class="comment">--获取学员总人数</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">COUNT</span>(*) <span class="keyword">from</span> Student</div><div class="line"><span class="comment">--查询最大年龄值</span></div><div class="line"><span class="keyword">select</span>  <span class="keyword">MIN</span>(BornDate) <span class="keyword">from</span> Student</div><div class="line"><span class="keyword">select</span>  <span class="keyword">max</span>(BornDate) <span class="keyword">from</span> Student</div><div class="line"></div><div class="line"><span class="comment">--查询总分</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">SUM</span>(StudentResult) <span class="keyword">from</span> <span class="keyword">Result</span> <span class="keyword">where</span> StudentNo=<span class="number">2</span></div><div class="line"><span class="comment">--平均分</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">avg</span>(StudentResult) <span class="keyword">from</span> <span class="keyword">Result</span> <span class="keyword">where</span> SubjectId=<span class="number">1</span></div><div class="line"><span class="comment">--注意细节：</span></div><div class="line"><span class="keyword">select</span>  <span class="keyword">SUM</span>(StudentName) <span class="keyword">from</span> Student</div><div class="line"><span class="keyword">select</span>  <span class="keyword">SUM</span>(BornDate) <span class="keyword">from</span> Student</div><div class="line"></div><div class="line"><span class="keyword">select</span>  <span class="keyword">min</span>(StudentName) <span class="keyword">from</span> Student</div><div class="line"><span class="keyword">select</span>  <span class="keyword">max</span>(StudentName) <span class="keyword">from</span> Student</div><div class="line"></div><div class="line"><span class="comment">--查询学号，姓名，性别，年龄，电话，地址 ---查询女生</span></div><div class="line"><span class="keyword">select</span> StudentNo,StudentName,Sex,BornDate,Address <span class="keyword">from</span> Student <span class="keyword">where</span> Sex=<span class="string">'女'</span> <span class="keyword">and</span> BornDate &gt;<span class="string">'1990-1-1'</span> <span class="keyword">and</span> Address=<span class="string">'广州'</span></div><div class="line"><span class="comment">--指定区间范围</span></div><div class="line"><span class="keyword">select</span> StudentNo,StudentName,Sex,BornDate,Address <span class="keyword">from</span> Student <span class="keyword">where</span>  BornDate &gt;=<span class="string">'1990-1-1'</span> <span class="keyword">and</span> BornDate&lt;=<span class="string">'1993-1-1'</span></div><div class="line"><span class="comment">--between...and  &gt;=  &lt;=</span></div><div class="line"><span class="keyword">select</span> StudentNo,StudentName,Sex,BornDate,Address <span class="keyword">from</span> Student <span class="keyword">where</span> BornDate  <span class="keyword">between</span> <span class="string">'1990-1-1'</span> <span class="keyword">and</span> <span class="string">'1993-1-1'</span></div><div class="line"><span class="comment">--查询班级id  1  3 5  7的学员信息</span></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> Student <span class="keyword">where</span> ClassId=<span class="number">1</span> <span class="keyword">or</span> ClassId=<span class="number">3</span> <span class="keyword">or</span> ClassId=<span class="number">5</span> <span class="keyword">or</span> ClassId=<span class="number">7</span></div><div class="line"><span class="comment">--指定具体的取值范围--可以是任意类型的范围.值的类型需要一致--可以相互转换</span></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> Student <span class="keyword">where</span> ClassId <span class="keyword">in</span>(<span class="number">1</span>,<span class="number">3</span>,<span class="string">'5'</span>,<span class="number">7</span>)</div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> Student <span class="keyword">where</span> ClassId <span class="keyword">not</span> <span class="keyword">in</span>(<span class="number">1</span>,<span class="number">3</span>,<span class="string">'5'</span>,<span class="number">7</span>)</div></pre></td></tr></table></figure>
+<h3 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--带条件的查询-模糊查询-- 只针对字符串而言</span></div><div class="line"></div><div class="line"><span class="comment">--查询  姓 林 的女生信息</span></div><div class="line"><span class="comment">--=是一种精确查询，需要完全匹配</span></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> Student <span class="keyword">where</span> Sex=<span class="string">'女'</span> <span class="keyword">and</span> StudentName=<span class="string">'林'</span></div><div class="line"><span class="comment">--通配符--元字符</span></div><div class="line"><span class="comment">--%：任意个任意字段  window:*  正则表达式 ：.*</span></div><div class="line"><span class="comment">--_:任意的单个字符</span></div><div class="line"><span class="comment">--[]:代表一个指定的范围，范围可以是连续也可以是间断的。与正则表达式完全一样[0-9a-zA-Z].可以从这个范围中取一个字符</span></div><div class="line"><span class="comment">--[^]:取反值</span></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> Student <span class="keyword">where</span> Sex=<span class="string">'女'</span> <span class="keyword">and</span> StudentName=<span class="string">'林%'</span></div><div class="line"><span class="comment">--通配符必须在模糊查询关键的中才可以做为通配符使用，否则就是普通字符</span></div><div class="line"><span class="comment">--like   像 。。。。一样</span></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> Student <span class="keyword">where</span> Sex=<span class="string">'女'</span> <span class="keyword">and</span> StudentName  <span class="keyword">like</span> <span class="string">'林%'</span></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> Student <span class="keyword">where</span> Sex=<span class="string">'女'</span> <span class="keyword">and</span> StudentName  <span class="keyword">like</span> <span class="string">'林_'</span></div><div class="line"><span class="comment">--[]的使用  学号在11~15之间的学员信息</span></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> Student <span class="keyword">where</span> StudentNo <span class="keyword">like</span> <span class="string">'[13579]'</span></div><div class="line"></div><div class="line"><span class="comment">---处理null值</span></div><div class="line"><span class="comment">--null:不是地址没有分配,而是不知道你需要存储什么值  所以null是指   不知道。但是=只能匹配具体的值，而null根本就不是一个值</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">COUNT</span>(email) <span class="keyword">from</span> Student <span class="keyword">where</span> Email !=<span class="literal">null</span> (错误)</div><div class="line"><span class="keyword">select</span> <span class="keyword">COUNT</span>(email) <span class="keyword">from</span> Student <span class="keyword">where</span> Email  <span class="keyword">is</span> <span class="literal">null</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">count</span>(email) <span class="keyword">from</span> Student <span class="keyword">where</span> Email  <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">null</span></div><div class="line"><span class="comment">--将null值替换为指定的字符串值</span></div><div class="line"><span class="keyword">select</span> StudentName,<span class="keyword">ISNULL</span>(Email,<span class="string">'没有填写电子邮箱'</span>) <span class="keyword">from</span> Student <span class="keyword">where</span> ClassId=<span class="number">2</span></div></pre></td></tr></table></figure>
+<h3 id="分组统计"><a href="#分组统计" class="headerlink" title="分组统计"></a>分组统计</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--当你看到  每一个，，各自，不同，，分别  需要考虑分组</span></div><div class="line"><span class="comment">--查询每一个班级的男生人数</span></div><div class="line"><span class="comment">--与聚合函数一起出现在查询中的列，要么也被聚合，要么被分组</span></div><div class="line"><span class="keyword">select</span> classid,Sex,<span class="keyword">COUNT</span>(*) <span class="keyword">from</span> Student <span class="keyword">where</span> Sex=<span class="string">'男'</span> <span class="keyword">group</span> <span class="keyword">by</span> ClassId,sex</div><div class="line"></div><div class="line"><span class="comment">--查询每一个班级的总人数,显示人数&gt;=2的信息</span></div><div class="line"><span class="comment">--1.聚合不应出现在 WHERE 子句中--语法错误</span></div><div class="line"><span class="keyword">select</span> ClassId ,<span class="keyword">COUNT</span>(*) <span class="keyword">as</span> <span class="keyword">num</span> <span class="keyword">from</span> Student <span class="keyword">where</span> Email <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">null</span>   <span class="keyword">GROUP</span> <span class="keyword">by</span> ClassId <span class="keyword">having</span> <span class="keyword">COUNT</span>(*)&gt;=<span class="number">2</span> <span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">num</span> <span class="keyword">desc</span></div><div class="line"></div><div class="line"><span class="comment">--完整的sql查询家庭                                           </span></div><div class="line"><span class="comment">--select 字段列表 from 表列表  where 数据源做筛选 group by 分组字段列表 having 分组结果集做筛选 Order by  对结果集做记录重排</span></div><div class="line"><span class="keyword">select</span> ClassId ,<span class="keyword">COUNT</span>(*) <span class="keyword">as</span> <span class="keyword">num</span> <span class="keyword">from</span> Student <span class="keyword">where</span> Email <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">null</span>   <span class="keyword">GROUP</span> <span class="keyword">by</span> ClassId <span class="keyword">order</span> <span class="keyword">by</span> ClassId <span class="keyword">desc</span></div><div class="line"></div><div class="line"><span class="comment">--关于top的执行顺序 排序之后再取top值</span></div><div class="line"><span class="keyword">select</span> top <span class="number">1</span> ClassId ,<span class="keyword">COUNT</span>(*) <span class="keyword">as</span> <span class="keyword">num</span> <span class="keyword">from</span> Student  <span class="keyword">GROUP</span> <span class="keyword">by</span> ClassId  <span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">num</span> <span class="keyword">desc</span></div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      pingguowei
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://itcabin.com/2017/05/20/SQL笔记梳理/" title="SQL笔记梳理">http://itcabin.com/2017/05/20/SQL笔记梳理/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SQL基础/" rel="tag"># SQL基础</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/20/SQL常用函数/" rel="next" title="SQL常用函数">
+                <i class="fa fa-chevron-left"></i> SQL常用函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/13/jQuery常用函数总结/" rel="prev" title="jQuery常用函数总结">
+                jQuery常用函数总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/freeofwing.jpeg"
+               alt="pingguowei" />
+          <p class="site-author-name" itemprop="name">pingguowei</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是SQL语句"><span class="nav-number">1.</span> <span class="nav-text">什么是SQL语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用sql语句创建数据库和表"><span class="nav-number">2.</span> <span class="nav-text">使用sql语句创建数据库和表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数据表"><span class="nav-number">3.</span> <span class="nav-text">创建数据表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据完整性约束"><span class="nav-number">4.</span> <span class="nav-text">数据完整性约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四中基本字符类型说明"><span class="nav-number">5.</span> <span class="nav-text">四中基本字符类型说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL基本语句"><span class="nav-number">6.</span> <span class="nav-text">SQL基本语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#select的作用"><span class="nav-number">7.</span> <span class="nav-text">select的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚合函数"><span class="nav-number">8.</span> <span class="nav-text">聚合函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模糊查询"><span class="nav-number">9.</span> <span class="nav-text">模糊查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分组统计"><span class="nav-number">10.</span> <span class="nav-text">分组统计</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pingguowei</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysYWLmXQ';
+      var conf = 'c9827a47febaff8473e65037e09159c4';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

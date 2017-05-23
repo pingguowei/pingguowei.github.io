@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Node.js基础学习01--创建第一个应用]]></title>
+    <url>%2F2017%2F05%2F23%2FNode-js%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A001-%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[Node.js简介简单的说 Node.js 就是运行在服务端的 JavaScript。 Node.js 是一个基于Chrome JavaScript 运行时建立的一个平台。 Node.js是一个事件驱动I/O服务端JavaScript环境，基于Google的V8引擎，V8引擎执行Javascript的速度非常快，性能非常好。 Node.js 创建第一个应用在我们创建 Node.js 第一个 “Hello, World!” 应用前，让我们先了解下 Node.js 应用是由哪几部分组成的： 引入 required 模块：我们可以使用 require 指令来载入 Node.js 模块。 创建服务器：服务器可以监听客户端的请求，类似于 Apache 、Nginx 等 HTTP 服务器。 接收请求与响应请求 服务器很容易创建，客户端可以使用浏览器或终端发送 HTTP 请求，服务器接收请求后返回响应数据。 创建 Node.js 应用步骤一、引入 required 模块我们使用 require 指令来载入 http 模块，并将实例化的 HTTP 赋值给变量 http，实例如下: 1var http = require("http"); 步骤二、创建服务器接下来我们使用 http.createServer() 方法创建服务器，并使用 listen 方法绑定 8888 端口。 函数通过 request, response 参数来接收和响应数据。 实例如下，在你项目的根目录下创建一个叫 server.js 的文件，并写入以下代码： 12345678910111213var http=require('http');http.createServer(function(request,response)&#123; // 发送HTTP头部 // HTTP 状态值：200：ok // 内容类型：text/plain response.writeHead(200,&#123;'Content-Type':'text/plain'&#125;); // 发送响应数据"Hello World\n" response.end('Hello World\n');&#125;).listen(8888);// 终端打印信息如下console.log('Server running at http://127.0.0.1:8888/') 以上代码我们完成了一个可以工作的 HTTP 服务器。 使用 node 命令执行以上的代码： 12node server.jsServer running at http://127.0.0.1:8888/ 接下来，打开浏览器访问 http://127.0.0.1:8888/，你会看到一个写着 “Hello World”的网页。 分析Node.js 的 HTTP 服务器： 第一行请求（require）Node.js 自带的 http 模块，并且把它赋值给 http 变量。 接下来我们调用 http 模块提供的函数： createServer 。这个函数会返回 一个对象，这个对象有一个叫做 listen 的方法，这个方法有一个数值参数， 指定这个 HTTP 服务器监听的端口号。]]></content>
+      <categories>
+        <category>Node.js</category>
+      </categories>
+      <tags>
+        <tag>Node.js基础学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JavaScript整理：this,call,apply,bind总结]]></title>
+    <url>%2F2017%2F05%2F21%2FJavaScript%E6%95%B4%E7%90%86%EF%BC%9Athis-call-apply-bind%E6%80%BB%E7%BB%93%2F</url>
+    <content type="text"><![CDATA[一、thisJavaScript 中的 this 总是指向一个对象，而具体指向那个对象是在运行时基于函数的执行环境动态绑定的，而非函数声明时的环境实际应用中 this 的指向大致可以分为以下 4 中： 作为对象的方法调用 作为普通函数掉用 构造器调用 Function.prototype.call 或 Function.prototype.apply 调用, 可以动态地改变出入函数的 this 1.作为对象的方法调用时， this 指向该对象12345678var obj = &#123; a: 1, getA: function()&#123; console.log( this == obj ); // true console.log( this.a ); // 1 &#125;&#125;;obj.getA(); 2.作为普通函数掉用，this 总是指向全局对象 window12345678console.log(this); // Windowswindow.name = "globalName";var getName = function() &#123; return this.name;&#125;console.log( getName() ); // globalName 3.构造器调用, 当用 new 运算符调用函数时，该函数总是会返回一个对象，通常情况下，构造函数里的 this 就指向返回的这个对象12345var MyClass = function()&#123; this.name = "class"; &#125;var obj = new MyClass();console.log( obj.name ); // class 如果使用 new 调用构造器时，构造器显式地返回了一个 object 类型的对象，那么此次运算结果最终会返回这个对象，而不是我么之前期待的 this 12345678var MyClass = function()&#123; this.name = "class"; return &#123; name: "other" &#125;&#125;var obj = new MyClass(); // 返回的是 &#123;name:"other"&#125; 这个对象console.log(obj.name); // other 二、 call 和 apply 他们的作用一模一样，区别仅在于传入参数形式的不同。​ apply 接收两个参数，第一个参数指定了函数体内 this 对象的指向，第二个参数为一个带下标的集合，这个集合可以是数组，也可以是类数组，apply 方法把这个集合中的元素作为参数传入被调用的函数。​ call 传入的参数不固定，跟 apply 相同的是，第一个参数也代表函数体内的 this 指向，从第二个参数开始往后，每个参数被依次传入函数 1234567var func = function(a, b, c)&#123; console.log([a, b, c]);&#125;//传入的第一个参数为 null ，函数体内的 this 会指向默认的宿主对象，在浏览器中则是 windowfunc.apply(null, [1, 2, 3]); // 输出：[ 1, 2, 3 ]func.call(null, 1, 2, 3); // 输出：[ 1, 2, 3 ] call 和 apply 的用途: 1.改变 this 指向12345678910111213141516var obj1 = &#123; name: "obj1"&#125;;var obj2 = &#123; name: "obj2"&#125;;window.name = "window";var getName = function()&#123; console.log( this.name );&#125;getName(); // windowgetName.call( obj1 ); // obj1getName.call( obj2 ); // obj2 当执行 getName.call( obj1 ) 这句代码时， getName 函数体内的 this 就指向 obj1 对象，所以此处的 123var getName = function()&#123; console.log( this.name );&#125; 实际上相当于 123var getName = function()&#123; console.log( obj1.name );&#125; 2.用来模拟 Function.prototype.bind 指定函数内部的 this 指向3.借用其他对象的方法， 可以模拟实现继承123456789101112var A = function(name)&#123; this.name = name;&#125;var B = function()&#123; A.apply( this, arguments);&#125;B.prototype.getName = function()&#123; return this.name;&#125;var b = new B("2B铅笔");console.log( b.getName() ); // 输出： 2B铅笔 借用 Array.prototype 对象上的方法，对参数列表 arguments 这个类数组对象，进行数组对象方法的调用 1234(function()&#123; Array.prototype.push.call( arguments, 3); console.log( arguments ); // 输出： [1, 2, 3]&#125;)(1, 2); 三、ECMAScript 5 中的 bind() 方法可以将函数绑定到一个对象上1234function f(y) &#123;return this.x + y&#125;;var o = &#123; x: 1&#125;;var g = f.bind(o);g(2); // 3]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>javascript</tag>
+        <tag>this</tag>
+        <tag>call</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[SQL日常记录]]></title>
     <url>%2F2017%2F05%2F21%2FSQL%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%2F</url>
     <content type="text"><![CDATA[SQL语句增加字段、修改字段、修改类型、修改默认值一、添加字段123ALTER TABLE table_name ADD column_name datatype-- 例如ALTER TABLE Persons ADD Birthday date 二、删除字段123ALTER TABLE table_name DROP COLUMN column_name-- 例如ALTER TABLE Person DROP COLUMN Birthday 三、改变字段数据类型123ALTER TABLE table_name ALTER COLUMN column_name datatype-- 例如ALTER TABLE Persons ALTER COLUMN Birthday int 四、修改字段名1234567891011--不能用SQL修改字段名,试用以下方法alter table table_name add new_field_name intgoupdate table_nameset new_field_name = old_field_namegoalter table table_name drop column old_field_namego-- 添加新的字段，赋值，删除旧的字段]]></content>

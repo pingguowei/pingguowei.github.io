@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="javascript,this,call," />
+  <meta name="keywords" content="Node.js基础学习,回调函数,事件循环," />
 
 
 
@@ -90,17 +90,22 @@
 
 
 
-<meta name="description" content="一、thisJavaScript 中的 this 总是指向一个对象，而具体指向那个对象是在运行时基于函数的执行环境动态绑定的，而非函数声明时的环境实际应用中 this 的指向大致可以分为以下 4 中：  作为对象的方法调用 作为普通函数掉用 构造器调用 Function.prototype.call 或 Function.prototype.apply 调用, 可以动态地改变出入函数的 this">
-<meta name="keywords" content="javascript,this,call">
+<meta name="description" content="Node.js回调函数Node.js 异步编程的直接体现就是回调。 异步编程依托于回调来实现，但不能说使用了回调后程序就异步化了。 回调函数在完成任务后就会被调用，Node 使用了大量的回调函数，Node 所有 API 都支持回调函数。 例如，我们可以一边读取文件，一边执行其他命令，在文件读取完成后，我们将文件内容作为回调函数的参数返回。这样在执行代码时就没有阻塞或等待文件 I/O 操作。这就大大">
+<meta name="keywords" content="Node.js基础学习,回调函数,事件循环">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript整理：this,call,apply,bind总结">
-<meta property="og:url" content="http://itcabin.com/2017/05/21/JavaScript整理：this-call-apply-bind总结/index.html">
+<meta property="og:title" content="Node.js基础学习02--回调函数、事件循环">
+<meta property="og:url" content="http://itcabin.com/2017/05/24/Node-js基础学习02-回调函数、事件循环/index.html">
 <meta property="og:site_name" content="苹果味博客">
-<meta property="og:description" content="一、thisJavaScript 中的 this 总是指向一个对象，而具体指向那个对象是在运行时基于函数的执行环境动态绑定的，而非函数声明时的环境实际应用中 this 的指向大致可以分为以下 4 中：  作为对象的方法调用 作为普通函数掉用 构造器调用 Function.prototype.call 或 Function.prototype.apply 调用, 可以动态地改变出入函数的 this">
-<meta property="og:updated_time" content="2017-05-21T10:22:29.529Z">
+<meta property="og:description" content="Node.js回调函数Node.js 异步编程的直接体现就是回调。 异步编程依托于回调来实现，但不能说使用了回调后程序就异步化了。 回调函数在完成任务后就会被调用，Node 使用了大量的回调函数，Node 所有 API 都支持回调函数。 例如，我们可以一边读取文件，一边执行其他命令，在文件读取完成后，我们将文件内容作为回调函数的参数返回。这样在执行代码时就没有阻塞或等待文件 I/O 操作。这就大大">
+<meta property="og:image" content="http://itcabin.com/2017/05/24/Node-js基础学习02-回调函数、事件循环/01.jpg">
+<meta property="og:image" content="http://itcabin.com/2017/05/24/Node-js基础学习02-回调函数、事件循环/02.PNG">
+<meta property="og:image" content="http://itcabin.com/2017/05/24/Node-js基础学习02-回调函数、事件循环/03.PNG">
+<meta property="og:image" content="http://itcabin.com/2017/05/24/Node-js基础学习02-回调函数、事件循环/04.PNG">
+<meta property="og:updated_time" content="2017-05-24T14:50:13.317Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript整理：this,call,apply,bind总结">
-<meta name="twitter:description" content="一、thisJavaScript 中的 this 总是指向一个对象，而具体指向那个对象是在运行时基于函数的执行环境动态绑定的，而非函数声明时的环境实际应用中 this 的指向大致可以分为以下 4 中：  作为对象的方法调用 作为普通函数掉用 构造器调用 Function.prototype.call 或 Function.prototype.apply 调用, 可以动态地改变出入函数的 this">
+<meta name="twitter:title" content="Node.js基础学习02--回调函数、事件循环">
+<meta name="twitter:description" content="Node.js回调函数Node.js 异步编程的直接体现就是回调。 异步编程依托于回调来实现，但不能说使用了回调后程序就异步化了。 回调函数在完成任务后就会被调用，Node 使用了大量的回调函数，Node 所有 API 都支持回调函数。 例如，我们可以一边读取文件，一边执行其他命令，在文件读取完成后，我们将文件内容作为回调函数的参数返回。这样在执行代码时就没有阻塞或等待文件 I/O 操作。这就大大">
+<meta name="twitter:image" content="http://itcabin.com/2017/05/24/Node-js基础学习02-回调函数、事件循环/01.jpg">
 
 
 
@@ -128,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://itcabin.com/2017/05/21/JavaScript整理：this-call-apply-bind总结/"/>
+  <link rel="canonical" href="http://itcabin.com/2017/05/24/Node-js基础学习02-回调函数、事件循环/"/>
 
 
 
 
 
-  <title>JavaScript整理：this,call,apply,bind总结 | 苹果味博客</title>
+  <title>Node.js基础学习02--回调函数、事件循环 | 苹果味博客</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -307,7 +312,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/05/21/JavaScript整理：this-call-apply-bind总结/">
+    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/05/24/Node-js基础学习02-回调函数、事件循环/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="pingguowei">
@@ -328,7 +333,7 @@
             
             
               
-                JavaScript整理：this,call,apply,bind总结
+                Node.js基础学习02--回调函数、事件循环
               
             
           </h2>
@@ -343,8 +348,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-21T17:49:02+08:00">
-                2017-05-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-24T22:19:21+08:00">
+                2017-05-24
               </time>
             
 
@@ -366,8 +371,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javascript/" itemprop="url" rel="index">
-                    <span itemprop="name">javascript</span>
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
                   </a>
                 </span>
 
@@ -385,8 +390,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/05/21/JavaScript整理：this-call-apply-bind总结/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/05/21/JavaScript整理：this-call-apply-bind总结/" itemprop="commentsCount"></span>
+                <a href="/2017/05/24/Node-js基础学习02-回调函数、事件循环/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/05/24/Node-js基础学习02-回调函数、事件循环/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -416,31 +421,54 @@
       
 
       
-        <h3 id="一、this"><a href="#一、this" class="headerlink" title="一、this"></a>一、this</h3><p>JavaScript 中的 this 总是指向一个对象，而具体指向那个对象是在运行时基于函数的执行环境动态绑定的，而非函数声明时的环境<br><strong>实际应用中 this 的指向大致可以分为以下 4 中：</strong></p>
-<ol>
-<li>作为对象的方法调用</li>
-<li>作为普通函数掉用</li>
-<li>构造器调用</li>
-<li>Function.prototype.call 或 Function.prototype.apply 调用, <strong>可以动态地改变出入函数的 this</strong></li>
-</ol>
+        <h3 id="Node-js回调函数"><a href="#Node-js回调函数" class="headerlink" title="Node.js回调函数"></a>Node.js回调函数</h3><p>Node.js 异步编程的直接体现就是回调。</p>
+<p>异步编程依托于回调来实现，<strong>但不能说使用了回调后程序就异步化了</strong>。</p>
+<p>回调函数在完成任务后就会被调用，Node 使用了大量的回调函数，Node 所有 API 都支持回调函数。</p>
+<p>例如，我们可以一边读取文件，一边执行其他命令，在文件读取完成后，我们将文件内容作为回调函数的参数返回。这样在执行代码时就没有阻塞或等待文件 I/O 操作。这就大大提高了 Node.js 的性能，可以处理大量的并发请求。</p>
 <a id="more"></a>
-<h4 id="1-作为对象的方法调用时，-this-指向该对象"><a href="#1-作为对象的方法调用时，-this-指向该对象" class="headerlink" title="1.作为对象的方法调用时， this 指向该对象"></a>1.作为对象的方法调用时， this 指向该对象</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    <span class="attr">a</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">getA</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log( <span class="keyword">this</span> == obj ); <span class="comment">// true</span></div><div class="line">        <span class="built_in">console</span>.log( <span class="keyword">this</span>.a ); <span class="comment">// 1</span></div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">obj.getA();</div></pre></td></tr></table></figure>
-<h4 id="2-作为普通函数掉用，this-总是指向全局对象-window"><a href="#2-作为普通函数掉用，this-总是指向全局对象-window" class="headerlink" title="2.作为普通函数掉用，this 总是指向全局对象 window"></a>2.作为普通函数掉用，this 总是指向全局对象 window</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">// Windows</span></div><div class="line"></div><div class="line"><span class="built_in">window</span>.name = <span class="string">"globalName"</span>;</div><div class="line"><span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log( getName() ); <span class="comment">// globalName</span></div></pre></td></tr></table></figure>
-<h4 id="3-构造器调用-当用-new-运算符调用函数时，该函数总是会返回一个对象，通常情况下，构造函数里的-this-就指向返回的这个对象"><a href="#3-构造器调用-当用-new-运算符调用函数时，该函数总是会返回一个对象，通常情况下，构造函数里的-this-就指向返回的这个对象" class="headerlink" title="3.构造器调用, 当用 new 运算符调用函数时，该函数总是会返回一个对象，通常情况下，构造函数里的 this 就指向返回的这个对象"></a>3.构造器调用, 当用 new 运算符调用函数时，该函数总是会返回一个对象，通常情况下，构造函数里的 this 就指向返回的这个对象</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> MyClass = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = <span class="string">"class"</span>;    </div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> MyClass();</div><div class="line"><span class="built_in">console</span>.log( obj.name ); <span class="comment">// class</span></div></pre></td></tr></table></figure>
-<p>如果使用 new 调用构造器时，构造器显式地返回了一个 object 类型的对象，那么此次运算结果最终会返回这个对象，而不是我么之前期待的 this</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> MyClass = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = <span class="string">"class"</span>;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">name</span>: <span class="string">"other"</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> MyClass(); <span class="comment">// 返回的是 &#123;name:"other"&#125; 这个对象</span></div><div class="line"><span class="built_in">console</span>.log(obj.name); <span class="comment">// other</span></div></pre></td></tr></table></figure>
-<h3 id="二、-call-和-apply"><a href="#二、-call-和-apply" class="headerlink" title="二、 call 和 apply"></a>二、 call 和 apply</h3><p>　他们的作用一模一样，区别仅在于传入参数形式的不同。<br>​      apply 接收两个参数，第一个参数指定了函数体内 this 对象的指向，第二个参数为一个带下标的集合，这个集合可以是数组，也可以是类数组，<strong>apply 方法把这个集合中的元素作为参数传入被调用的函数</strong>。<br>​      call 传入的参数不固定，跟 apply 相同的是，第一个参数也代表函数体内的 this 指向，<strong>从第二个参数开始往后，每个参数被依次传入函数</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> func = <span class="function"><span class="keyword">function</span>(<span class="params">a, b, c</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log([a, b, c]);</div><div class="line">&#125;</div><div class="line"><span class="comment">//传入的第一个参数为 null ，函数体内的 this 会指向默认的宿主对象，在浏览器中则是 window</span></div><div class="line">func.apply(<span class="literal">null</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]); <span class="comment">// 输出：[ 1, 2, 3 ]</span></div><div class="line"></div><div class="line">func.call(<span class="literal">null</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>); <span class="comment">// 输出：[ 1, 2, 3 ]</span></div></pre></td></tr></table></figure>
-<p>call 和 apply 的用途:</p>
-<h4 id="1-改变-this-指向"><a href="#1-改变-this-指向" class="headerlink" title="1.改变 this 指向"></a>1.改变 this 指向</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj1 = &#123;</div><div class="line">    <span class="attr">name</span>: <span class="string">"obj1"</span></div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> obj2 = &#123;</div><div class="line">    <span class="attr">name</span>: <span class="string">"obj2"</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">window</span>.name = <span class="string">"window"</span>;</div><div class="line"></div><div class="line"><span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log( <span class="keyword">this</span>.name );</div><div class="line">&#125;</div><div class="line"></div><div class="line">getName(); <span class="comment">// window</span></div><div class="line">getName.call( obj1 ); <span class="comment">// obj1</span></div><div class="line">getName.call( obj2 ); <span class="comment">// obj2</span></div></pre></td></tr></table></figure>
-<p>当执行 getName.call( obj1 ) 这句代码时， getName 函数体内的 this 就指向 obj1 对象，所以此处的</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log( <span class="keyword">this</span>.name );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>实际上相当于</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log( obj1.name );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="2-用来模拟-Function-prototype-bind-指定函数内部的-this-指向"><a href="#2-用来模拟-Function-prototype-bind-指定函数内部的-this-指向" class="headerlink" title="2.用来模拟 Function.prototype.bind 指定函数内部的 this 指向"></a>2.用来模拟 Function.prototype.bind 指定函数内部的 this 指向</h4><h4 id="3-借用其他对象的方法，-可以模拟实现继承"><a href="#3-借用其他对象的方法，-可以模拟实现继承" class="headerlink" title="3.借用其他对象的方法， 可以模拟实现继承"></a>3.借用其他对象的方法， 可以模拟实现继承</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> A = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> B = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    A.apply( <span class="keyword">this</span>, <span class="built_in">arguments</span>);</div><div class="line">&#125;</div><div class="line">B.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> B(<span class="string">"2B铅笔"</span>);</div><div class="line"><span class="built_in">console</span>.log( b.getName() ); <span class="comment">// 输出： 2B铅笔</span></div></pre></td></tr></table></figure>
-<p>借用 Array.prototype 对象上的方法，对参数列表 arguments 这个类数组对象，进行数组对象方法的调用</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">Array</span>.prototype.push.call( <span class="built_in">arguments</span>, <span class="number">3</span>);</div><div class="line">	<span class="built_in">console</span>.log( <span class="built_in">arguments</span> ); <span class="comment">// 输出： [1, 2, 3]</span></div><div class="line">&#125;)(<span class="number">1</span>, <span class="number">2</span>);</div></pre></td></tr></table></figure>
-<h3 id="三、ECMAScript-5-中的-bind-方法可以将函数绑定到一个对象上"><a href="#三、ECMAScript-5-中的-bind-方法可以将函数绑定到一个对象上" class="headerlink" title="三、ECMAScript 5 中的 bind() 方法可以将函数绑定到一个对象上"></a>三、ECMAScript 5 中的 bind() 方法可以将函数绑定到一个对象上</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">y</span>) </span>&#123;<span class="keyword">return</span> <span class="keyword">this</span>.x + y&#125;;</div><div class="line"><span class="keyword">var</span> o = &#123; <span class="attr">x</span>: <span class="number">1</span>&#125;;</div><div class="line"><span class="keyword">var</span> g = f.bind(o);</div><div class="line">g(<span class="number">2</span>); <span class="comment">// 3</span></div></pre></td></tr></table></figure>
+<h4 id="阻塞代码实例"><a href="#阻塞代码实例" class="headerlink" title="阻塞代码实例"></a>阻塞代码实例</h4><p>创建一个文件 input.txt ，内容如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">苹果味博客：itcabin.com</div></pre></td></tr></table></figure>
+<p>创建 main.js 文件, 代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> data = fs.readFileSync(<span class="string">'input.txt'</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(data.toString());</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"程序执行结束!"</span>);</div></pre></td></tr></table></figure>
+<p>以上代码执行结果如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ node main.js</div><div class="line">苹果味博客：itcabin.com</div><div class="line"></div><div class="line">程序执行结束!</div></pre></td></tr></table></figure>
+<h4 id="非阻塞代码实例"><a href="#非阻塞代码实例" class="headerlink" title="非阻塞代码实例"></a>非阻塞代码实例</h4><p>创建 main.js 文件, 代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</div><div class="line"></div><div class="line">fs.readFile(<span class="string">'input.txt'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.error(err);</div><div class="line">    <span class="built_in">console</span>.log(data.toString());</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">"程序执行结束!"</span>);</div></pre></td></tr></table></figure>
+<p>以上代码执行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ node main.js</div><div class="line">程序执行结束!</div><div class="line">苹果味博客：itcabin.com</div></pre></td></tr></table></figure>
+<p>以上两个实例我们了解了阻塞与非阻塞调用的不同。第一个实例在文件读取完后才执行完程序。 第二个实例我们不需要等待文件读取完，这样就可以在读取文件时同时执行接下来的代码，大大提高了程序的性能。</p>
+<p>因此，<strong>阻塞是按顺序执行的，而非阻塞是不需要按顺序的，所以如果需要处理回调函数的参数，我们就需要写在回调函数内</strong>。</p>
+<h3 id="Node-js-事件循环"><a href="#Node-js-事件循环" class="headerlink" title="Node.js 事件循环"></a>Node.js 事件循环</h3><p>Node.js 是单进程单线程应用程序，但是通过事件和回调支持并发，所以性能非常高。</p>
+<p>Node.js 的每一个 API 都是异步的，并作为一个独立线程运行，使用异步函数调用，并处理并发。</p>
+<p>Node.js 基本上所有的事件机制都是用设计模式中观察者模式实现。</p>
+<p>Node.js 单线程类似进入一个while(true)的事件循环，直到没有事件观察者退出，每个异步事件都生成一个事件观察者，如果有事件发生就调用该回调函数.</p>
+<h4 id="事件驱动程序"><a href="#事件驱动程序" class="headerlink" title="事件驱动程序"></a>事件驱动程序</h4><p>Node.js 使用事件驱动模型，当web server接收到请求，就把它关闭然后进行处理，然后去服务下一个web请求。</p>
+<p>当这个请求完成，它被放回处理队列，当到达队列开头，这个结果被返回给用户。</p>
+<p>在事件驱动模型中，会生成一个主循环来监听事件，当检测到事件时触发回调函数。</p>
+<p><img src="/2017/05/24/Node-js基础学习02-回调函数、事件循环/01.jpg" alt="img"></p>
+<p>整个事件驱动的流程就是这么实现的，非常简洁。有点类似于观察者模式，事件相当于一个主题(Subject)，而所有注册到这个事件上的处理函数相当于观察者(Observer)。</p>
+<p>Node.js 有多个内置的事件，我们可以通过引入 events 模块，并通过实例化 EventEmitter 类来绑定和监听事件，如下实例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 引入 events 模块</span></div><div class="line"><span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">'events'</span>);</div><div class="line"><span class="comment">// 创建 eventEmitter 对象</span></div><div class="line"><span class="keyword">var</span> eventEmitter = <span class="keyword">new</span> events.EventEmitter();</div></pre></td></tr></table></figure>
+<p>以下程序绑定事件处理程序：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 绑定事件及事件的处理程序</span></div><div class="line">eventEmitter.on(<span class="string">'eventName'</span>, eventHandler);</div></pre></td></tr></table></figure>
+<p>我们可以通过程序触发事件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 触发事件</span></div><div class="line">eventEmitter.emit(<span class="string">'eventName'</span>);</div></pre></td></tr></table></figure>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><p>创建 main.js 文件，代码如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 引入 events 模块</span></div><div class="line"><span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">'events'</span>);</div><div class="line"><span class="comment">// 创建 eventEmitter 对象</span></div><div class="line"><span class="keyword">var</span> eventEmitter = <span class="keyword">new</span> events.EventEmitter();</div><div class="line"></div><div class="line"><span class="comment">// 创建事件处理程序</span></div><div class="line"><span class="keyword">var</span> connectHandler = <span class="function"><span class="keyword">function</span> <span class="title">connected</span>(<span class="params"></span>) </span>&#123;</div><div class="line">   <span class="built_in">console</span>.log(<span class="string">'连接成功。'</span>);</div><div class="line">  </div><div class="line">   <span class="comment">// 触发 data_received 事件 </span></div><div class="line">   eventEmitter.emit(<span class="string">'data_received'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 绑定 connection 事件处理程序</span></div><div class="line">eventEmitter.on(<span class="string">'connection'</span>, connectHandler);</div><div class="line"> </div><div class="line"><span class="comment">// 使用匿名函数绑定 data_received 事件</span></div><div class="line">eventEmitter.on(<span class="string">'data_received'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">   <span class="built_in">console</span>.log(<span class="string">'数据接收成功。'</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 触发 connection 事件 </span></div><div class="line">eventEmitter.emit(<span class="string">'connection'</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">"程序执行完毕。"</span>);</div></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<p><img src="/2017/05/24/Node-js基础学习02-回调函数、事件循环/02.PNG" alt="img"></p>
+<h4 id="Node-应用程序是如何工作的？"><a href="#Node-应用程序是如何工作的？" class="headerlink" title="Node 应用程序是如何工作的？"></a>Node 应用程序是如何工作的？</h4><p>在 Node 应用程序中，执行异步操作的函数将回调函数作为最后一个参数， 回调函数接收错误对象作为第一个参数。</p>
+<p>接下来让我们来重新看下前面的实例，创建一个 input.txt ,文件内容如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">苹果味博客：itcabin.com</div></pre></td></tr></table></figure>
+<p>创建 main.js 文件，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</div><div class="line"></div><div class="line">fs.readFile(<span class="string">'input.txt'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</div><div class="line">   <span class="keyword">if</span> (err)&#123;</div><div class="line">      <span class="built_in">console</span>.log(err.stack);</div><div class="line">      <span class="keyword">return</span>;</div><div class="line">   &#125;</div><div class="line">   <span class="built_in">console</span>.log(data.toString());</div><div class="line">&#125;);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"程序执行完毕"</span>);</div></pre></td></tr></table></figure>
+<p>以上程序中 fs.readFile() 是异步函数用于读取文件。 如果在读取文件过程中发生错误，错误 err 对象就会输出错误信息。</p>
+<p>如果没发生错误，readFile 跳过 err 对象的输出，文件内容就通过回调函数输出。</p>
+<p>执行以上代码，执行结果如下：</p>
+<p><img src="/2017/05/24/Node-js基础学习02-回调函数、事件循环/03.PNG" alt="img"></p>
+<p>接下来我们删除 input.txt 文件，执行结果如下所示：</p>
+<p><img src="/2017/05/24/Node-js基础学习02-回调函数、事件循环/04.PNG" alt="img"></p>
+<p>因为文件 input.txt 不存在，所以输出了错误信息。</p>
 
       
     </div>
@@ -469,7 +497,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://itcabin.com/2017/05/21/JavaScript整理：this-call-apply-bind总结/" title="JavaScript整理：this,call,apply,bind总结">http://itcabin.com/2017/05/21/JavaScript整理：this-call-apply-bind总结/</a>
+      <a href="http://itcabin.com/2017/05/24/Node-js基础学习02-回调函数、事件循环/" title="Node.js基础学习02--回调函数、事件循环">http://itcabin.com/2017/05/24/Node-js基础学习02-回调函数、事件循环/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -485,11 +513,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/javascript/" rel="tag"># javascript</a>
+            <a href="/tags/Node-js基础学习/" rel="tag"># Node.js基础学习</a>
           
-            <a href="/tags/this/" rel="tag"># this</a>
+            <a href="/tags/回调函数/" rel="tag"># 回调函数</a>
           
-            <a href="/tags/call/" rel="tag"># call</a>
+            <a href="/tags/事件循环/" rel="tag"># 事件循环</a>
           
         </div>
       
@@ -502,18 +530,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/23/Node-js基础学习01-创建第一个应用/" rel="next" title="Node.js基础学习01--创建第一个应用">
-                <i class="fa fa-chevron-left"></i> Node.js基础学习01--创建第一个应用
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/21/SQL日常记录/" rel="prev" title="SQL日常记录">
-                SQL日常记录 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/23/Node-js基础学习01-创建第一个应用/" rel="prev" title="Node.js基础学习01--创建第一个应用">
+                Node.js基础学习01--创建第一个应用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -683,7 +707,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、this"><span class="nav-number">1.</span> <span class="nav-text">一、this</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-作为对象的方法调用时，-this-指向该对象"><span class="nav-number">1.1.</span> <span class="nav-text">1.作为对象的方法调用时， this 指向该对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-作为普通函数掉用，this-总是指向全局对象-window"><span class="nav-number">1.2.</span> <span class="nav-text">2.作为普通函数掉用，this 总是指向全局对象 window</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-构造器调用-当用-new-运算符调用函数时，该函数总是会返回一个对象，通常情况下，构造函数里的-this-就指向返回的这个对象"><span class="nav-number">1.3.</span> <span class="nav-text">3.构造器调用, 当用 new 运算符调用函数时，该函数总是会返回一个对象，通常情况下，构造函数里的 this 就指向返回的这个对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、-call-和-apply"><span class="nav-number">2.</span> <span class="nav-text">二、 call 和 apply</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-改变-this-指向"><span class="nav-number">2.1.</span> <span class="nav-text">1.改变 this 指向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-用来模拟-Function-prototype-bind-指定函数内部的-this-指向"><span class="nav-number">2.2.</span> <span class="nav-text">2.用来模拟 Function.prototype.bind 指定函数内部的 this 指向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-借用其他对象的方法，-可以模拟实现继承"><span class="nav-number">2.3.</span> <span class="nav-text">3.借用其他对象的方法， 可以模拟实现继承</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、ECMAScript-5-中的-bind-方法可以将函数绑定到一个对象上"><span class="nav-number">3.</span> <span class="nav-text">三、ECMAScript 5 中的 bind() 方法可以将函数绑定到一个对象上</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-js回调函数"><span class="nav-number">1.</span> <span class="nav-text">Node.js回调函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#阻塞代码实例"><span class="nav-number">1.1.</span> <span class="nav-text">阻塞代码实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非阻塞代码实例"><span class="nav-number">1.2.</span> <span class="nav-text">非阻塞代码实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-js-事件循环"><span class="nav-number">2.</span> <span class="nav-text">Node.js 事件循环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#事件驱动程序"><span class="nav-number">2.1.</span> <span class="nav-text">事件驱动程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例"><span class="nav-number">2.2.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Node-应用程序是如何工作的？"><span class="nav-number">2.3.</span> <span class="nav-text">Node 应用程序是如何工作的？</span></a></li></ol></li></ol></div>
             
 
           </div>

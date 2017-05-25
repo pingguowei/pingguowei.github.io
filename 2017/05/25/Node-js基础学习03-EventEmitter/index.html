@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Node.js基础学习," />
+  <meta name="keywords" content="Node.js基础学习,EventEmitter," />
 
 
 
@@ -90,20 +90,22 @@
 
 
 
-<meta name="description" content="Node.js简介简单的说 Node.js 就是运行在服务端的 JavaScript。 Node.js 是一个基于Chrome JavaScript 运行时建立的一个平台。 Node.js是一个事件驱动I/O服务端JavaScript环境，基于Google的V8引擎，V8引擎执行Javascript的速度非常快，性能非常好。">
-<meta name="keywords" content="Node.js基础学习">
+<meta name="description" content="Node.js EventEmitterNode.js 所有的异步 I/O 操作在完成时都会发送一个事件到事件队列。 Node.js里面的许多对象都会分发事件：一个net.Server对象会在每次有新连接时分发一个事件， 一个fs.readStream对象会在文件被打开的时候发出一个事件。 所有这些产生事件的对象都是 events.EventEmitter 的实例。">
+<meta name="keywords" content="Node.js基础学习,EventEmitter">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Node.js基础学习01--创建第一个应用">
-<meta property="og:url" content="http://itcabin.com/2017/05/23/Node-js基础学习01-创建第一个应用/index.html">
+<meta property="og:title" content="Node.js基础学习03--EventEmitter">
+<meta property="og:url" content="http://itcabin.com/2017/05/25/Node-js基础学习03-EventEmitter/index.html">
 <meta property="og:site_name" content="苹果味博客">
-<meta property="og:description" content="Node.js简介简单的说 Node.js 就是运行在服务端的 JavaScript。 Node.js 是一个基于Chrome JavaScript 运行时建立的一个平台。 Node.js是一个事件驱动I/O服务端JavaScript环境，基于Google的V8引擎，V8引擎执行Javascript的速度非常快，性能非常好。">
-<meta property="og:image" content="http://itcabin.com/2017/05/23/Node-js基础学习01-创建第一个应用/01.PNG">
-<meta property="og:image" content="http://itcabin.com/2017/05/23/Node-js基础学习01-创建第一个应用/02.PNG">
-<meta property="og:updated_time" content="2017-05-23T14:53:11.044Z">
+<meta property="og:description" content="Node.js EventEmitterNode.js 所有的异步 I/O 操作在完成时都会发送一个事件到事件队列。 Node.js里面的许多对象都会分发事件：一个net.Server对象会在每次有新连接时分发一个事件， 一个fs.readStream对象会在文件被打开的时候发出一个事件。 所有这些产生事件的对象都是 events.EventEmitter 的实例。">
+<meta property="og:image" content="http://itcabin.com/2017/05/25/Node-js基础学习03-EventEmitter/01.PNG">
+<meta property="og:image" content="http://itcabin.com/2017/05/25/Node-js基础学习03-EventEmitter/02.PNG">
+<meta property="og:image" content="http://itcabin.com/2017/05/25/Node-js基础学习03-EventEmitter/03.PNG">
+<meta property="og:image" content="http://itcabin.com/2017/05/25/Node-js基础学习03-EventEmitter/04.PNG">
+<meta property="og:updated_time" content="2017-05-25T15:20:49.849Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Node.js基础学习01--创建第一个应用">
-<meta name="twitter:description" content="Node.js简介简单的说 Node.js 就是运行在服务端的 JavaScript。 Node.js 是一个基于Chrome JavaScript 运行时建立的一个平台。 Node.js是一个事件驱动I/O服务端JavaScript环境，基于Google的V8引擎，V8引擎执行Javascript的速度非常快，性能非常好。">
-<meta name="twitter:image" content="http://itcabin.com/2017/05/23/Node-js基础学习01-创建第一个应用/01.PNG">
+<meta name="twitter:title" content="Node.js基础学习03--EventEmitter">
+<meta name="twitter:description" content="Node.js EventEmitterNode.js 所有的异步 I/O 操作在完成时都会发送一个事件到事件队列。 Node.js里面的许多对象都会分发事件：一个net.Server对象会在每次有新连接时分发一个事件， 一个fs.readStream对象会在文件被打开的时候发出一个事件。 所有这些产生事件的对象都是 events.EventEmitter 的实例。">
+<meta name="twitter:image" content="http://itcabin.com/2017/05/25/Node-js基础学习03-EventEmitter/01.PNG">
 
 
 
@@ -131,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://itcabin.com/2017/05/23/Node-js基础学习01-创建第一个应用/"/>
+  <link rel="canonical" href="http://itcabin.com/2017/05/25/Node-js基础学习03-EventEmitter/"/>
 
 
 
 
 
-  <title>Node.js基础学习01--创建第一个应用 | 苹果味博客</title>
+  <title>Node.js基础学习03--EventEmitter | 苹果味博客</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -310,7 +312,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/05/23/Node-js基础学习01-创建第一个应用/">
+    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/05/25/Node-js基础学习03-EventEmitter/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="pingguowei">
@@ -331,7 +333,7 @@
             
             
               
-                Node.js基础学习01--创建第一个应用
+                Node.js基础学习03--EventEmitter
               
             
           </h2>
@@ -346,8 +348,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-23T22:32:57+08:00">
-                2017-05-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-25T21:57:17+08:00">
+                2017-05-25
               </time>
             
 
@@ -388,8 +390,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/05/23/Node-js基础学习01-创建第一个应用/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/05/23/Node-js基础学习01-创建第一个应用/" itemprop="commentsCount"></span>
+                <a href="/2017/05/25/Node-js基础学习03-EventEmitter/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/05/25/Node-js基础学习03-EventEmitter/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -419,32 +421,75 @@
       
 
       
-        <h3 id="Node-js简介"><a href="#Node-js简介" class="headerlink" title="Node.js简介"></a>Node.js简介</h3><p>简单的说 Node.js 就是运行在服务端的 JavaScript。</p>
-<p>Node.js 是一个基于Chrome JavaScript 运行时建立的一个平台。</p>
-<p>Node.js是一个事件驱动I/O服务端JavaScript环境，基于Google的V8引擎，V8引擎执行Javascript的速度非常快，性能非常好。</p>
+        <h3 id="Node-js-EventEmitter"><a href="#Node-js-EventEmitter" class="headerlink" title="Node.js EventEmitter"></a>Node.js EventEmitter</h3><p>Node.js 所有的异步 I/O 操作在完成时都会发送一个事件到事件队列。</p>
+<p>Node.js里面的许多对象都会分发事件：一个net.Server对象会在每次有新连接时分发一个事件， 一个fs.readStream对象会在文件被打开的时候发出一个事件。 所有这些产生事件的对象都是 events.EventEmitter 的实例。</p>
 <a id="more"></a>
-<h3 id="Node-js-创建第一个应用"><a href="#Node-js-创建第一个应用" class="headerlink" title="Node.js 创建第一个应用"></a>Node.js 创建第一个应用</h3><p>在我们创建 Node.js 第一个 “Hello, World!” 应用前，让我们先了解下 Node.js 应用是由哪几部分组成的：</p>
-<ol>
-<li><strong>引入 required 模块：</strong>我们可以使用 <strong>require</strong> 指令来载入 Node.js 模块。</li>
-<li><strong>创建服务器：</strong>服务器可以监听客户端的请求，类似于 Apache 、Nginx 等 HTTP 服务器。</li>
-<li><strong>接收请求与响应请求</strong> 服务器很容易创建，客户端可以使用浏览器或终端发送 HTTP 请求，服务器接收请求后返回响应数据。</li>
-</ol>
-<h3 id="创建-Node-js-应用"><a href="#创建-Node-js-应用" class="headerlink" title="创建 Node.js 应用"></a>创建 Node.js 应用</h3><h4 id="步骤一、引入-required-模块"><a href="#步骤一、引入-required-模块" class="headerlink" title="步骤一、引入 required 模块"></a>步骤一、引入 required 模块</h4><p>我们使用 <strong>require</strong> 指令来载入 http 模块，并将实例化的 HTTP 赋值给变量 http，实例如下:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</div></pre></td></tr></table></figure>
-<h4 id="步骤二、创建服务器"><a href="#步骤二、创建服务器" class="headerlink" title="步骤二、创建服务器"></a>步骤二、创建服务器</h4><p>接下来我们使用 http.createServer() 方法创建服务器，并使用 listen 方法绑定 8888 端口。 函数通过 request, response 参数来接收和响应数据。</p>
-<p>实例如下，在你项目的根目录下创建一个叫 server.js 的文件，并写入以下代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http=<span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"></div><div class="line">http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">request,response</span>)</span>&#123;</div><div class="line">	<span class="comment">// 发送HTTP头部</span></div><div class="line">	<span class="comment">// HTTP 状态值：200：ok</span></div><div class="line">	<span class="comment">// 内容类型：text/plain</span></div><div class="line">	response.writeHead(<span class="number">200</span>,&#123;<span class="string">'Content-Type'</span>:<span class="string">'text/plain'</span>&#125;);</div><div class="line">	<span class="comment">// 发送响应数据"Hello World\n"</span></div><div class="line">	response.end(<span class="string">'Hello World\n'</span>);</div><div class="line">&#125;).listen(<span class="number">8888</span>);</div><div class="line"></div><div class="line"><span class="comment">// 终端打印信息如下</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'Server running at http://127.0.0.1:8888/'</span>)</div></pre></td></tr></table></figure>
-<p>以上代码我们完成了一个可以工作的 HTTP 服务器。</p>
-<p>使用 <strong>node</strong> 命令执行以上的代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">node server.js</div><div class="line">Server running at http:<span class="comment">//127.0.0.1:8888/</span></div></pre></td></tr></table></figure>
-<p><img src="/2017/05/23/Node-js基础学习01-创建第一个应用/01.PNG" alt="img"></p>
-<p>接下来，打开浏览器访问 <a href="http://127.0.0.1:8888/，你会看到一个写着" target="_blank" rel="external">http://127.0.0.1:8888/，你会看到一个写着</a> “Hello World”的网页。</p>
-<p><img src="/2017/05/23/Node-js基础学习01-创建第一个应用/02.PNG" alt="img"></p>
-<p><strong>分析Node.js 的 HTTP 服务器：</strong></p>
+<h3 id="EventEmitter-类"><a href="#EventEmitter-类" class="headerlink" title="EventEmitter 类"></a>EventEmitter 类</h3><p>events 模块只提供了一个对象： events.EventEmitter。<strong>EventEmitter 的核心就是事件触发与事件监听器功能的封装。</strong></p>
+<p>你可以通过require(“events”);来访问该模块。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 引入 events 模块</span></div><div class="line"><span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">'events'</span>);</div><div class="line"><span class="comment">// 创建 eventEmitter 对象</span></div><div class="line"><span class="keyword">var</span> eventEmitter = <span class="keyword">new</span> events.EventEmitter();</div></pre></td></tr></table></figure>
+<p>EventEmitter 对象如果在实例化时发生错误，会触发 error 事件。<strong>当添加新的监听器时，newListener 事件会触发，当监听器被移除时，removeListener 事件被触发。</strong></p>
+<p>下面我们用一个简单的例子说明 EventEmitter 的用法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// event.js 文件</span></div><div class="line"><span class="keyword">var</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>).EventEmitter; </div><div class="line"><span class="keyword">var</span> event = <span class="keyword">new</span> EventEmitter(); </div><div class="line">event.on(<span class="string">'myEvent'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'myEvent 事件触发'</span>); </div><div class="line">&#125;); </div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </div><div class="line">	event.emit(<span class="string">'some_event'</span>); </div><div class="line">&#125;, <span class="number">1000</span>);</div></pre></td></tr></table></figure>
+<p>event 对象注册了事件 some_event 的一个监听器，然后我们通过 setTimeout 在 1000 毫秒以后向 event 对象发送事件 some_event，此时会调用some_event 的监听器。</p>
+<p><img src="/2017/05/25/Node-js基础学习03-EventEmitter/01.PNG" alt="img"></p>
+<p>EventEmitter 的每个事件由一个事件名和若干个参数组成，事件名是一个字符串，通常表达一定的语义。对于每个事件，EventEmitter 支持 若干个事件监听器。</p>
+<p><strong>当事件触发时，注册到这个事件的事件监听器被依次调用，事件参数作为回调函数参数传递。</strong></p>
+<p>让我们以下面的例子解释这个过程：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> events=<span class="built_in">require</span>(<span class="string">'events'</span>);</div><div class="line"><span class="keyword">var</span> emitter=<span class="keyword">new</span> events.EventEmitter();</div><div class="line">emitter.on(<span class="string">'myEvent'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">arg1,arg2</span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'listener1'</span>,arg1,arg2);</div><div class="line">&#125;);</div><div class="line">emitter.on(<span class="string">'myEvent'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">arg1,arg2</span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'listener2'</span>,arg1,arg2);</div><div class="line">&#125;);</div><div class="line">emitter.emit(<span class="string">'myEvent'</span>,<span class="string">'arg1参数'</span>,<span class="string">'arg2参数'</span>);</div></pre></td></tr></table></figure>
+<p>执行以上代码，运行的结果如下：</p>
+<p><img src="/2017/05/25/Node-js基础学习03-EventEmitter/02.PNG" alt="img"></p>
+<p>以上例子中，emitter 为事件 someEvent 注册了两个事件监听器，然后触发了 someEvent 事件。</p>
+<p>运行结果中可以看到<strong>两个事件监听器回调函数被先后调用</strong>。 这就是EventEmitter最简单的用法。</p>
+<p>EventEmitter 提供了多个属性，如 <strong>on</strong> 和 <strong>emit</strong>。<strong>on</strong> 函数用于绑定事件函数，<strong>emit</strong> 属性用于触发一个事件。接下来我们来具体看下 EventEmitter 的属性介绍。</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>1.<strong>addListener(event, listener)</strong></p>
+<p>为指定事件添加一个监听器到监听器数组的<strong>尾部</strong>。</p>
+<p>2.<strong>on(event, listener)</strong></p>
+<p>为指定事件注册一个监听器，接受一个字符串 event 和一个回调函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">server.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">stream</span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'someone connected!'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>3.<strong>once(event, listener)</strong></p>
+<p>为指定事件注册一个单次监听器，即 监听器最多只会触发一次，触发后立刻解除该监听器。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">server.once(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">stream</span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'Ah, we have our first user!'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>4.<strong>removeListener(event, listener)</strong></p>
+<p>移除指定事件的某个监听器，监听器必须是该事件已经注册过的监听器。</p>
+<p><strong>它接受两个参数，第一个是事件名称，第二个是回调函数名称。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> callback = <span class="function"><span class="keyword">function</span>(<span class="params">stream</span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'someone connected!'</span>);</div><div class="line">&#125;;</div><div class="line">server.on(<span class="string">'connection'</span>, callback);</div><div class="line"><span class="comment">// ...</span></div><div class="line">server.removeListener(<span class="string">'connection'</span>, callback);</div></pre></td></tr></table></figure>
+<p>5.<strong>removeAllListeners([event])</strong></p>
+<p>移除所有事件的所有监听器， 如果指定事件，则移除指定事件的所有监听器。</p>
+<p>6.<strong>setMaxListeners(n)</strong></p>
+<p>默认情况下， EventEmitters 如果你添加的监听器超过 10 个就会输出警告信息。 setMaxListeners 函数用于提高监听器的默认限制的数量。</p>
+<p>7.<strong>listeners(event)</strong></p>
+<p>返回指定事件的监听器数组。</p>
+<p>8.<strong>emit(event, [arg1], [arg2], […])</strong></p>
+<p>按参数的顺序执行每个监听器，如果事件有注册监听返回 true，否则返回 false。</p>
+<h3 id="类方法"><a href="#类方法" class="headerlink" title="类方法"></a>类方法</h3><p>1.<strong>listenerCount(emitter, event)</strong></p>
+<p>返回指定事件的监听器数量。</p>
+<h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p>1.<strong>newListener</strong></p>
 <ul>
-<li>第一行请求（require）Node.js 自带的 http 模块，并且把它赋值给 http 变量。</li>
-<li>接下来我们调用 http 模块提供的函数： createServer 。这个函数会返回 一个对象，这个对象有一个叫做 listen 的方法，这个方法有一个数值参数， 指定这个 HTTP 服务器监听的端口号。</li>
+<li><strong>event</strong> - 字符串，事件名称</li>
+<li><strong>listener</strong> - 处理事件函数</li>
 </ul>
+<p>该事件在添加新监听器时被触发。</p>
+<p>2.<strong>removeListener</strong></p>
+<ul>
+<li><strong>event</strong> - 字符串，事件名称</li>
+<li><strong>listener</strong> - 处理事件函数</li>
+</ul>
+<p>从指定监听器数组中删除一个监听器。需要注意的是，此操作将会改变处于被删监听器之后的那些监听器的索引。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>以下实例通过 connection（连接）事件演示了 EventEmitter 类的应用。</p>
+<p>创建 main.js 文件，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">'events'</span>);</div><div class="line"><span class="keyword">var</span> eventEmitter = <span class="keyword">new</span> events.EventEmitter();</div><div class="line"></div><div class="line"><span class="comment">// 监听器 #1</span></div><div class="line"><span class="keyword">var</span> listener1 = <span class="function"><span class="keyword">function</span> <span class="title">listener1</span>(<span class="params"></span>) </span>&#123;</div><div class="line">   <span class="built_in">console</span>.log(<span class="string">'监听器 listener1 执行。'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 监听器 #2</span></div><div class="line"><span class="keyword">var</span> listener2 = <span class="function"><span class="keyword">function</span> <span class="title">listener2</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'监听器 listener2 执行。'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 绑定 connection 事件，处理函数为 listener1 </span></div><div class="line">eventEmitter.addListener(<span class="string">'connection'</span>, listener1);</div><div class="line"></div><div class="line"><span class="comment">// 绑定 connection 事件，处理函数为 listener2</span></div><div class="line">eventEmitter.on(<span class="string">'connection'</span>, listener2);</div><div class="line"></div><div class="line"><span class="keyword">var</span> eventListeners = <span class="built_in">require</span>(<span class="string">'events'</span>).EventEmitter.listenerCount(eventEmitter,<span class="string">'connection'</span>);</div><div class="line"><span class="built_in">console</span>.log(eventListeners + <span class="string">" 个监听器监听连接事件。"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 处理 connection 事件 </span></div><div class="line">eventEmitter.emit(<span class="string">'connection'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 移除监绑定的 listener1 函数</span></div><div class="line">eventEmitter.removeListener(<span class="string">'connection'</span>, listener1);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"listener1 不再受监听。"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 触发连接事件</span></div><div class="line">eventEmitter.emit(<span class="string">'connection'</span>);</div><div class="line"></div><div class="line">eventListeners = <span class="built_in">require</span>(<span class="string">'events'</span>).EventEmitter.listenerCount(eventEmitter,<span class="string">'connection'</span>);</div><div class="line"><span class="built_in">console</span>.log(eventListeners + <span class="string">" 个监听器监听连接事件。"</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">"程序执行完毕。"</span>);</div></pre></td></tr></table></figure>
+<p>执行以上代码，运行的结果如下：</p>
+<p><img src="/2017/05/25/Node-js基础学习03-EventEmitter/03.PNG" alt="img"></p>
+<h3 id="error-事件"><a href="#error-事件" class="headerlink" title="error 事件"></a>error 事件</h3><p>EventEmitter 定义了一个特殊的事件 error，它包含了错误的语义，我们在遇到 异常的时候通常会触发 error 事件。</p>
+<p>当 error 被触发时，EventEmitter 规定如果没有响 应的监听器，Node.js 会把它当作异常，退出程序并输出错误信息。</p>
+<p>我们一般要为会触发 error 事件的对象设置监听器，避免遇到错误后整个程序崩溃。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">'events'</span>); </div><div class="line"><span class="keyword">var</span> emitter = <span class="keyword">new</span> events.EventEmitter(); </div><div class="line">emitter.emit(<span class="string">'error'</span>);</div></pre></td></tr></table></figure>
+<p>运行时会显示以下错误：</p>
+<p><img src="/2017/05/25/Node-js基础学习03-EventEmitter/04.PNG" alt="img"></p>
+<h3 id="继承-EventEmitter"><a href="#继承-EventEmitter" class="headerlink" title="继承 EventEmitter"></a>继承 EventEmitter</h3><p>大多数时候我们不会直接使用 EventEmitter，而是在对象中继承它。包括 fs、net、 http 在内的，<strong>只要是支持事件响应的核心模块都是 EventEmitter 的子类。</strong></p>
+<p><strong>为什么要这样做呢？原因有两点：</strong></p>
+<p>首先，具有某个实体功能的对象实现事件符合语义， 事件的监听和发射应该是一个对象的方法。</p>
+<p>其次 JavaScript 的对象机制是基于原型的，支持 部分多重继承，继承 EventEmitter 不会打乱对象原有的继承关系。</p>
 
       
     </div>
@@ -473,7 +518,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://itcabin.com/2017/05/23/Node-js基础学习01-创建第一个应用/" title="Node.js基础学习01--创建第一个应用">http://itcabin.com/2017/05/23/Node-js基础学习01-创建第一个应用/</a>
+      <a href="http://itcabin.com/2017/05/25/Node-js基础学习03-EventEmitter/" title="Node.js基础学习03--EventEmitter">http://itcabin.com/2017/05/25/Node-js基础学习03-EventEmitter/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -491,6 +536,8 @@
           
             <a href="/tags/Node-js基础学习/" rel="tag"># Node.js基础学习</a>
           
+            <a href="/tags/EventEmitter/" rel="tag"># EventEmitter</a>
+          
         </div>
       
 
@@ -502,18 +549,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/24/Node-js基础学习02-回调函数、事件循环/" rel="next" title="Node.js基础学习02--回调函数、事件循环">
-                <i class="fa fa-chevron-left"></i> Node.js基础学习02--回调函数、事件循环
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/21/JavaScript整理：this-call-apply-bind总结/" rel="prev" title="JavaScript整理：this,call,apply,bind总结">
-                JavaScript整理：this,call,apply,bind总结 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/24/Node-js基础学习02-回调函数、事件循环/" rel="prev" title="Node.js基础学习02--回调函数、事件循环">
+                Node.js基础学习02--回调函数、事件循环 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -683,7 +726,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-js简介"><span class="nav-number">1.</span> <span class="nav-text">Node.js简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-js-创建第一个应用"><span class="nav-number">2.</span> <span class="nav-text">Node.js 创建第一个应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建-Node-js-应用"><span class="nav-number">3.</span> <span class="nav-text">创建 Node.js 应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤一、引入-required-模块"><span class="nav-number">3.1.</span> <span class="nav-text">步骤一、引入 required 模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤二、创建服务器"><span class="nav-number">3.2.</span> <span class="nav-text">步骤二、创建服务器</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-js-EventEmitter"><span class="nav-number">1.</span> <span class="nav-text">Node.js EventEmitter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EventEmitter-类"><span class="nav-number">2.</span> <span class="nav-text">EventEmitter 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">3.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类方法"><span class="nav-number">4.</span> <span class="nav-text">类方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件"><span class="nav-number">5.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">6.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#error-事件"><span class="nav-number">7.</span> <span class="nav-text">error 事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承-EventEmitter"><span class="nav-number">8.</span> <span class="nav-text">继承 EventEmitter</span></a></li></ol></div>
             
 
           </div>

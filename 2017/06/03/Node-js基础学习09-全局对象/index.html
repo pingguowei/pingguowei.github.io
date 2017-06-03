@@ -1,0 +1,1085 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Node.js基础学习,全局对象," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Node.js 全局对象概念：所有属性都可以在程序的任何地方访问，即全局变量。在JavaScript中，通常window是全局对象，而Node.js的全局对象是global，所有全局变量都是global对象的属性，如：console、process等。">
+<meta name="keywords" content="Node.js基础学习,全局对象">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node.js基础学习09--全局对象">
+<meta property="og:url" content="http://itcabin.com/2017/06/03/Node-js基础学习09-全局对象/index.html">
+<meta property="og:site_name" content="苹果味博客">
+<meta property="og:description" content="Node.js 全局对象概念：所有属性都可以在程序的任何地方访问，即全局变量。在JavaScript中，通常window是全局对象，而Node.js的全局对象是global，所有全局变量都是global对象的属性，如：console、process等。">
+<meta property="og:image" content="http://itcabin.com/2017/06/03/Node-js基础学习09-全局对象/01.PNG">
+<meta property="og:image" content="http://itcabin.com/2017/06/03/Node-js基础学习09-全局对象/02.PNG">
+<meta property="og:image" content="http://itcabin.com/2017/06/03/Node-js基础学习09-全局对象/03.PNG">
+<meta property="og:updated_time" content="2017-06-03T10:10:17.330Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node.js基础学习09--全局对象">
+<meta name="twitter:description" content="Node.js 全局对象概念：所有属性都可以在程序的任何地方访问，即全局变量。在JavaScript中，通常window是全局对象，而Node.js的全局对象是global，所有全局变量都是global对象的属性，如：console、process等。">
+<meta name="twitter:image" content="http://itcabin.com/2017/06/03/Node-js基础学习09-全局对象/01.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '苹果味'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://itcabin.com/2017/06/03/Node-js基础学习09-全局对象/"/>
+
+
+
+
+
+  <title>Node.js基础学习09--全局对象 | 苹果味博客</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">苹果味博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/06/03/Node-js基础学习09-全局对象/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pingguowei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/freeofwing.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="苹果味博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                Node.js基础学习09--全局对象
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-03T16:37:10+08:00">
+                2017-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/06/03/Node-js基础学习09-全局对象/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/06/03/Node-js基础学习09-全局对象/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Node-js-全局对象"><a href="#Node-js-全局对象" class="headerlink" title="Node.js 全局对象"></a>Node.js 全局对象</h3><p>概念：所有属性都可以在程序的任何地方访问，即全局变量。在JavaScript中，通常window是全局对象，而Node.js的全局对象是global，<br>所有全局变量都是global对象的属性，如：console、process等。</p>
+<a id="more"></a>
+<h4 id="全局对象与全局变量"><a href="#全局对象与全局变量" class="headerlink" title="全局对象与全局变量"></a>全局对象与全局变量</h4><p>global最根本的作用是作为全局变量的宿主。满足以下条件成为全局变量：</p>
+<ol>
+<li>在最外层定义的变量</li>
+<li>全局对象的属性</li>
+<li>隐式定义的变量(未定义直接赋值的变量)</li>
+</ol>
+<p>在Node.js中不可能在最外层定义变量，因为所有用户代码都是属于当前模块的，而模块本身不是最外层上下文。</p>
+<h4 id="filename"><a href="#filename" class="headerlink" title="__filename"></a>__filename</h4><p><strong>__filename</strong> 表示当前正在执行的脚本的文件名。它将输出文件所在位置的绝对路径，且和命令行参数所指定的文件名不一定相同。 如果在模块中，返回的值是模块文件的路径。</p>
+<h4 id="dirname"><a href="#dirname" class="headerlink" title="__dirname"></a>__dirname</h4><p><strong>__dirname</strong> 表示当前执行脚本所在的目录。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 输出全局变量 __filename 的值</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'模块文件的路径:'</span>+ __filename );</div><div class="line"><span class="comment">// 输出全局变量 __dirname 的值</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'脚本所在的目录:'</span>+ __dirname );</div></pre></td></tr></table></figure>
+<p>执行以上代码输出结果</p>
+<p><img src="/2017/06/03/Node-js基础学习09-全局对象/01.PNG" alt="img"></p>
+<h4 id="setTimeout-cb-ms"><a href="#setTimeout-cb-ms" class="headerlink" title="setTimeout(cb, ms)"></a>setTimeout(cb, ms)</h4><p><strong>setTimeout(cb, ms)</strong> 全局函数在指定的毫秒(ms)数后执行指定函数(cb)。：setTimeout() 只执行一次指定函数。</p>
+<p>返回一个代表定时器的句柄值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">printHello</span>(<span class="params"></span>)</span>&#123;</div><div class="line">   <span class="built_in">console</span>.log( <span class="string">"Hello, World!"</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">// 两秒后执行以上函数</span></div><div class="line">setTimeout(printHello, <span class="number">2000</span>);</div></pre></td></tr></table></figure>
+<h4 id="clearTimeout-t"><a href="#clearTimeout-t" class="headerlink" title="clearTimeout(t)"></a>clearTimeout(t)</h4><p><strong>clearTimeout( t )</strong> 全局函数用于停止一个之前通过 setTimeout() 创建的定时器。 参数 <strong>t</strong> 是通过 setTimeout() 函数创建的定时器。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">printHello</span>(<span class="params"></span>)</span>&#123;</div><div class="line">   <span class="built_in">console</span>.log( <span class="string">"Hello, World!"</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">// 两秒后执行以上函数</span></div><div class="line"><span class="keyword">var</span> t = setTimeout(printHello, <span class="number">2000</span>);</div><div class="line"></div><div class="line"><span class="comment">// 清除定时器</span></div><div class="line">clearTimeout(t);</div></pre></td></tr></table></figure>
+<p>执行 main.js 文件，代码如下所示:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ node main.js</div></pre></td></tr></table></figure>
+<h4 id="setInterval-cb-ms"><a href="#setInterval-cb-ms" class="headerlink" title="setInterval(cb, ms)"></a>setInterval(cb, ms)</h4><p><strong>setInterval(cb, ms)</strong> 全局函数在指定的毫秒(ms)数后执行指定函数(cb)。</p>
+<p>返回一个代表定时器的句柄值。可以使用 <strong>clearInterval(t)</strong> 函数来清除定时器。</p>
+<p><strong>setInterval() 方法会不停地调用函数，直到 clearInterval() 被调用或窗口被关闭。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">printHello</span>(<span class="params"></span>)</span>&#123;</div><div class="line">   <span class="built_in">console</span>.log( <span class="string">"Hello, World!"</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">// 两秒后执行以上函数</span></div><div class="line">setInterval(printHello, <span class="number">2000</span>);</div></pre></td></tr></table></figure>
+<p>Hello, World! Hello, World! Hello, World! Hello, World! Hello, World! ……以上程序每隔两秒就会输出一次”Hello, World!”，且会永久执行下去，直到你按下 <strong>ctrl + c</strong> 按钮。</p>
+<h4 id="console"><a href="#console" class="headerlink" title="console"></a>console</h4><p>console 用于提供控制台标准输出，它是由 Internet Explorer 的 JScript 引擎提供的调试工具，后来逐渐成为浏览器的事实标准。</p>
+<p>Node.js 沿用了这个标准，提供与习惯行为一致的 console 对象，用于向标准输出流（stdout）或标准错误流（stderr）输出字符。</p>
+<h4 id="console-方法"><a href="#console-方法" class="headerlink" title="console 方法"></a>console 方法</h4><p><strong>console.log([data][, …])</strong></p>
+<p>向标准输出流打印字符并以换行符结束。该方法接收若干 个参数，如果只有一个参数，则输出这个参数的字符串形式。如果有多个参数，则 以类似于C 语言 printf() 命令的格式输出。</p>
+<p><strong>console.time(label)</strong></p>
+<p>输出时间，表示计时开始。</p>
+<p><strong>console.timeEnd(label)</strong><br>结束时间，表示计时结束。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="string">'Hello world'</span>); </div><div class="line"><span class="built_in">console</span>.log(<span class="string">'byvoid%diovyb'</span>); </div><div class="line"><span class="built_in">console</span>.log(<span class="string">'byvoid%diovyb'</span>, <span class="number">1991</span>);</div></pre></td></tr></table></figure>
+<p>运行结果为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Hello world </div><div class="line">byvoid%diovyb </div><div class="line">byvoid1991iovyb</div></pre></td></tr></table></figure>
+<p><strong>实例</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.info(<span class="string">"程序开始执行："</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> counter = <span class="number">10</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"计数: %d"</span>, counter);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.time(<span class="string">"获取数据"</span>);</div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// 执行一些代码</span></div><div class="line"><span class="comment">// </span></div><div class="line"><span class="built_in">console</span>.timeEnd(<span class="string">'获取数据'</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.info(<span class="string">"程序执行完毕。"</span>)</div></pre></td></tr></table></figure>
+<p>运行结果为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ node main.js</div><div class="line">程序开始执行：</div><div class="line">计数: <span class="number">10</span></div><div class="line">获取数据: <span class="number">0</span>ms</div><div class="line">程序执行完毕</div></pre></td></tr></table></figure>
+<h4 id="process"><a href="#process" class="headerlink" title="process"></a>process</h4><p>process 是一个全局变量，即 global 对象的属性。</p>
+<p>它用于描述当前Node.js 进程状态的对象，提供了一个与操作系统的简单接口。</p>
+<p>下面将会介绍 process 对象的一些最常用的成员方法。</p>
+<p><strong>exit</strong><br>当进程准备退出时触发。</p>
+<p><strong>beforeExit</strong><br>当 node 清空事件循环，并且没有其他安排时触发这个事件。通常来说，当没有进程安排时 node 退出，但是 ‘beforeExit’ 的监听器可以异步调用，这样 node 就会继续执行。</p>
+<p><strong>Signal 事件</strong><br>当进程接收到信号时就触发。信号列表详见标准的 POSIX 信号名，如 SIGINT、SIGUSR1 等。</p>
+<p><strong>实例</strong></p>
+<p>创建文件 main.js ，代码如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">process.on(<span class="string">'exit'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">code</span>) </span>&#123;</div><div class="line"></div><div class="line">  <span class="comment">// 以下代码永远不会执行</span></div><div class="line">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"该代码不会执行"</span>);</div><div class="line">  &#125;, <span class="number">0</span>);</div><div class="line">  </div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'退出码为:'</span>, code);</div><div class="line">&#125;);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"程序执行结束"</span>);</div></pre></td></tr></table></figure>
+<p>运行结果为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ node main.js</div><div class="line">程序执行结束</div><div class="line">退出码为: <span class="number">0</span></div></pre></td></tr></table></figure>
+<h4 id="Process-属性"><a href="#Process-属性" class="headerlink" title="Process 属性"></a>Process 属性</h4><p>Process 提供了很多有用的属性，便于我们更好的控制系统的交互：</p>
+<p><strong>stdout</strong><br>标准输出流。</p>
+<p><strong>stderr</strong><br>标准错误流。</p>
+<p><strong>stdin</strong><br>标准输入流。</p>
+<p><strong>execPath</strong><br>返回执行当前脚本的 Node 二进制文件的绝对路径。</p>
+<p><strong>env</strong><br>返回一个对象，成员为当前 shell 的环境变量</p>
+<p><strong>arch</strong><br>当前 CPU 的架构：’arm’、’ia32’ 或者 ‘x64’。</p>
+<p><strong>实例</strong></p>
+<p>创建文件 main.js ，代码如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 输出到终端</span></div><div class="line">process.stdout.write(<span class="string">"Hello World!"</span> + <span class="string">"\n"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 通过参数读取</span></div><div class="line">process.argv.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">val, index, array</span>) </span>&#123;</div><div class="line">   <span class="built_in">console</span>.log(index + <span class="string">': '</span> + val);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 获取执行路径</span></div><div class="line"><span class="built_in">console</span>.log(process.execPath);</div><div class="line"></div><div class="line"><span class="comment">// 平台信息</span></div><div class="line"><span class="built_in">console</span>.log(process.platform);</div></pre></td></tr></table></figure>
+<p>运行结果为：</p>
+<p><img src="/2017/06/03/Node-js基础学习09-全局对象/02.PNG" alt="img"></p>
+<p><strong>方法参考手册</strong></p>
+<p>Process 提供了很多有用的方法，便于我们更好的控制系统的交互：</p>
+<p><strong>abort()</strong><br>这将导致 node 触发 abort 事件。会让 node 退出并生成一个核心文件。</p>
+<p><strong>cwd()</strong><br>返回当前进程的工作目录</p>
+<p><strong>uptime()</strong><br>返回 Node 已经运行的秒数。</p>
+<p><strong>实例</strong></p>
+<p>创建文件 main.js ，代码如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 输出当前目录</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'当前目录: '</span> + process.cwd());</div><div class="line"></div><div class="line"><span class="comment">// 输出当前版本</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'当前版本: '</span> + process.version);</div><div class="line"></div><div class="line"><span class="comment">// 输出内存使用情况</span></div><div class="line"><span class="built_in">console</span>.log(process.memoryUsage());</div></pre></td></tr></table></figure>
+<p>运行结果为：</p>
+<p><img src="/2017/06/03/Node-js基础学习09-全局对象/03.PNG" alt="img"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      pingguowei
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://itcabin.com/2017/06/03/Node-js基础学习09-全局对象/" title="Node.js基础学习09--全局对象">http://itcabin.com/2017/06/03/Node-js基础学习09-全局对象/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Node-js基础学习/" rel="tag"># Node.js基础学习</a>
+          
+            <a href="/tags/全局对象/" rel="tag"># 全局对象</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/03/Node-js基础学习10-常用工具/" rel="next" title="Node.js基础学习10--常用工具">
+                <i class="fa fa-chevron-left"></i> Node.js基础学习10--常用工具
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/01/Node-js基础学习08-路由/" rel="prev" title="Node.js基础学习08--路由">
+                Node.js基础学习08--路由 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/freeofwing.jpeg"
+               alt="pingguowei" />
+          <p class="site-author-name" itemprop="name">pingguowei</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-js-全局对象"><span class="nav-number">1.</span> <span class="nav-text">Node.js 全局对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#全局对象与全局变量"><span class="nav-number">1.1.</span> <span class="nav-text">全局对象与全局变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#filename"><span class="nav-number">1.2.</span> <span class="nav-text">__filename</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dirname"><span class="nav-number">1.3.</span> <span class="nav-text">__dirname</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setTimeout-cb-ms"><span class="nav-number">1.4.</span> <span class="nav-text">setTimeout(cb, ms)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#clearTimeout-t"><span class="nav-number">1.5.</span> <span class="nav-text">clearTimeout(t)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setInterval-cb-ms"><span class="nav-number">1.6.</span> <span class="nav-text">setInterval(cb, ms)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#console"><span class="nav-number">1.7.</span> <span class="nav-text">console</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#console-方法"><span class="nav-number">1.8.</span> <span class="nav-text">console 方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#process"><span class="nav-number">1.9.</span> <span class="nav-text">process</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Process-属性"><span class="nav-number">1.10.</span> <span class="nav-text">Process 属性</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pingguowei</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysYWLmXQ';
+      var conf = 'c9827a47febaff8473e65037e09159c4';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

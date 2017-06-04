@@ -1,0 +1,1524 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Node.js,文件系统," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Node.js 文件系统Node.js 提供一组类似 UNIX（POSIX）标准的文件操作API。 Node 导入文件系统模块(fs)语法如下所示： 1var fs=require(&apos;fs&apos;)">
+<meta name="keywords" content="Node.js,文件系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node.js基础学习11--文件系统">
+<meta property="og:url" content="http://itcabin.com/2017/06/04/Node-js基础学习11-文件系统/index.html">
+<meta property="og:site_name" content="苹果味博客">
+<meta property="og:description" content="Node.js 文件系统Node.js 提供一组类似 UNIX（POSIX）标准的文件操作API。 Node 导入文件系统模块(fs)语法如下所示： 1var fs=require(&apos;fs&apos;)">
+<meta property="og:image" content="http://itcabin.com/2017/06/04/Node-js基础学习11-文件系统/01.PNG">
+<meta property="og:image" content="http://itcabin.com/2017/06/04/Node-js基础学习11-文件系统/02.PNG">
+<meta property="og:image" content="http://itcabin.com/2017/06/04/Node-js基础学习11-文件系统/03.PNG">
+<meta property="og:image" content="http://itcabin.com/2017/06/04/Node-js基础学习11-文件系统/04.PNG">
+<meta property="og:image" content="http://itcabin.com/2017/06/04/Node-js基础学习11-文件系统/05.PNG">
+<meta property="og:image" content="http://itcabin.com/2017/06/04/Node-js基础学习11-文件系统/06.PNG">
+<meta property="og:image" content="http://itcabin.com/2017/06/04/Node-js基础学习11-文件系统/07.PNG">
+<meta property="og:image" content="http://itcabin.com/2017/06/04/Node-js基础学习11-文件系统/08.PNG">
+<meta property="og:updated_time" content="2017-06-04T06:53:48.956Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node.js基础学习11--文件系统">
+<meta name="twitter:description" content="Node.js 文件系统Node.js 提供一组类似 UNIX（POSIX）标准的文件操作API。 Node 导入文件系统模块(fs)语法如下所示： 1var fs=require(&apos;fs&apos;)">
+<meta name="twitter:image" content="http://itcabin.com/2017/06/04/Node-js基础学习11-文件系统/01.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '苹果味'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://itcabin.com/2017/06/04/Node-js基础学习11-文件系统/"/>
+
+
+
+
+
+  <title>Node.js基础学习11--文件系统 | 苹果味博客</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">苹果味博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/06/04/Node-js基础学习11-文件系统/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pingguowei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/freeofwing.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="苹果味博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                Node.js基础学习11--文件系统
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-04T10:55:06+08:00">
+                2017-06-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/06/04/Node-js基础学习11-文件系统/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/06/04/Node-js基础学习11-文件系统/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Node-js-文件系统"><a href="#Node-js-文件系统" class="headerlink" title="Node.js 文件系统"></a>Node.js 文件系统</h3><p>Node.js 提供一组类似 UNIX（POSIX）标准的文件操作API。 Node 导入文件系统模块(fs)语法如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>)</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="异步和同步"><a href="#异步和同步" class="headerlink" title="异步和同步"></a>异步和同步</h3><p>Node.js 文件系统（fs 模块）模块中的方法均有异步和同步版本，例如读取文件内容的函数有<strong>异步的 fs.readFile() 和同步的 fs.readFileSync()</strong>。</p>
+<p>异步的方法函数最后一个参数为回调函数，回调函数的第一个参数包含了错误信息(error)。</p>
+<p>建议大家是用异步方法，比起同步，异步方法性能更高，速度更快，而且没有阻塞。</p>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><p>创建 file.js 文件, 代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 异步读取</span></div><div class="line">fs.readFile(<span class="string">'input.txt'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,data</span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(err)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="built_in">console</span>.error(err);</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'异步读取：'</span>+data.toString());</div><div class="line">&#125;);</div><div class="line"><span class="comment">// 同步函数</span></div><div class="line"><span class="keyword">var</span> data=fs.readFileSync(<span class="string">'input.txt'</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'同步读取：'</span>+data.toString());</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'程序执行完毕。'</span>);</div></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<p><img src="/2017/06/04/Node-js基础学习11-文件系统/01.PNG" alt="img"></p>
+<p>接下来，让我们来具体了解下 Node.js 文件系统的方法。</p>
+<h3 id="打开文件"><a href="#打开文件" class="headerlink" title="打开文件"></a>打开文件</h3><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p>以下为在异步模式下打开文件的语法格式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fs.open(path,flags[,mode],callback);</div></pre></td></tr></table></figure>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>参数使用说明如下：</p>
+<ul>
+<li><strong>path</strong> - 文件的路径。</li>
+<li><strong>flags</strong> - 文件打开的行为。具体值详见下文。</li>
+<li><strong>mode</strong> - 设置文件模式(权限)，文件创建默认权限为 0666(可读，可写)。</li>
+<li><strong>callback</strong> - 回调函数，带有两个参数如：callback(err, fd)。</li>
+</ul>
+<p>flags 参数可以是以下值：</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r</td>
+<td>以读取模式打开文件。如果文件不存在抛出异常。</td>
+</tr>
+<tr>
+<td>r+</td>
+<td>以读写模式打开文件。如果文件不存在抛出异常。</td>
+</tr>
+<tr>
+<td>rs</td>
+<td>以同步的方式读取文件。</td>
+</tr>
+<tr>
+<td>rs+</td>
+<td>以同步的方式读取和写入文件。</td>
+</tr>
+<tr>
+<td>w</td>
+<td>以写入模式打开文件，如果文件不存在则创建。</td>
+</tr>
+<tr>
+<td>wx</td>
+<td>类似 ‘w’，但是如果文件路径存在，则文件写入失败。</td>
+</tr>
+<tr>
+<td>w+</td>
+<td>以读写模式打开文件，如果文件不存在则创建。</td>
+</tr>
+<tr>
+<td>wx+</td>
+<td>类似 ‘w+’， 但是如果文件路径存在，则文件读写失败。</td>
+</tr>
+<tr>
+<td>a</td>
+<td>以追加模式打开文件，如果文件不存在则创建。</td>
+</tr>
+<tr>
+<td>ax</td>
+<td>类似 ‘a’， 但是如果文件路径存在，则文件追加失败。</td>
+</tr>
+<tr>
+<td>a+</td>
+<td>以读取追加模式打开文件，如果文件不存在则创建。</td>
+</tr>
+<tr>
+<td>ax+</td>
+<td>类似 ‘a+’， 但是如果文件路径存在，则文件读取追加失败。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 异步打开文件</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'准备打开文件！'</span>);</div><div class="line">fs.open(<span class="string">'input.txt'</span>,<span class="string">'r+'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,fd</span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(err)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="built_in">console</span>.err(err);</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'文件打开成功'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<p><img src="/2017/06/04/Node-js基础学习11-文件系统/02.PNG" alt="img"></p>
+<h3 id="获取文件信息"><a href="#获取文件信息" class="headerlink" title="获取文件信息"></a>获取文件信息</h3><h4 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h4><p>以下为通过异步模式获取文件信息的语法格式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fs.stat(path,callback)</div></pre></td></tr></table></figure>
+<h4 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a>参数</h4><p>参数使用说明如下：</p>
+<ul>
+<li><strong>path</strong> - 文件路径。</li>
+<li><strong>callback</strong> - 回调函数，带有两个参数如：(err, stats), <strong>stats</strong> 是 fs.Stats 对象。</li>
+</ul>
+<p>fs.stat(path)执行后，会将stats类的实例返回给其回调函数。可以通过stats类中的提供方法判断文件的相关属性。例如判断是否为文件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"></div><div class="line">fs.stat(<span class="string">'input.txt'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,stats</span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(stats.isFile());	<span class="comment">// true</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>stats类中的方法有：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stats.isFile()</td>
+<td>如果是文件返回 true，否则返回 false。</td>
+</tr>
+<tr>
+<td>stats.isDirectory()</td>
+<td>如果是目录返回 true，否则返回 false。</td>
+</tr>
+<tr>
+<td>stats.isBlockDevice()</td>
+<td>如果是块设备返回 true，否则返回 false。</td>
+</tr>
+<tr>
+<td>stats.isCharacterDevice()</td>
+<td>如果是字符设备返回 true，否则返回 false。</td>
+</tr>
+<tr>
+<td>stats.isSymbolicLink()</td>
+<td>如果是软链接返回 true，否则返回 false。</td>
+</tr>
+<tr>
+<td>stats.isFIFO()</td>
+<td>如果是FIFO，返回true，否则返回 false。FIFO是UNIX中的一种特殊类型的命令管道。</td>
+</tr>
+<tr>
+<td>stats.isSocket()</td>
+<td>如果是 Socket 返回 true，否则返回 false。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="写入文件"><a href="#写入文件" class="headerlink" title="写入文件"></a>写入文件</h3><h4 id="语法-2"><a href="#语法-2" class="headerlink" title="语法"></a>语法</h4><p>以下为异步模式下写入文件的语法格式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fs.writeFile(file,data[,options],callback)</div></pre></td></tr></table></figure>
+<h3 id="参数-2"><a href="#参数-2" class="headerlink" title="参数"></a>参数</h3><p>参数使用说明如下：</p>
+<ul>
+<li><strong>file</strong> - 文件名或文件描述符。</li>
+<li><strong>data</strong> - 要写入文件的数据，可以是 String(字符串) 或 Buffer(流) 对象。</li>
+<li><strong>options</strong> - 该参数是一个对象，包含 {encoding, mode, flag}。默认编码为 utf8, 模式为 0666 ， flag 为 ‘w’</li>
+<li><strong>callback</strong> - 回调函数，回调函数只包含错误信息参数(err)，在写入失败时返回。</li>
+</ul>
+<h4 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h4><p>创建 file.js 文件，代码如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'准备写入文件'</span>);</div><div class="line">fs.writeFile(<span class="string">'myTxt.txt'</span>,<span class="string">'我是通过写入的文件内容！'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(err)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="built_in">console</span>.log(err);</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'数据写入成功！'</span>);</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'------------分割线-------------'</span>);</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'读取写入的数据！'</span>);</div><div class="line">	fs.readFile(<span class="string">'myTxt.txt'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,data</span>)</span>&#123;</div><div class="line">		<span class="keyword">if</span>(err)&#123;</div><div class="line">			<span class="keyword">return</span> <span class="built_in">console</span>.error(err);</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'异步读取文件数据：'</span>+data.toString());</div><div class="line">	&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<p><img src="/2017/06/04/Node-js基础学习11-文件系统/03.PNG" alt="img"></p>
+<h4 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h4><h4 id="语法-3"><a href="#语法-3" class="headerlink" title="语法"></a>语法</h4><p>以下为异步模式下读取文件的语法格式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fs.read(fd,buffer,offset,length,position,callback)</div></pre></td></tr></table></figure>
+<p>该方法使用了文件描述符来读取文件。</p>
+<h3 id="参数-3"><a href="#参数-3" class="headerlink" title="参数"></a>参数</h3><p>参数使用说明如下：</p>
+<ul>
+<li><strong>fd</strong> - 通过 fs.open() 方法返回的文件描述符。</li>
+<li><strong>buffer</strong> - 数据写入的缓冲区。</li>
+<li><strong>offset</strong> - 缓冲区写入的写入偏移量。</li>
+<li><strong>length</strong> - 要从文件中读取的字节数。</li>
+<li><strong>position</strong> - 文件读取的起始位置，如果 position 的值为 null，则会从当前文件指针的位置读取。</li>
+<li><strong>callback</strong> - 回调函数，有三个参数err, bytesRead, buffer，err 为错误信息， <strong>bytesRead 表示读取的字节数</strong>，buffer 为缓冲区对象。</li>
+</ul>
+<h4 id="实例-3"><a href="#实例-3" class="headerlink" title="实例"></a>实例</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">var</span> buf=<span class="keyword">new</span> Buffer(<span class="number">1024</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'准备打开已存在的文件！'</span>);</div><div class="line">fs.open(<span class="string">'input.txt'</span>,<span class="string">'r+'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,fd</span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(err)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="built_in">console</span>.error(err);</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'文件打开开成功！'</span>);</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'准备读取文件！'</span>);</div><div class="line">	fs.read(fd,buf,<span class="number">0</span>,buf.length,<span class="number">0</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,bytes</span>)</span>&#123;</div><div class="line">		<span class="keyword">if</span>(err)&#123;</div><div class="line">			<span class="built_in">console</span>.log(err);</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">console</span>.log(bytes+<span class="string">' 字节被读取'</span>);</div><div class="line">		</div><div class="line">		<span class="comment">// 仅输出读取的字节</span></div><div class="line">		<span class="keyword">if</span>(bytes&gt;<span class="number">0</span>)&#123;</div><div class="line">			<span class="built_in">console</span>.log(buf.slice(<span class="number">0</span>,bytes).toString());</div><div class="line">		&#125;</div><div class="line">	&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<p><img src="/2017/06/04/Node-js基础学习11-文件系统/04.PNG" alt="img"></p>
+<h3 id="关闭文件"><a href="#关闭文件" class="headerlink" title="关闭文件"></a>关闭文件</h3><h4 id="语法-4"><a href="#语法-4" class="headerlink" title="语法"></a>语法</h4><p>以下为异步模式下关闭文件的语法格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fs.close(fd,callback)</div></pre></td></tr></table></figure>
+<p>该方法使用了文件描述符来读取文件。</p>
+<h4 id="参数-4"><a href="#参数-4" class="headerlink" title="参数"></a>参数</h4><p>参数使用说明如下：</p>
+<ul>
+<li><strong>fd</strong> - 通过 fs.open() 方法返回的<strong>文件描述符</strong>。</li>
+<li><strong>callback</strong> - 回调函数，没有参数。</li>
+</ul>
+<h4 id="实例-4"><a href="#实例-4" class="headerlink" title="实例"></a>实例</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">var</span> buf=<span class="keyword">new</span> Buffer(<span class="number">1024</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'准备打开文件！'</span>);</div><div class="line">fs.open(<span class="string">'input.txt'</span>,<span class="string">'r+'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,fd</span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(err)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="built_in">console</span>.error(err);</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'文件打开开成功！'</span>);</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'准备读取文件！'</span>);</div><div class="line">	fs.read(fd,buf,<span class="number">0</span>,buf.length,<span class="number">0</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,bytes</span>)</span>&#123;</div><div class="line">		<span class="keyword">if</span>(err)&#123;</div><div class="line">			<span class="built_in">console</span>.log(err);</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">console</span>.log(bytes+<span class="string">' 字节被读取'</span>);</div><div class="line">		</div><div class="line">		<span class="comment">// 仅输出读取的字节</span></div><div class="line">		<span class="keyword">if</span>(bytes&gt;<span class="number">0</span>)&#123;</div><div class="line">			<span class="built_in">console</span>.log(buf.slice(<span class="number">0</span>,bytes).toString());</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="comment">// 关闭文件</span></div><div class="line">		fs.close(fd,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">			<span class="keyword">if</span>(err)&#123;</div><div class="line">				<span class="built_in">console</span>.log(err);</div><div class="line">			&#125;</div><div class="line">			<span class="built_in">console</span>.log(<span class="string">'文件关闭成功'</span>);</div><div class="line">		&#125;);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<p><img src="/2017/06/04/Node-js基础学习11-文件系统/05.PNG" alt="img"></p>
+<h3 id="截取文件"><a href="#截取文件" class="headerlink" title="截取文件"></a>截取文件</h3><h4 id="语法-5"><a href="#语法-5" class="headerlink" title="语法"></a>语法</h4><p>以下为异步模式下截取文件的语法格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fs.ftruncate(fd,len,callback)</div></pre></td></tr></table></figure>
+<p>该方法使用了文件描述符来读取文件。</p>
+<h5 id="参数-5"><a href="#参数-5" class="headerlink" title="参数"></a>参数</h5><p>参数使用说明如下：</p>
+<ul>
+<li><strong>fd</strong> - 通过 fs.open() 方法返回的文件描述符。</li>
+<li><strong>len</strong> - 文件内容截取的长度。</li>
+<li><strong>callback</strong> - 回调函数，没有参数。</li>
+</ul>
+<h4 id="实例-5"><a href="#实例-5" class="headerlink" title="实例"></a>实例</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">var</span> buf=<span class="keyword">new</span> Buffer(<span class="number">1024</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'准备打开文件！'</span>);</div><div class="line">fs.open(<span class="string">'input.txt'</span>,<span class="string">'r+'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,fd</span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(err)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="built_in">console</span>.error(err);</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'文件打开成功！'</span>);</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'截取20字节后的文件内容。'</span>);</div><div class="line">	</div><div class="line">	<span class="comment">// 截取文件</span></div><div class="line">	fs.ftruncate(fd,<span class="number">20</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">		<span class="keyword">if</span>(err)&#123;</div><div class="line">			<span class="built_in">console</span>.log(err);</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'文件截取成功。'</span>);</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'读取相同的文件'</span>);</div><div class="line">		fs.read(fd,buf,<span class="number">0</span>,buf.length,<span class="number">0</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,bytes</span>)</span>&#123;</div><div class="line">			<span class="keyword">if</span>(err)&#123;</div><div class="line">				<span class="built_in">console</span>.log(err);</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">			<span class="comment">// 仅输出读取的字节</span></div><div class="line">			<span class="keyword">if</span>(bytes&gt;<span class="number">0</span>)&#123;</div><div class="line">				<span class="built_in">console</span>.log(buf.slice(<span class="number">0</span>,bytes).toString());</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">			<span class="comment">// 关闭文件</span></div><div class="line">			fs.close(fd,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">				<span class="keyword">if</span>(err)&#123;</div><div class="line">					<span class="built_in">console</span>.log(err);</div><div class="line">				&#125;</div><div class="line">				<span class="built_in">console</span>.log(<span class="string">'文件关闭成功!'</span>);</div><div class="line">			&#125;);</div><div class="line">		&#125;);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<p><img src="/2017/06/04/Node-js基础学习11-文件系统/06.PNG" alt="img"></p>
+<h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><h4 id="语法-6"><a href="#语法-6" class="headerlink" title="语法"></a>语法</h4><p>以下为删除文件的语法格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fs.unlink(path,callback)</div></pre></td></tr></table></figure>
+<h4 id="参数-6"><a href="#参数-6" class="headerlink" title="参数"></a>参数</h4><p>参数使用说明如下：</p>
+<ul>
+<li><strong>path</strong> - 文件路径。</li>
+<li><strong>callback</strong> - 回调函数，没有参数。</li>
+</ul>
+<h4 id="实例-6"><a href="#实例-6" class="headerlink" title="实例"></a>实例</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'准备删除文件！'</span>);</div><div class="line">fs.unlink(<span class="string">'input.txt'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(err)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="built_in">console</span>.error(err);</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'文件删除成功！'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>再去查看 input.txt 文件，发现已经不存在了。</p>
+<h3 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h3><h4 id="语法-7"><a href="#语法-7" class="headerlink" title="语法"></a>语法</h4><p>以下为创建目录的语法格式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fs.mkdir(path[,mode],callback)</div></pre></td></tr></table></figure>
+<h4 id="参数-7"><a href="#参数-7" class="headerlink" title="参数"></a>参数</h4><p>参数使用说明如下：</p>
+<ul>
+<li><strong>path</strong> - 文件路径。</li>
+<li><strong>mode</strong> - 设置目录权限，默认为 0777。</li>
+<li><strong>callback</strong> - 回调函数，没有参数。</li>
+</ul>
+<h4 id="实例-7"><a href="#实例-7" class="headerlink" title="实例"></a>实例</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'创建目录/test'</span>);</div><div class="line">fs.mkdir(<span class="string">'./test'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(err)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="built_in">console</span>.log(err);</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'创建目录成功。'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>运行结果：<strong>成功在当前文件目录下创建test文件夹。</strong></p>
+<h3 id="读取目录"><a href="#读取目录" class="headerlink" title="读取目录"></a>读取目录</h3><h4 id="语法-8"><a href="#语法-8" class="headerlink" title="语法"></a>语法</h4><p>以下为读取目录的语法格式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fs.readdir(path,callback)</div></pre></td></tr></table></figure>
+<h4 id="参数-8"><a href="#参数-8" class="headerlink" title="参数"></a>参数</h4><p>参数使用说明如下：</p>
+<ul>
+<li><strong>path</strong> - 文件路径。</li>
+<li><strong>callback</strong> - 回调函数，回调函数带有两个参数err, files，err 为错误信息，files 为 目录下的文件数组列表。</li>
+</ul>
+<h4 id="实例-8"><a href="#实例-8" class="headerlink" title="实例"></a>实例</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'查看/test 目录'</span>);</div><div class="line">fs.readdir(<span class="string">'./test/'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,files</span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(err)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="built_in">console</span>.err(err);</div><div class="line">	&#125;</div><div class="line">	files.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">file</span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(file);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<p><img src="/2017/06/04/Node-js基础学习11-文件系统/07.PNG" alt="img"></p>
+<h3 id="删除目录"><a href="#删除目录" class="headerlink" title="删除目录"></a>删除目录</h3><h4 id="语法-9"><a href="#语法-9" class="headerlink" title="语法"></a>语法</h4><p>以下为删除目录的语法格式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fs.rmdir(path,callback)</div></pre></td></tr></table></figure>
+<h4 id="参数-9"><a href="#参数-9" class="headerlink" title="参数"></a>参数</h4><p>参数使用说明如下：</p>
+<ul>
+<li><strong>path</strong> - 文件路径。</li>
+<li><strong>callback</strong> - 回调函数，没有参数。</li>
+</ul>
+<h4 id="实例-9"><a href="#实例-9" class="headerlink" title="实例"></a>实例</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 执行前创建一个空的 /kakaxi 目录</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'准备删除目录/kakaxi/'</span>);</div><div class="line">fs.rmdir(<span class="string">'./kakaxi'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(err)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="built_in">console</span>.error(err);</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'读取./目录'</span>);</div><div class="line">	fs.readdir(<span class="string">'./'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,files</span>)</span>&#123;</div><div class="line">		<span class="keyword">if</span>(err)&#123;</div><div class="line">			<span class="keyword">return</span> <span class="built_in">console</span>.error(err);</div><div class="line">		&#125;</div><div class="line">		files.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">file</span>)</span>&#123;</div><div class="line">			<span class="built_in">console</span>.log(file);</div><div class="line">		&#125;);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<p><img src="/2017/06/04/Node-js基础学习11-文件系统/08.PNG" alt="img"></p>
+<h3 id="文件模块方法参考手册"><a href="#文件模块方法参考手册" class="headerlink" title="文件模块方法参考手册"></a>文件模块方法参考手册</h3><p>以下为 Node.js 文件模块相同的方法列表：</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>方法 &amp; 描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>fs.rename(oldPath, newPath, callback)</strong>异步 rename().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>fs.ftruncate(fd, len, callback)</strong>异步 ftruncate().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>fs.ftruncateSync(fd, len)</strong>同步 ftruncate()</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>fs.truncate(path, len, callback)</strong>异步 truncate().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>fs.truncateSync(path, len)</strong>同步 truncate()</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>fs.chown(path, uid, gid, callback)</strong>异步 chown().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>fs.chownSync(path, uid, gid)</strong>同步 chown()</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>fs.fchown(fd, uid, gid, callback)</strong>异步 fchown().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>fs.fchownSync(fd, uid, gid)</strong>同步 fchown()</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>fs.lchown(path, uid, gid, callback)</strong>异步 lchown().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>fs.lchownSync(path, uid, gid)</strong>同步 lchown()</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>fs.chmod(path, mode, callback)</strong>异步 chmod().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>fs.chmodSync(path, mode)</strong>同步 chmod().</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>fs.fchmod(fd, mode, callback)</strong>异步 fchmod().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>fs.fchmodSync(fd, mode)</strong>同步 fchmod().</td>
+</tr>
+<tr>
+<td>16</td>
+<td><strong>fs.lchmod(path, mode, callback)</strong>异步 lchmod().回调函数没有参数，但可能抛出异常。Only available on Mac OS X.</td>
+</tr>
+<tr>
+<td>17</td>
+<td><strong>fs.lchmodSync(path, mode)</strong>同步 lchmod().</td>
+</tr>
+<tr>
+<td>18</td>
+<td><strong>fs.stat(path, callback)</strong>异步 stat(). 回调函数有两个参数 err, stats，stats 是 fs.Stats 对象。</td>
+</tr>
+<tr>
+<td>19</td>
+<td><strong>fs.lstat(path, callback)</strong>异步 lstat(). 回调函数有两个参数 err, stats，stats 是 fs.Stats 对象。</td>
+</tr>
+<tr>
+<td>20</td>
+<td><strong>fs.fstat(fd, callback)</strong>异步 fstat(). 回调函数有两个参数 err, stats，stats 是 fs.Stats 对象。</td>
+</tr>
+<tr>
+<td>21</td>
+<td><strong>fs.statSync(path)</strong>同步 stat(). 返回 fs.Stats 的实例。</td>
+</tr>
+<tr>
+<td>22</td>
+<td><strong>fs.lstatSync(path)</strong>同步 lstat(). 返回 fs.Stats 的实例。</td>
+</tr>
+<tr>
+<td>23</td>
+<td><strong>fs.fstatSync(fd)</strong>同步 fstat(). 返回 fs.Stats 的实例。</td>
+</tr>
+<tr>
+<td>24</td>
+<td><strong>fs.link(srcpath, dstpath, callback)</strong>异步 link().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td>25</td>
+<td><strong>fs.linkSync(srcpath, dstpath)</strong>同步 link().</td>
+</tr>
+<tr>
+<td>26</td>
+<td><strong>fs.symlink(srcpath, dstpath[, type], callback)</strong>异步 symlink().回调函数没有参数，但可能抛出异常。 type 参数可以设置为 ‘dir’, ‘file’, 或 ‘junction’ (默认为 ‘file’) 。</td>
+</tr>
+<tr>
+<td>27</td>
+<td><strong>fs.symlinkSync(srcpath, dstpath[, type])</strong>同步 symlink().</td>
+</tr>
+<tr>
+<td>28</td>
+<td><strong>fs.readlink(path, callback)</strong>异步 readlink(). 回调函数有两个参数 err, linkString。</td>
+</tr>
+<tr>
+<td>29</td>
+<td><strong>fs.realpath(path[, cache], callback)</strong>异步 realpath(). 回调函数有两个参数 err, resolvedPath。</td>
+</tr>
+<tr>
+<td>30</td>
+<td><strong>fs.realpathSync(path[, cache])</strong>同步 realpath()。返回绝对路径。</td>
+</tr>
+<tr>
+<td>31</td>
+<td><strong>fs.unlink(path, callback)</strong>异步 unlink().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td>32</td>
+<td><strong>fs.unlinkSync(path)</strong>同步 unlink().</td>
+</tr>
+<tr>
+<td>33</td>
+<td><strong>fs.rmdir(path, callback)</strong>异步 rmdir().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td>34</td>
+<td><strong>fs.rmdirSync(path)</strong>同步 rmdir().</td>
+</tr>
+<tr>
+<td>35</td>
+<td><strong>fs.mkdir(path[, mode], callback)</strong>S异步 mkdir(2).回调函数没有参数，但可能抛出异常。 mode defaults to 0777.</td>
+</tr>
+<tr>
+<td>36</td>
+<td><strong>fs.mkdirSync(path[, mode])</strong>同步 mkdir().</td>
+</tr>
+<tr>
+<td>37</td>
+<td><strong>fs.readdir(path, callback)</strong>异步 readdir(3). 读取目录的内容。</td>
+</tr>
+<tr>
+<td>38</td>
+<td><strong>fs.readdirSync(path)</strong>同步 readdir().返回文件数组列表。</td>
+</tr>
+<tr>
+<td>39</td>
+<td><strong>fs.close(fd, callback)</strong>异步 close().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td>40</td>
+<td><strong>fs.closeSync(fd)</strong>同步 close().</td>
+</tr>
+<tr>
+<td>41</td>
+<td><strong>fs.open(path, flags[, mode], callback)</strong>异步打开文件。</td>
+</tr>
+<tr>
+<td>42</td>
+<td><strong>fs.openSync(path, flags[, mode])</strong>同步 version of fs.open().</td>
+</tr>
+<tr>
+<td>43</td>
+<td><strong>fs.utimes(path, atime, mtime, callback)</strong></td>
+</tr>
+<tr>
+<td>44</td>
+<td><strong>fs.utimesSync(path, atime, mtime)</strong>修改文件时间戳，文件通过指定的文件路径。</td>
+</tr>
+<tr>
+<td>45</td>
+<td><strong>fs.futimes(fd, atime, mtime, callback)</strong></td>
+</tr>
+<tr>
+<td>46</td>
+<td><strong>fs.futimesSync(fd, atime, mtime)</strong>修改文件时间戳，通过文件描述符指定。</td>
+</tr>
+<tr>
+<td>47</td>
+<td><strong>fs.fsync(fd, callback)</strong>异步 fsync.回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td>48</td>
+<td><strong>fs.fsyncSync(fd)</strong>同步 fsync.</td>
+</tr>
+<tr>
+<td>49</td>
+<td><strong>fs.write(fd, buffer, offset, length[, position], callback)</strong>将缓冲区内容写入到通过文件描述符指定的文件。</td>
+</tr>
+<tr>
+<td>50</td>
+<td><strong>fs.write(fd, data[, position[, encoding]], callback)</strong>通过文件描述符 fd 写入文件内容。</td>
+</tr>
+<tr>
+<td>51</td>
+<td><strong>fs.writeSync(fd, buffer, offset, length[, position])</strong>同步版的 fs.write()。</td>
+</tr>
+<tr>
+<td>52</td>
+<td><strong>fs.writeSync(fd, data[, position[, encoding]])</strong>同步版的 fs.write().</td>
+</tr>
+<tr>
+<td>53</td>
+<td><strong>fs.read(fd, buffer, offset, length, position, callback)</strong>通过文件描述符 fd 读取文件内容。</td>
+</tr>
+<tr>
+<td>54</td>
+<td><strong>fs.readSync(fd, buffer, offset, length, position)</strong>同步版的 fs.read.</td>
+</tr>
+<tr>
+<td>55</td>
+<td><strong>fs.readFile(filename[, options], callback)</strong>异步读取文件内容。</td>
+</tr>
+<tr>
+<td>56</td>
+<td><strong>fs.readFileSync(filename[, options])</strong></td>
+</tr>
+<tr>
+<td>57</td>
+<td><strong>fs.writeFile(filename, data[, options], callback)</strong>异步写入文件内容。</td>
+</tr>
+<tr>
+<td>58</td>
+<td><strong>fs.writeFileSync(filename, data[, options])</strong>同步版的 fs.writeFile。</td>
+</tr>
+<tr>
+<td>59</td>
+<td><strong>fs.appendFile(filename, data[, options], callback)</strong>异步追加文件内容。</td>
+</tr>
+<tr>
+<td>60</td>
+<td><strong>fs.appendFileSync(filename, data[, options])</strong>The 同步 version of fs.appendFile.</td>
+</tr>
+<tr>
+<td>61</td>
+<td><strong>fs.watchFile(filename[, options], listener)</strong>查看文件的修改。</td>
+</tr>
+<tr>
+<td>62</td>
+<td><strong>fs.unwatchFile(filename[, listener])</strong>停止查看 filename 的修改。</td>
+</tr>
+<tr>
+<td>63</td>
+<td><strong>fs.watch(filename[, options][, listener])</strong>查看 filename 的修改，filename 可以是文件或目录。返回 fs.FSWatcher 对象。</td>
+</tr>
+<tr>
+<td>64</td>
+<td><strong>fs.exists(path, callback)</strong>检测给定的路径是否存在。</td>
+</tr>
+<tr>
+<td>65</td>
+<td><strong>fs.existsSync(path)</strong>同步版的 fs.exists.</td>
+</tr>
+<tr>
+<td>66</td>
+<td><strong>fs.access(path[, mode], callback)</strong>测试指定路径用户权限。</td>
+</tr>
+<tr>
+<td>67</td>
+<td><strong>fs.accessSync(path[, mode])</strong>同步版的 fs.access。</td>
+</tr>
+<tr>
+<td>68</td>
+<td><strong>fs.createReadStream(path[, options])</strong>返回ReadStream 对象。</td>
+</tr>
+<tr>
+<td>69</td>
+<td><strong>fs.createWriteStream(path[, options])</strong>返回 WriteStream 对象。</td>
+</tr>
+<tr>
+<td>70</td>
+<td><strong>fs.symlink(srcpath, dstpath[, type], callback)</strong>异步 symlink().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      pingguowei
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://itcabin.com/2017/06/04/Node-js基础学习11-文件系统/" title="Node.js基础学习11--文件系统">http://itcabin.com/2017/06/04/Node-js基础学习11-文件系统/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+          
+            <a href="/tags/文件系统/" rel="tag"># 文件系统</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/03/Node-js基础学习10-常用工具/" rel="prev" title="Node.js基础学习10--常用工具">
+                Node.js基础学习10--常用工具 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/freeofwing.jpeg"
+               alt="pingguowei" />
+          <p class="site-author-name" itemprop="name">pingguowei</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-js-文件系统"><span class="nav-number">1.</span> <span class="nav-text">Node.js 文件系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步和同步"><span class="nav-number">2.</span> <span class="nav-text">异步和同步</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实例"><span class="nav-number">2.1.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打开文件"><span class="nav-number">3.</span> <span class="nav-text">打开文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法"><span class="nav-number">3.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数"><span class="nav-number">3.2.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例-1"><span class="nav-number">3.3.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取文件信息"><span class="nav-number">4.</span> <span class="nav-text">获取文件信息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法-1"><span class="nav-number">4.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数-1"><span class="nav-number">4.2.</span> <span class="nav-text">参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写入文件"><span class="nav-number">5.</span> <span class="nav-text">写入文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法-2"><span class="nav-number">5.1.</span> <span class="nav-text">语法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数-2"><span class="nav-number">6.</span> <span class="nav-text">参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实例-2"><span class="nav-number">6.1.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读取文件"><span class="nav-number">6.2.</span> <span class="nav-text">读取文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#语法-3"><span class="nav-number">6.3.</span> <span class="nav-text">语法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数-3"><span class="nav-number">7.</span> <span class="nav-text">参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实例-3"><span class="nav-number">7.1.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭文件"><span class="nav-number">8.</span> <span class="nav-text">关闭文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法-4"><span class="nav-number">8.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数-4"><span class="nav-number">8.2.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例-4"><span class="nav-number">8.3.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#截取文件"><span class="nav-number">9.</span> <span class="nav-text">截取文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法-5"><span class="nav-number">9.1.</span> <span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#参数-5"><span class="nav-number">9.1.1.</span> <span class="nav-text">参数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例-5"><span class="nav-number">9.2.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除文件"><span class="nav-number">10.</span> <span class="nav-text">删除文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法-6"><span class="nav-number">10.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数-6"><span class="nav-number">10.2.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例-6"><span class="nav-number">10.3.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建目录"><span class="nav-number">11.</span> <span class="nav-text">创建目录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法-7"><span class="nav-number">11.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数-7"><span class="nav-number">11.2.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例-7"><span class="nav-number">11.3.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取目录"><span class="nav-number">12.</span> <span class="nav-text">读取目录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法-8"><span class="nav-number">12.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数-8"><span class="nav-number">12.2.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例-8"><span class="nav-number">12.3.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除目录"><span class="nav-number">13.</span> <span class="nav-text">删除目录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法-9"><span class="nav-number">13.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数-9"><span class="nav-number">13.2.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例-9"><span class="nav-number">13.3.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件模块方法参考手册"><span class="nav-number">14.</span> <span class="nav-text">文件模块方法参考手册</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pingguowei</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysYWLmXQ';
+      var conf = 'c9827a47febaff8473e65037e09159c4';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

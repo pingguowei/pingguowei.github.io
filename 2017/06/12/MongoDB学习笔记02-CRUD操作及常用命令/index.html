@@ -1,0 +1,1055 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MongoDB,常用命令," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="CRUDMongoDB 存储数据称为：documents，使用类似JSON的键值对方式。mongodb documents称为BSON.documents以collections集合方式存储。集合是一类关联的documents的分组，有共享的索引。">
+<meta name="keywords" content="MongoDB,常用命令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB学习笔记02--CRUD操作及常用命令">
+<meta property="og:url" content="http://itcabin.com/2017/06/12/MongoDB学习笔记02-CRUD操作及常用命令/index.html">
+<meta property="og:site_name" content="苹果味博客">
+<meta property="og:description" content="CRUDMongoDB 存储数据称为：documents，使用类似JSON的键值对方式。mongodb documents称为BSON.documents以collections集合方式存储。集合是一类关联的documents的分组，有共享的索引。">
+<meta property="og:updated_time" content="2017-06-13T14:41:08.054Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MongoDB学习笔记02--CRUD操作及常用命令">
+<meta name="twitter:description" content="CRUDMongoDB 存储数据称为：documents，使用类似JSON的键值对方式。mongodb documents称为BSON.documents以collections集合方式存储。集合是一类关联的documents的分组，有共享的索引。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '苹果味'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://itcabin.com/2017/06/12/MongoDB学习笔记02-CRUD操作及常用命令/"/>
+
+
+
+
+
+  <title>MongoDB学习笔记02--CRUD操作及常用命令 | 苹果味博客</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">苹果味博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/06/12/MongoDB学习笔记02-CRUD操作及常用命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pingguowei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/freeofwing.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="苹果味博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                MongoDB学习笔记02--CRUD操作及常用命令
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-12T22:12:12+08:00">
+                2017-06-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MongoDB/" itemprop="url" rel="index">
+                    <span itemprop="name">MongoDB</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/06/12/MongoDB学习笔记02-CRUD操作及常用命令/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/06/12/MongoDB学习笔记02-CRUD操作及常用命令/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="CRUD"><a href="#CRUD" class="headerlink" title="CRUD"></a>CRUD</h3><p><a href="https://www.mongodb.com" target="_blank" rel="external">MongoDB</a> 存储数据称为：documents，使用类似JSON的键值对方式。<a href="http://lib.csdn.net/base/mongodb" target="_blank" rel="external">mongodb</a> documents称为BSON.<br>documents以collections集合方式存储。集合是一类关联的documents的分组，有共享的索引。</p>
+<a id="more"></a>
+<h3 id="操作示例"><a href="#操作示例" class="headerlink" title="操作示例"></a>操作示例</h3><h4 id="一些命令"><a href="#一些命令" class="headerlink" title="一些命令"></a>一些命令</h4><h5 id="查看帮助"><a href="#查看帮助" class="headerlink" title="查看帮助"></a>查看帮助</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">help</span></div><div class="line">db.help();</div><div class="line">db.collectionname.help();</div><div class="line">db.collectionname.find().help();</div><div class="line">rs.help();</div></pre></td></tr></table></figure>
+<h4 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h4><h5 id="切换数据库"><a href="#切换数据库" class="headerlink" title="切换数据库"></a>切换数据库</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> dbname;</div><div class="line">对于不存在的db会自动创建</div></pre></td></tr></table></figure>
+<h5 id="查询所有数据库"><a href="#查询所有数据库" class="headerlink" title="查询所有数据库"></a>查询所有数据库</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> dbs;</div></pre></td></tr></table></figure>
+<h4 id="删除当前使用数据库"><a href="#删除当前使用数据库" class="headerlink" title="删除当前使用数据库"></a>删除当前使用数据库</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.dropDatabase();</div></pre></td></tr></table></figure>
+<h4 id="从指定主机克隆数据库"><a href="#从指定主机克隆数据库" class="headerlink" title="从指定主机克隆数据库"></a>从指定主机克隆数据库</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.cloneDatabase('host ip');</div></pre></td></tr></table></figure>
+<h4 id="从指定的机器上复制数据库到某个数据库"><a href="#从指定的机器上复制数据库到某个数据库" class="headerlink" title="从指定的机器上复制数据库到某个数据库"></a>从指定的机器上复制数据库到某个数据库</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.copyDatabase('mydb','temp','host ip');</div></pre></td></tr></table></figure>
+<h4 id="修复当前数据库"><a href="#修复当前数据库" class="headerlink" title="修复当前数据库"></a>修复当前数据库</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.repairDatabase();</div></pre></td></tr></table></figure>
+<h4 id="查看当前使用的数据库"><a href="#查看当前使用的数据库" class="headerlink" title="查看当前使用的数据库"></a>查看当前使用的数据库</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">db.getName();</div><div class="line">db;</div></pre></td></tr></table></figure>
+<h4 id="显示当前db状态"><a href="#显示当前db状态" class="headerlink" title="显示当前db状态"></a>显示当前db状态</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.stats();</div></pre></td></tr></table></figure>
+<h4 id="当前db版本"><a href="#当前db版本" class="headerlink" title="当前db版本"></a>当前db版本</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.version();</div></pre></td></tr></table></figure>
+<h4 id="查看当前db的链接机器地址"><a href="#查看当前db的链接机器地址" class="headerlink" title="查看当前db的链接机器地址"></a>查看当前db的链接机器地址</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.getMongo();</div></pre></td></tr></table></figure>
+<h3 id="Collection集合操作"><a href="#Collection集合操作" class="headerlink" title="Collection集合操作"></a>Collection集合操作</h3><h4 id="创建一个集合"><a href="#创建一个集合" class="headerlink" title="创建一个集合"></a>创建一个集合</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.createCollection('user',&#123;size:20,capped:5,max:100&#125;);</div></pre></td></tr></table></figure>
+<h4 id="获取集合"><a href="#获取集合" class="headerlink" title="获取集合"></a>获取集合</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.getCollection('user');</div></pre></td></tr></table></figure>
+<h4 id="查询现在所有集合"><a href="#查询现在所有集合" class="headerlink" title="查询现在所有集合"></a>查询现在所有集合</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.getCollectionNames();</div></pre></td></tr></table></figure>
+<h4 id="显示当前db所有聚集索引的状态"><a href="#显示当前db所有聚集索引的状态" class="headerlink" title="显示当前db所有聚集索引的状态"></a>显示当前db所有聚集索引的状态</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.printCollectionStats();</div></pre></td></tr></table></figure>
+<h4 id="集合数据空间大小"><a href="#集合数据空间大小" class="headerlink" title="集合数据空间大小"></a>集合数据空间大小</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.dataSize();</div></pre></td></tr></table></figure>
+<h4 id="集合数据条数"><a href="#集合数据条数" class="headerlink" title="集合数据条数"></a>集合数据条数</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.count();</div></pre></td></tr></table></figure>
+<h4 id="集合所在db"><a href="#集合所在db" class="headerlink" title="集合所在db"></a>集合所在db</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.getDB();</div></pre></td></tr></table></figure>
+<h4 id="集合状态"><a href="#集合状态" class="headerlink" title="集合状态"></a>集合状态</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.stats();</div></pre></td></tr></table></figure>
+<h4 id="集合总大小"><a href="#集合总大小" class="headerlink" title="集合总大小"></a>集合总大小</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.totalSize();</div></pre></td></tr></table></figure>
+<h4 id="聚焦集合存储空间大小"><a href="#聚焦集合存储空间大小" class="headerlink" title="聚焦集合存储空间大小"></a>聚焦集合存储空间大小</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.storageSize();</div></pre></td></tr></table></figure>
+<h4 id="Shard版本信息"><a href="#Shard版本信息" class="headerlink" title="Shard版本信息"></a>Shard版本信息</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.getShardVersion();</div></pre></td></tr></table></figure>
+<h4 id="聚集集合重命名"><a href="#聚集集合重命名" class="headerlink" title="聚集集合重命名"></a>聚集集合重命名</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.renameCollection('users');</div></pre></td></tr></table></figure>
+<h4 id="删除当前聚集集合"><a href="#删除当前聚集集合" class="headerlink" title="删除当前聚集集合"></a>删除当前聚集集合</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.drop();</div></pre></td></tr></table></figure>
+<h4 id="删除集合里所有记录"><a href="#删除集合里所有记录" class="headerlink" title="删除集合里所有记录"></a>删除集合里所有记录</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.remove(&#123;&#125;);</div></pre></td></tr></table></figure>
+<h3 id="collection记录操作"><a href="#collection记录操作" class="headerlink" title="collection记录操作"></a>collection记录操作</h3><h4 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">db.user.insert(&#123;id:1,userName:'username'&#125;);</div><div class="line">db.user.save(&#123;name:'kakaxi',age:22,sex:true&#125;);</div></pre></td></tr></table></figure>
+<h4 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;age:22&#125;,&#123;$set:&#123;name:'chen'&#125;&#125;,false,true)</div></pre></td></tr></table></figure>
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.remove(&#123;age:20&#125;);</div></pre></td></tr></table></figure>
+<h4 id="查询修改"><a href="#查询修改" class="headerlink" title="查询修改"></a>查询修改</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">db.users.findAndModify(&#123;</div><div class="line">	query: &#123;age: &#123;$gte: 25&#125;&#125;, </div><div class="line">	sort: &#123;age: -1&#125;, </div><div class="line">	update: &#123;$set: &#123;name: 'a2'&#125;, $inc: &#123;age: 2&#125;&#125;,</div><div class="line">	remove: true</div><div class="line">&#125;);</div><div class="line"></div><div class="line">db.runCommand(&#123; findandmodify : "users", </div><div class="line">	query: &#123;age: &#123;$gte: 25&#125;&#125;, </div><div class="line">	sort: &#123;age: -1&#125;, </div><div class="line">	update: &#123;$set: &#123;name: 'a2'&#125;, $inc: &#123;age: 2&#125;&#125;,</div><div class="line">	remove: true</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">db.user.find();</div><div class="line">// 查询结果排除重复</div><div class="line">db.user.distinct("name");</div><div class="line">// 条件查询</div><div class="line">db.user.find(&#123;"name","a"&#125;);</div><div class="line">// 大于查询</div><div class="line">db.user.find(&#123;age:&#123;$gt:22&#125;&#125;);   $lt小于  $ate大于等于  $lte小于等于</div><div class="line">// 包含查询</div><div class="line">db.user.find(&#123;name:/mongo/&#125;);</div><div class="line">// 开头查询</div><div class="line">db.user.find(&#123;name:/^mongo/&#125;);</div><div class="line">// 查询指定列</div><div class="line">db.user.find(&#123;&#125;,&#123;name:1,age:1&#125;);    //如果是age:false，就是除了age列</div><div class="line">// 排序</div><div class="line">db.user.find().sort(&#123;age:1&#125;);      //-1为降序</div><div class="line">// 查询前5条</div><div class="line">db.user.find().limit(5);</div><div class="line">// 查询10条后</div><div class="line">db.user.find().skip(10);</div><div class="line">// 查询某区间条数</div><div class="line">db.user.find().limit(10).skip(5);</div><div class="line">// 用于分页，limit是pageSize,skip是第几页*pageSize</div><div class="line">或与查询</div><div class="line">db.user.find(&#123;$or:[&#123;name:'张三'&#125;,&#123;name:'李四'&#125;]&#125;);</div><div class="line">// 查询第一条</div><div class="line">db.user.findOne();</div><div class="line">// 查询某个结果集的记录条数</div><div class="line">db.user.find(&#123;age:&#123;$gte:25&#125;&#125;).count();</div><div class="line">// 某列排序</div><div class="line">db.user.find(&#123;sex:&#123;$exists:true&#125;&#125;).count();</div></pre></td></tr></table></figure>
+<h3 id="用户操作"><a href="#用户操作" class="headerlink" title="用户操作"></a>用户操作</h3><h4 id="添加一个用户语法"><a href="#添加一个用户语法" class="headerlink" title="添加一个用户语法"></a>添加一个用户语法</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123; user: "&lt;name&gt;",</div><div class="line">  pwd: "&lt;cleartext password&gt;",</div><div class="line">  customData: &#123; &lt;any information&gt; &#125;,</div><div class="line">  roles: [</div><div class="line">    &#123; role: "&lt;role&gt;", db: "&lt;database&gt;" &#125; | "&lt;role&gt;",</div><div class="line">    ...</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> myDatabase</div><div class="line">db.createUser(&#123;</div><div class="line">	<span class="keyword">user</span>:<span class="string">'pingguowei'</span>,</div><div class="line">	pwd:<span class="string">'123456'</span>,</div><div class="line">	<span class="keyword">roles</span>:[</div><div class="line">		<span class="string">'readWrite'</span></div><div class="line">	]</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="数据库认证、安全模式"><a href="#数据库认证、安全模式" class="headerlink" title="数据库认证、安全模式"></a>数据库认证、安全模式</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.auth('pingguowei','123456')</div></pre></td></tr></table></figure>
+<h4 id="显示所有用户"><a href="#显示所有用户" class="headerlink" title="显示所有用户"></a>显示所有用户</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> <span class="keyword">users</span>;</div></pre></td></tr></table></figure>
+<h4 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.dropUser('kakaxi');</div></pre></td></tr></table></figure>
+<h4 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.changeUserPassword(&apos;kakaxi&apos;,&apos;654321&apos;);</div></pre></td></tr></table></figure>
+<h3 id="语块操作"><a href="#语块操作" class="headerlink" title="语块操作"></a>语块操作</h3><h4 id="1、print"><a href="#1、print" class="headerlink" title="1、print"></a>1、print</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(&apos;Hello World!&apos;);</div></pre></td></tr></table></figure>
+<h4 id="2、将一个对象转换成json"><a href="#2、将一个对象转换成json" class="headerlink" title="2、将一个对象转换成json"></a>2、将一个对象转换成json</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">tojson(new Object());</div><div class="line">tojson(new Object(&apos;a&apos;));</div></pre></td></tr></table></figure>
+<h4 id="3、循环添加数据"><a href="#3、循环添加数据" class="headerlink" title="3、循环添加数据"></a>3、循环添加数据</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">for (var i = 0; i &lt; 30; i++) &#123; </div><div class="line">… db.users.save(&#123;name: “u_” + i, age: 22 + i, sex: i % 2&#125;); </div><div class="line">… &#125;; </div><div class="line">这样就循环添加了30条数据，同样也可以省略括号的写法 </div><div class="line">for (var i = 0; i &lt; 30; i++) db.users.save(&#123;name: “u_” + i, age: 22 + i, sex: i % 2&#125;); </div><div class="line">也是可以的，当你用db.users.find()查询的时候，显示多条数据而无法一页显示的情况下，可以用it查看下一页的信息；</div></pre></td></tr></table></figure>
+<h4 id="4、find-游标查询"><a href="#4、find-游标查询" class="headerlink" title="4、find 游标查询"></a>4、find 游标查询</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var cursor = db.users.find();</div><div class="line">while (cursor.hasNext()) &#123; </div><div class="line">    printjson(cursor.next()); </div><div class="line">&#125;</div><div class="line">这样就查询所有的users信息，同样可以这样写</div><div class="line">var cursor = db.users.find();</div><div class="line">while (cursor.hasNext()) &#123; printjson(cursor.next); &#125;</div><div class="line">同样可以省略&#123;&#125;号</div></pre></td></tr></table></figure>
+<h4 id="5、forEach迭代循环"><a href="#5、forEach迭代循环" class="headerlink" title="5、forEach迭代循环"></a>5、forEach迭代循环</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">db.users.find().forEach(printjson); </div><div class="line">forEach中必须传递一个函数来处理每条迭代的数据信息</div></pre></td></tr></table></figure>
+<h4 id="6、将find游标当数组处理"><a href="#6、将find游标当数组处理" class="headerlink" title="6、将find游标当数组处理"></a>6、将find游标当数组处理</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var cursor = db.users.find(); </div><div class="line">cursor[4]; </div><div class="line">取得下标索引为4的那条数据 </div><div class="line">既然可以当做数组处理，那么就可以获得它的长度：cursor.length();或者cursor.count(); </div><div class="line">那样我们也可以用循环显示数据 </div><div class="line">for (var i = 0, len = c.length(); i &lt; len; i++) printjson(c[i]);</div></pre></td></tr></table></figure>
+<h4 id="7、将find游标转换成数组"><a href="#7、将find游标转换成数组" class="headerlink" title="7、将find游标转换成数组"></a>7、将find游标转换成数组</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var arr = db.users.find().toArray(); </div><div class="line">printjson(arr[2]); </div><div class="line">用toArray方法将其转换为数组</div></pre></td></tr></table></figure>
+<h4 id="8、定制我们自己的查询结果"><a href="#8、定制我们自己的查询结果" class="headerlink" title="8、定制我们自己的查询结果"></a>8、定制我们自己的查询结果</h4><p>只显示age &lt;= 28的并且只显示age这列数据</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">db.users.find(&#123;age: &#123;$lte: 28&#125;&#125;, &#123;age: 1&#125;).forEach(printjson);</div><div class="line">db.users.find(&#123;age: &#123;$lte: 28&#125;&#125;, &#123;age: true&#125;).forEach(printjson);</div><div class="line">// 排除age的列</div><div class="line">db.users.find(&#123;age: &#123;$lte: 28&#125;&#125;, &#123;age: false&#125;).forEach(printjson);</div></pre></td></tr></table></figure>
+<h4 id="9、forEach传递函数显示信息"><a href="#9、forEach传递函数显示信息" class="headerlink" title="9、forEach传递函数显示信息"></a>9、forEach传递函数显示信息</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">db.things.find(&#123;x:4&#125;).forEach(function(x) &#123;print(tojson(x));&#125;); </div><div class="line">上面介绍过forEach需要传递一个函数，函数会接受一个参数，就是当前循环的对象，然后在函数体重处理传入的参数信息。</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      pingguowei
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://itcabin.com/2017/06/12/MongoDB学习笔记02-CRUD操作及常用命令/" title="MongoDB学习笔记02--CRUD操作及常用命令">http://itcabin.com/2017/06/12/MongoDB学习笔记02-CRUD操作及常用命令/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MongoDB/" rel="tag"># MongoDB</a>
+          
+            <a href="/tags/常用命令/" rel="tag"># 常用命令</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/13/MongoDB学习笔记01-安装及配置/" rel="next" title="MongoDB学习笔记01--安装及配置">
+                <i class="fa fa-chevron-left"></i> MongoDB学习笔记01--安装及配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/11/Node-js基础学习16-多进程/" rel="prev" title="Node.js基础学习16--多进程">
+                Node.js基础学习16--多进程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/freeofwing.jpeg"
+               alt="pingguowei" />
+          <p class="site-author-name" itemprop="name">pingguowei</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#CRUD"><span class="nav-number">1.</span> <span class="nav-text">CRUD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作示例"><span class="nav-number">2.</span> <span class="nav-text">操作示例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一些命令"><span class="nav-number">2.1.</span> <span class="nav-text">一些命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#查看帮助"><span class="nav-number">2.1.1.</span> <span class="nav-text">查看帮助</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库操作"><span class="nav-number">2.2.</span> <span class="nav-text">数据库操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#切换数据库"><span class="nav-number">2.2.1.</span> <span class="nav-text">切换数据库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查询所有数据库"><span class="nav-number">2.2.2.</span> <span class="nav-text">查询所有数据库</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除当前使用数据库"><span class="nav-number">2.3.</span> <span class="nav-text">删除当前使用数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从指定主机克隆数据库"><span class="nav-number">2.4.</span> <span class="nav-text">从指定主机克隆数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从指定的机器上复制数据库到某个数据库"><span class="nav-number">2.5.</span> <span class="nav-text">从指定的机器上复制数据库到某个数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修复当前数据库"><span class="nav-number">2.6.</span> <span class="nav-text">修复当前数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看当前使用的数据库"><span class="nav-number">2.7.</span> <span class="nav-text">查看当前使用的数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#显示当前db状态"><span class="nav-number">2.8.</span> <span class="nav-text">显示当前db状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#当前db版本"><span class="nav-number">2.9.</span> <span class="nav-text">当前db版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看当前db的链接机器地址"><span class="nav-number">2.10.</span> <span class="nav-text">查看当前db的链接机器地址</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Collection集合操作"><span class="nav-number">3.</span> <span class="nav-text">Collection集合操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建一个集合"><span class="nav-number">3.1.</span> <span class="nav-text">创建一个集合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取集合"><span class="nav-number">3.2.</span> <span class="nav-text">获取集合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询现在所有集合"><span class="nav-number">3.3.</span> <span class="nav-text">查询现在所有集合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#显示当前db所有聚集索引的状态"><span class="nav-number">3.4.</span> <span class="nav-text">显示当前db所有聚集索引的状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集合数据空间大小"><span class="nav-number">3.5.</span> <span class="nav-text">集合数据空间大小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集合数据条数"><span class="nav-number">3.6.</span> <span class="nav-text">集合数据条数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集合所在db"><span class="nav-number">3.7.</span> <span class="nav-text">集合所在db</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集合状态"><span class="nav-number">3.8.</span> <span class="nav-text">集合状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集合总大小"><span class="nav-number">3.9.</span> <span class="nav-text">集合总大小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#聚焦集合存储空间大小"><span class="nav-number">3.10.</span> <span class="nav-text">聚焦集合存储空间大小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shard版本信息"><span class="nav-number">3.11.</span> <span class="nav-text">Shard版本信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#聚集集合重命名"><span class="nav-number">3.12.</span> <span class="nav-text">聚集集合重命名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除当前聚集集合"><span class="nav-number">3.13.</span> <span class="nav-text">删除当前聚集集合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除集合里所有记录"><span class="nav-number">3.14.</span> <span class="nav-text">删除集合里所有记录</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#collection记录操作"><span class="nav-number">4.</span> <span class="nav-text">collection记录操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#插入"><span class="nav-number">4.1.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改"><span class="nav-number">4.2.</span> <span class="nav-text">修改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除"><span class="nav-number">4.3.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询修改"><span class="nav-number">4.4.</span> <span class="nav-text">查询修改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询"><span class="nav-number">4.5.</span> <span class="nav-text">查询</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户操作"><span class="nav-number">5.</span> <span class="nav-text">用户操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加一个用户语法"><span class="nav-number">5.1.</span> <span class="nav-text">添加一个用户语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#示例"><span class="nav-number">5.2.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库认证、安全模式"><span class="nav-number">5.3.</span> <span class="nav-text">数据库认证、安全模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#显示所有用户"><span class="nav-number">5.4.</span> <span class="nav-text">显示所有用户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除用户"><span class="nav-number">5.5.</span> <span class="nav-text">删除用户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改密码"><span class="nav-number">5.6.</span> <span class="nav-text">修改密码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语块操作"><span class="nav-number">6.</span> <span class="nav-text">语块操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、print"><span class="nav-number">6.1.</span> <span class="nav-text">1、print</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、将一个对象转换成json"><span class="nav-number">6.2.</span> <span class="nav-text">2、将一个对象转换成json</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、循环添加数据"><span class="nav-number">6.3.</span> <span class="nav-text">3、循环添加数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、find-游标查询"><span class="nav-number">6.4.</span> <span class="nav-text">4、find 游标查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、forEach迭代循环"><span class="nav-number">6.5.</span> <span class="nav-text">5、forEach迭代循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、将find游标当数组处理"><span class="nav-number">6.6.</span> <span class="nav-text">6、将find游标当数组处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7、将find游标转换成数组"><span class="nav-number">6.7.</span> <span class="nav-text">7、将find游标转换成数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8、定制我们自己的查询结果"><span class="nav-number">6.8.</span> <span class="nav-text">8、定制我们自己的查询结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9、forEach传递函数显示信息"><span class="nav-number">6.9.</span> <span class="nav-text">9、forEach传递函数显示信息</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pingguowei</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysYWLmXQ';
+      var conf = 'c9827a47febaff8473e65037e09159c4';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

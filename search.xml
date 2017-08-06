@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[hexo常用命令笔记]]></title>
+    <url>%2F2017%2F08%2F06%2Fhexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[hexo123npm install hexo -g #安装 npm update hexo -g #升级 hexo init #初始化 简写12345hexo n "我的博客" == hexo new "我的博客" #新建文章hexo p == hexo publishhexo g == hexo generate#生成hexo s == hexo server #启动服务预览hexo d == hexo deploy#部署 服务器12345678hexo server #Hexo 会监视文件变动并自动更新，您无须重启服务器。hexo server -s #静态模式hexo server -p 5000 #更改端口hexo server -i 192.168.1.1 #自定义 IPhexo clean #清除缓存 网页正常情况下可以忽略此条命令hexo g #生成静态网页hexo d #开始部署 推送到服务器上123hexo n #写文章hexo g #生成hexo d #部署 #可与hexo g合并为 hexo d -g 监视文件变动12hexo generate #使用 Hexo 生成静态文件快速而且简单hexo generate --watch #监视文件变动 报错1.找不到git部署1ERROR Deployer not found: git 解决方法 1npm install hexo-deployer-git --save]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>命令</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[使用pm2部署nodejs项目]]></title>
     <url>%2F2017%2F08%2F06%2F%E4%BD%BF%E7%94%A8pm2%E9%83%A8%E7%BD%B2nodejs%E9%A1%B9%E7%9B%AE%2F</url>
     <content type="text"><![CDATA[安装pm2使用命令 cd F:\nodejs定位到nodejs安装目录，执行以下命令安装pm2 1npm install -g pm2 使用pm2运行程序在程序根目录打开命令行窗口 shift+右键 1pm2 start index.js 查看运行状态1pm2 list 重启程序述restarted那栏变成1，可以显示程序运行了多长时间、占用内存大小 1pm2 restart index.js 查看启动程序的详细信息1pm2 describe id 终止程序1pm2 stop index.js 查看得到进程(以及集群)的CPU的使用率和内存占用1pm2 monit 强大API你想要监控所有被PM2管理的进程,而且同时还想监控运行这些进程的机器的状态， 1pm2 web 启动程序的时候顺便在浏览器访问：http://localhost:**9615** 把部署的服务器的信息和程序的信息都显示出来了： 所有命令总结：1234567891011安装：npm install -g pm2启动程序：pm2 start &lt;app_name|id|all&gt; 可以指定应用名称 pm2 start app,js --name=test列举进程：pm2 list退出程序：pm2 stop &lt;app_name|id|all&gt;重起应用：pm2 restart程序信息：pm2 describe id|all监控：pm2 monit实时集中log处理: pm2 logsAPI:pm2 web (端口：9615 )]]></content>

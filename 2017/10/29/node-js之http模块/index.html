@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Node.js基础学习,Stream," />
+  <meta name="keywords" content="Node.js,Node.js常用模块," />
 
 
 
@@ -90,23 +90,17 @@
 
 
 
-<meta name="description" content="Node.js Stream(流)Stream 是一个抽象接口，Node 中有很多对象实现了这个接口。例如，对http 服务器发起请求的request 对象就是一个 Stream，还有stdout（标准输出）。 Node.js，Stream 有四种流类型：  Readable - 可读操作。  Writable - 可写操作。  Duplex - 可读可写操作.  Transform - 操作被写">
-<meta name="keywords" content="Node.js基础学习,Stream">
+<meta name="description" content="1.http.get(options[, callback]),发送简单Get请求，并响应1234567891011var http=require(&apos;http&apos;);// get 请求外网http.get(&apos;http://itcabin.com/&apos;,function(req,res)&amp;#123;  var html=&apos;&apos;;  req.on(&apos;data&apos;,function(data)&amp;#123;">
+<meta name="keywords" content="Node.js,Node.js常用模块">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Node.js基础学习05--Stream(流)">
-<meta property="og:url" content="http://itcabin.com/2017/05/31/Node-js基础学习05-Stream-流/index.html">
+<meta property="og:title" content="node.js之http模块">
+<meta property="og:url" content="http://itcabin.com/2017/10/29/node-js之http模块/index.html">
 <meta property="og:site_name" content="苹果味博客">
-<meta property="og:description" content="Node.js Stream(流)Stream 是一个抽象接口，Node 中有很多对象实现了这个接口。例如，对http 服务器发起请求的request 对象就是一个 Stream，还有stdout（标准输出）。 Node.js，Stream 有四种流类型：  Readable - 可读操作。  Writable - 可写操作。  Duplex - 可读可写操作.  Transform - 操作被写">
-<meta property="og:image" content="http://itcabin.com/2017/05/31/Node-js基础学习05-Stream-流/01.PNG">
-<meta property="og:image" content="http://itcabin.com/2017/05/31/Node-js基础学习05-Stream-流/02.PNG">
-<meta property="og:image" content="http://itcabin.com/2017/05/31/Node-js基础学习05-Stream-流/03.PNG">
-<meta property="og:image" content="http://itcabin.com/2017/05/31/Node-js基础学习05-Stream-流/04.PNG">
-<meta property="og:image" content="http://itcabin.com/2017/05/31/Node-js基础学习05-Stream-流/05.PNG">
-<meta property="og:updated_time" content="2017-05-31T14:05:35.714Z">
+<meta property="og:description" content="1.http.get(options[, callback]),发送简单Get请求，并响应1234567891011var http=require(&apos;http&apos;);// get 请求外网http.get(&apos;http://itcabin.com/&apos;,function(req,res)&amp;#123;  var html=&apos;&apos;;  req.on(&apos;data&apos;,function(data)&amp;#123;">
+<meta property="og:updated_time" content="2017-10-29T14:16:06.122Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Node.js基础学习05--Stream(流)">
-<meta name="twitter:description" content="Node.js Stream(流)Stream 是一个抽象接口，Node 中有很多对象实现了这个接口。例如，对http 服务器发起请求的request 对象就是一个 Stream，还有stdout（标准输出）。 Node.js，Stream 有四种流类型：  Readable - 可读操作。  Writable - 可写操作。  Duplex - 可读可写操作.  Transform - 操作被写">
-<meta name="twitter:image" content="http://itcabin.com/2017/05/31/Node-js基础学习05-Stream-流/01.PNG">
+<meta name="twitter:title" content="node.js之http模块">
+<meta name="twitter:description" content="1.http.get(options[, callback]),发送简单Get请求，并响应1234567891011var http=require(&apos;http&apos;);// get 请求外网http.get(&apos;http://itcabin.com/&apos;,function(req,res)&amp;#123;  var html=&apos;&apos;;  req.on(&apos;data&apos;,function(data)&amp;#123;">
 
 
 
@@ -134,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://itcabin.com/2017/05/31/Node-js基础学习05-Stream-流/"/>
+  <link rel="canonical" href="http://itcabin.com/2017/10/29/node-js之http模块/"/>
 
 
 
 
 
-  <title>Node.js基础学习05--Stream(流) | 苹果味博客</title>
+  <title>node.js之http模块 | 苹果味博客</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -313,7 +307,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/05/31/Node-js基础学习05-Stream-流/">
+    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/10/29/node-js之http模块/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="pingguowei">
@@ -334,7 +328,7 @@
             
             
               
-                Node.js基础学习05--Stream(流)
+                node.js之http模块
               
             
           </h2>
@@ -349,8 +343,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-31T21:01:08+08:00">
-                2017-05-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-29T20:15:09+08:00">
+                2017-10-29
               </time>
             
 
@@ -391,8 +385,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/05/31/Node-js基础学习05-Stream-流/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/05/31/Node-js基础学习05-Stream-流/" itemprop="commentsCount"></span>
+                <a href="/2017/10/29/node-js之http模块/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/10/29/node-js之http模块/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -422,57 +416,13 @@
       
 
       
-        <h3 id="Node-js-Stream-流"><a href="#Node-js-Stream-流" class="headerlink" title="Node.js Stream(流)"></a>Node.js Stream(流)</h3><p>Stream 是一个抽象接口，Node 中有很多对象实现了这个接口。例如，对http 服务器发起请求的request 对象就是一个 Stream，还有stdout（标准输出）。</p>
-<p>Node.js，Stream 有四种流类型：</p>
-<ul>
-<li><p><strong>Readable</strong> - 可读操作。</p>
-</li>
-<li><p><strong>Writable</strong> - 可写操作。</p>
-</li>
-<li><p><strong>Duplex</strong> - 可读可写操作.</p>
-</li>
-<li><p><strong>Transform</strong> - 操作被写入数据，然后读出结果。</p>
+        <h3 id="1-http-get-options-callback-发送简单Get请求，并响应"><a href="#1-http-get-options-callback-发送简单Get请求，并响应" class="headerlink" title="1.http.get(options[, callback]),发送简单Get请求，并响应"></a>1.http.get(options[, callback]),发送简单Get请求，并响应</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http=<span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"><span class="comment">// get 请求外网</span></div><div class="line">http.get(<span class="string">'http://itcabin.com/'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> html=<span class="string">''</span>;</div><div class="line">  req.on(<span class="string">'data'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    html+=data;</div><div class="line">  &#125;);</div><div class="line">  req.on(<span class="string">'end'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(html);</div><div class="line">  &#125;);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <a id="more"></a>
-</li>
-</ul>
-<p>所有的 Stream 对象都是 EventEmitter 的实例。常用的事件有：</p>
-<ul>
-<li><strong>data</strong> - 当有数据可读时触发。</li>
-<li><strong>end</strong> - 没有更多的数据可读时触发。</li>
-<li><strong>error</strong> - 在接收和写入过程中发生错误时触发。</li>
-<li><strong>finish</strong> - 所有数据已被写入到底层系统时触发。</li>
-</ul>
-<h3 id="从流中读取数据"><a href="#从流中读取数据" class="headerlink" title="从流中读取数据"></a>从流中读取数据</h3><p>创建 main.js 文件, 代码如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">var</span> data=<span class="string">''</span>;</div><div class="line"></div><div class="line"><span class="comment">// 创建可读流</span></div><div class="line"><span class="keyword">var</span> readerStream=fs.createReadStream(<span class="string">'input.txt'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 设置编码为 utf8</span></div><div class="line">readerStream.setEncoding(<span class="string">'UTF8'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 处理流事件 --&gt; data,end,and error</span></div><div class="line">readerStream.on(<span class="string">'data'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>)</span>&#123;</div><div class="line">	data+=chunk;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">readerStream.on(<span class="string">'end'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(data);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">readerStream.on(<span class="string">'error'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(err.stack);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'程序执行完毕'</span>);</div></pre></td></tr></table></figure>
-<p>以上代码执行结果如下：</p>
-<p><img src="/2017/05/31/Node-js基础学习05-Stream-流/01.PNG" alt="img"></p>
-<h3 id="写入流"><a href="#写入流" class="headerlink" title="写入流"></a>写入流</h3><p>创建 main.js 文件, 代码如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">var</span> data=<span class="string">'苹果味博客：itcabin.com'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 创建一个可以写入的流，写入到文件output.txt中</span></div><div class="line"><span class="keyword">var</span> writerStream=fs.createWriteStream(<span class="string">'output.txt'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 使用 utf8 编码写入数据</span></div><div class="line">writerStream.write(data,<span class="string">'UTF8'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 标记文件末尾</span></div><div class="line">writerStream.end();</div><div class="line"></div><div class="line"><span class="comment">// 处理流事件 --&gt; data,end,and error</span></div><div class="line">writerStream.on(<span class="string">'finish'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'写入完成'</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">writerStream.on(<span class="string">'error'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(err.stack);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'程序执行完毕'</span>);</div></pre></td></tr></table></figure>
-<p>以上程序会将 data 变量的数据写入到 output.txt 文件中。代码执行结果如下：</p>
-<p><img src="/2017/05/31/Node-js基础学习05-Stream-流/02.PNG" alt="img"></p>
-<p>查看 output.txt 文件的内容：</p>
-<p><img src="/2017/05/31/Node-js基础学习05-Stream-流/03.PNG" alt="img"></p>
-<h3 id="管道流"><a href="#管道流" class="headerlink" title="管道流"></a>管道流</h3><p>管道提供了一个输出流到输入流的机制。通常我们用于从一个流中获取数据并将数据传递到另外一个流中。</p>
-<p><img src="/2017/05/31/Node-js基础学习05-Stream-流/04.PNG" alt="img"></p>
-<p>如上面的图片所示，我们把文件比作装水的桶，而水就是文件里的内容，我们用一根管子(pipe)连接两个桶使得水从一个桶流入另一个桶，这样就慢慢的实现了大文件的复制过程。</p>
-<p>以下实例我们通过读取一个文件内容并将内容写入到另外一个文件中。</p>
-<p>设置 input.txt 文件内容如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">苹果味博客：itcabin.com</div><div class="line">管道流操作实例</div></pre></td></tr></table></figure>
-<p>创建 main.js 文件, 代码如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 创建一个可读流</span></div><div class="line"><span class="keyword">var</span> readerStream=fs.createReadStream(<span class="string">'input.txt'</span>);</div><div class="line"><span class="comment">// 创建一个可写流</span></div><div class="line"><span class="keyword">var</span> writerStream=fs.createWriteStream(<span class="string">'output.txt'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 管道读写操作</span></div><div class="line"><span class="comment">// 读取 input.txt 文件内容，并将内容写入到 output.txt文件中</span></div><div class="line">readerStream.pipe(writerStream);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'程序执行完毕'</span>);</div></pre></td></tr></table></figure>
-<p>查看 output.txt 文件的内容：</p>
-<p><img src="/2017/05/31/Node-js基础学习05-Stream-流/05.PNG" alt="img"></p>
-<h3 id="链式流"><a href="#链式流" class="headerlink" title="链式流"></a>链式流</h3><p>链式是通过连接输出流到另外一个流并创建多个对个流操作链的机制。链式流一般用于管道操作。</p>
-<p>接下来我们就是用管道和链式来压缩和解压文件。</p>
-<p>创建 compress.js 文件, 代码如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">var</span> zlib=<span class="built_in">require</span>(<span class="string">'zlib'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 压缩 input.txt 文件为 input.txt.gz</span></div><div class="line">fs.createReadStream(<span class="string">'input.txt'</span>)</div><div class="line">	.pipe(zlib.createGzip())</div><div class="line">	.pipe(fs.createWriteStream(<span class="string">'input.txt.gz'</span>));</div><div class="line">	</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'文件压缩完成。'</span>);</div></pre></td></tr></table></figure>
-<p>代码执行结果如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ node compress.js </div><div class="line">文件压缩完成。</div></pre></td></tr></table></figure>
-<p>执行完以上操作后，我们可以看到当前目录下生成了 input.txt 的压缩文件 input.txt.gz。</p>
-<p>接下来，让我们来解压该文件，创建 decompress.js 文件，代码如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">var</span> zlib=<span class="built_in">require</span>(<span class="string">'zlib'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 解压 input.txt.gz文件为 input.txt</span></div><div class="line">fs.createReadStream(<span class="string">'input.txt.gz'</span>)</div><div class="line">	.pipe(zlib.createGunzip())</div><div class="line">	.pipe(fs.createWriteStream(<span class="string">'input.txt'</span>));</div><div class="line">	</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'文件解压完成。'</span>);</div></pre></td></tr></table></figure>
-<p>生成input.txt文件,代码执行结果如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ node decompress.js </div><div class="line">文件解压完成。</div></pre></td></tr></table></figure>
+<h3 id="2-http-request-options-callback-使用详细配置，发送Get或Post请求"><a href="#2-http-request-options-callback-使用详细配置，发送Get或Post请求" class="headerlink" title="2.http.request(options[, callback]),使用详细配置，发送Get或Post请求"></a>2.http.request(options[, callback]),使用详细配置，发送Get或Post请求</h3><h4 id="发送Post实例：注http请求头使用headers指定"><a href="#发送Post实例：注http请求头使用headers指定" class="headerlink" title="发送Post实例：注http请求头使用headers指定"></a>发送Post实例：注http请求头使用headers指定</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http=<span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"><span class="keyword">var</span> queryString=<span class="built_in">require</span>(<span class="string">'querystring'</span>);</div><div class="line"><span class="comment">// 发送 http Post请求</span></div><div class="line"><span class="keyword">var</span> postData=queryString.stringify(&#123;</div><div class="line">    <span class="attr">msg</span>:<span class="string">'自由之翼'</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="keyword">var</span> options=&#123;</div><div class="line">    <span class="attr">hostname</span>:<span class="string">'www.gongjuji.net'</span>,</div><div class="line">    <span class="attr">port</span>:<span class="number">80</span>,</div><div class="line">    <span class="attr">path</span>:<span class="string">'/'</span>,</div><div class="line">    <span class="attr">method</span>:<span class="string">'POST'</span>,</div><div class="line">    <span class="attr">headers</span>:&#123;    </div><div class="line">        <span class="string">'Content-Type'</span>:<span class="string">'application/x-www-form-urlencoded; charset=UTF-8'</span>,  </div><div class="line">        <span class="string">'Content-Length'</span>:Buffer.byteLength(postData)  </div><div class="line">       &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> req=http.request(options,<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> html=<span class="string">''</span>;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'Status:'</span>,res.statusCode);</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'headers:'</span>,<span class="built_in">JSON</span>.stringify(res.headers));</div><div class="line">    res.setEncoding(<span class="string">'utf-8'</span>);</div><div class="line">    res.on(<span class="string">'data'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">chun</span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'body分割线-------------------------------'</span>);</div><div class="line">        html+=chun;</div><div class="line">    &#125;);</div><div class="line">    res.on(<span class="string">'end'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(html);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div><div class="line">req.on(<span class="string">'error'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.error(err);</div><div class="line">&#125;);</div><div class="line">req.write(postData);</div><div class="line">req.end();</div></pre></td></tr></table></figure>
+<h4 id="发送Get请求实例："><a href="#发送Get请求实例：" class="headerlink" title="发送Get请求实例："></a>发送Get请求实例：</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 发送GET请求</span></div><div class="line"><span class="keyword">var</span> http=<span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"><span class="keyword">var</span> querystring=<span class="built_in">require</span>(<span class="string">'querystring'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> data=&#123;</div><div class="line">    <span class="attr">age</span>:<span class="number">13</span>,</div><div class="line">    <span class="attr">time</span>:<span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> content=querystring.stringify(data);</div><div class="line"><span class="keyword">var</span> options=&#123;</div><div class="line">    <span class="attr">hostname</span>:<span class="string">'www.gongjuji.net'</span>,</div><div class="line">    <span class="attr">port</span>:<span class="number">80</span>,</div><div class="line">    <span class="attr">path</span>:<span class="string">'/'</span>,</div><div class="line">    <span class="attr">method</span>:<span class="string">'GET'</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 创建请求</span></div><div class="line"><span class="keyword">var</span> req=http.request(options,<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> html=<span class="string">''</span>;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'STATUS:'</span>,res.statusCode);</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'HEADERS:'</span>,<span class="built_in">JSON</span>.stringify(res.headers));</div><div class="line">    res.setEncoding(<span class="string">'utf-8'</span>);</div><div class="line">    res.on(<span class="string">'data'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'body数据隔离--------------------------------'</span>);</div><div class="line">        html+=chunk;</div><div class="line">    &#125;);</div><div class="line">    res.on(<span class="string">'end'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(html);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">req.on(<span class="string">'error'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(err);</div><div class="line">&#125;);</div><div class="line">req.end();</div></pre></td></tr></table></figure>
+<h3 id="3-创建服务器http-createServer"><a href="#3-创建服务器http-createServer" class="headerlink" title="3.创建服务器http.createServer"></a>3.创建服务器http.createServer</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http=<span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"></div><div class="line">http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">request,response</span>)</span>&#123;</div><div class="line">    response.writeHead(<span class="number">200</span>,&#123;<span class="string">'Content-Type'</span>:<span class="string">'text/plain'</span>&#125;);</div><div class="line">    response.write(<span class="string">'Hello World'</span>);</div><div class="line">    response.end();</div><div class="line">&#125;).listen(<span class="number">8077</span>,<span class="string">'127.0.0.1'</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'Server Running on port 8077'</span>);</div></pre></td></tr></table></figure>
+<h3 id="4-http-ClientRequest"><a href="#4-http-ClientRequest" class="headerlink" title="4.http.ClientRequest"></a>4.http.ClientRequest</h3><p>http.ClientRequest 是http.request或者http.get返回产生的对象，表示一个已经产生而且正在进行的http请求，提供一个response事件，也就是我们使用http.get和http.request方法中的回调函数所绑定的对象，我们可以显示的绑定这个事件的监听函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> options = &#123;</div><div class="line">    <span class="attr">hostname</span>: <span class="string">'www.baidu.com'</span>,</div><div class="line">    <span class="attr">port</span>:<span class="string">'8070'</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 这里的req就是http.ClientRequest的一个实例，注意与http.IncomingMessage的区别</span></div><div class="line"><span class="keyword">var</span> req = http.request(options);</div><div class="line">req.on(<span class="string">'response'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</div><div class="line">    res.setEncoding(<span class="string">'utf-8'</span>);</div><div class="line">    res.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(chunk.toString())</div><div class="line">    &#125;);</div><div class="line">    <span class="built_in">console</span>.log(res.statusCode);</div><div class="line">&#125;)</div><div class="line"></div><div class="line">req.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(err.message);</div><div class="line">&#125;);</div><div class="line">req.end();</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -500,7 +450,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://itcabin.com/2017/05/31/Node-js基础学习05-Stream-流/" title="Node.js基础学习05--Stream(流)">http://itcabin.com/2017/05/31/Node-js基础学习05-Stream-流/</a>
+      <a href="http://itcabin.com/2017/10/29/node-js之http模块/" title="node.js之http模块">http://itcabin.com/2017/10/29/node-js之http模块/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -516,9 +466,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Node-js基础学习/" rel="tag"># Node.js基础学习</a>
+            <a href="/tags/Node-js/" rel="tag"># Node.js</a>
           
-            <a href="/tags/Stream/" rel="tag"># Stream</a>
+            <a href="/tags/Node-js常用模块/" rel="tag"># Node.js常用模块</a>
           
         </div>
       
@@ -531,18 +481,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/31/Node-js基础学习06-模块系统/" rel="next" title="Node.js基础学习06--模块系统">
-                <i class="fa fa-chevron-left"></i> Node.js基础学习06--模块系统
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/26/Node-js基础学习04-Buffer-缓冲区/" rel="prev" title="Node.js基础学习04--Buffer(缓冲区)">
-                Node.js基础学习04--Buffer(缓冲区) <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/06/hexo常用命令笔记/" rel="prev" title="hexo常用命令笔记">
+                hexo常用命令笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -712,7 +658,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-js-Stream-流"><span class="nav-number">1.</span> <span class="nav-text">Node.js Stream(流)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从流中读取数据"><span class="nav-number">2.</span> <span class="nav-text">从流中读取数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写入流"><span class="nav-number">3.</span> <span class="nav-text">写入流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管道流"><span class="nav-number">4.</span> <span class="nav-text">管道流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链式流"><span class="nav-number">5.</span> <span class="nav-text">链式流</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-http-get-options-callback-发送简单Get请求，并响应"><span class="nav-number">1.</span> <span class="nav-text">1.http.get(options[, callback]),发送简单Get请求，并响应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-http-request-options-callback-使用详细配置，发送Get或Post请求"><span class="nav-number">2.</span> <span class="nav-text">2.http.request(options[, callback]),使用详细配置，发送Get或Post请求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#发送Post实例：注http请求头使用headers指定"><span class="nav-number">2.1.</span> <span class="nav-text">发送Post实例：注http请求头使用headers指定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#发送Get请求实例："><span class="nav-number">2.2.</span> <span class="nav-text">发送Get请求实例：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-创建服务器http-createServer"><span class="nav-number">3.</span> <span class="nav-text">3.创建服务器http.createServer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-http-ClientRequest"><span class="nav-number">4.</span> <span class="nav-text">4.http.ClientRequest</span></a></li></ol></div>
             
 
           </div>

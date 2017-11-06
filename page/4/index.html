@@ -307,6 +307,330 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/05/20/SQL常用函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pingguowei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/freeofwing.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="苹果味博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/20/SQL常用函数/" itemprop="url">
+                  SQL常用函数
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-20T17:21:23+08:00">
+                2017-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SQL/" itemprop="url" rel="index">
+                    <span itemprop="name">SQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/05/20/SQL常用函数/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://itcabin.com/2017/05/20/SQL常用函数/" class="cy_cmt_count" data-xid="2017/05/20/SQL常用函数/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="类型转换函数"><a href="#类型转换函数" class="headerlink" title="类型转换函数"></a>类型转换函数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--select :输出为结果集--虚拟表</span></div><div class="line"><span class="comment">--print：以文本形式输出  只能输出一个字符串值.</span></div><div class="line"></div><div class="line">print 1+'a'</div><div class="line"><span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span></div><div class="line"></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> Student</div><div class="line"></div><div class="line"><span class="comment">--类型转换</span></div><div class="line"><span class="comment">--Convert(目标类型,源数据,[格式]) --日期有格式</span></div><div class="line">print <span class="string">'我的成绩是：'</span>+<span class="keyword">convert</span>(<span class="built_in">char</span>(<span class="number">3</span>),<span class="number">100</span>)</div><div class="line"></div><div class="line">print <span class="string">'今天是个大日子：'</span>+<span class="keyword">convert</span>(<span class="built_in">varchar</span>(<span class="number">30</span>),<span class="keyword">getdate</span>(),<span class="number">120</span>)</div><div class="line"><span class="keyword">select</span> <span class="keyword">getdate</span>()</div><div class="line"><span class="keyword">select</span> <span class="keyword">len</span>(<span class="keyword">getdate</span>())</div><div class="line"></div><div class="line"><span class="comment">--cast(源数据  as  目标类型)  它没有格式</span></div><div class="line">print <span class="string">'我的成绩是：'</span>+<span class="keyword">cast</span>(<span class="number">100</span> <span class="keyword">as</span> <span class="built_in">char</span>(<span class="number">3</span>))</div></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/20/SQL常用函数/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/05/20/SQL笔记梳理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pingguowei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/freeofwing.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="苹果味博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/20/SQL笔记梳理/" itemprop="url">
+                  SQL笔记梳理
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-20T15:31:06+08:00">
+                2017-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SQL/" itemprop="url" rel="index">
+                    <span itemprop="name">SQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/05/20/SQL笔记梳理/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://itcabin.com/2017/05/20/SQL笔记梳理/" class="cy_cmt_count" data-xid="2017/05/20/SQL笔记梳理/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="什么是SQL语句"><a href="#什么是SQL语句" class="headerlink" title="什么是SQL语句"></a>什么是SQL语句</h3><p>sql语言：结构化的查询语言。（Structured Query Language），是关系数据库管理系统的标准语言。</p>
+<p>它是一种解释语言：<strong>写一句执行一句，不需要整体编译执行</strong>。<br>语法特点：</p>
+<ol>
+<li>没有“ ”，字符串使用‘ ’包含</li>
+<li>没有逻辑相等，赋值和逻辑相等都是=</li>
+<li>类型不再是最严格的。任何数据都可以包含在‘ ’以内</li>
+<li>没有bool值的概念，但是在视图中可以输入true/false</li>
+<li>它也有关系运算符：&gt; &lt; &gt;= &lt;= = &lt;&gt; != ,它返回一个bool值</li>
+<li>它也有逻辑运算符： ！(not) &amp;&amp;(and) ||(or)</li>
+<li>它不区别大小写</li>
+</ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/20/SQL笔记梳理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/05/13/jQuery常用函数总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1411,7 +1735,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/05/06/JavaScript编码规范/">
+    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/05/06/javascript之DOM操作-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="pingguowei">
@@ -1433,8 +1757,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/05/06/JavaScript编码规范/" itemprop="url">
-                  JavaScript编码规范
+                <a class="post-title-link" href="/2017/05/06/javascript之DOM操作-2/" itemprop="url">
+                  javascript之DOM操作(2)
                 </a>
               
             
@@ -1450,7 +1774,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-06T12:25:43+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-06T13:13:08+08:00">
                 2017-05-06
               </time>
             
@@ -1492,8 +1816,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/05/06/JavaScript编码规范/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://itcabin.com/2017/05/06/JavaScript编码规范/" class="cy_cmt_count" data-xid="2017/05/06/JavaScript编码规范/" itemprop="commentsCount" ></span>
+                <a href="/2017/05/06/javascript之DOM操作-2/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://itcabin.com/2017/05/06/javascript之DOM操作-2/" class="cy_cmt_count" data-xid="2017/05/06/javascript之DOM操作-2/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -1519,12 +1843,10 @@
 
       
         
-          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>好的编码规范可以尽可能的减少一个软件的维护成本，并且几乎没有任何一个软件，在其整个生命周期中，均由最初的开发人员来维护；好的编码规范可以改善软件的可读性，可以让开发人员尽快而彻底地理解新的代码；好的编码规范可以最大限度的提高团队开发的合作效率；长期的规范性编码还可以让开发人员养成好的编码习惯，甚至锻炼出更加严谨的思维。</p>
-<h3 id="不规范写法举例"><a href="#不规范写法举例" class="headerlink" title="不规范写法举例"></a>不规范写法举例</h3><h4 id="句尾没有分号"><a href="#句尾没有分号" class="headerlink" title="句尾没有分号"></a>句尾没有分号</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> isHotel = json.type == <span class="string">"hotel"</span> ? <span class="literal">true</span> : <span class="literal">false</span></div></pre></td></tr></table></figure>
-<h4 id="变量命名各种各样"><a href="#变量命名各种各样" class="headerlink" title="变量命名各种各样"></a>变量命名各种各样</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> is_hotel;</div><div class="line"><span class="keyword">var</span> isHotel;</div><div class="line"><span class="keyword">var</span> ishotel;</div></pre></td></tr></table></figure>
+          <h2 id="DOM操作总结"><a href="#DOM操作总结" class="headerlink" title="DOM操作总结"></a>DOM操作总结</h2><h3 id="jQuery-select操作控制方法小结"><a href="#jQuery-select操作控制方法小结" class="headerlink" title="jQuery select操作控制方法小结"></a>jQuery select操作控制方法小结</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"mySelect"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span> =<span class="string">"volvo"</span>&gt;</span>Volvo<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span> =<span class="string">"saab"</span>&gt;</span>Saab<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"opel"</span>&gt;</span>Opel<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"audi"</span>&gt;</span>Audi<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/05/06/JavaScript编码规范/#more" rel="contents">
+            <a class="btn" href="/2017/05/06/javascript之DOM操作-2/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1565,7 +1887,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1610,7 +1932,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1632,7 +1954,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

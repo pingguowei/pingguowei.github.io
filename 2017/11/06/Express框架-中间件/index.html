@@ -95,10 +95,10 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Express框架+中间件">
 <meta property="og:url" content="http://itcabin.com/2017/11/06/Express框架-中间件/index.html">
-<meta property="og:site_name" content="苹果味博客">
+<meta property="og:site_name" content="JOJO博客">
 <meta property="og:description" content="Express框架路由能力 12345678910111213141516171819var express = require(&quot;express&quot;);var app = express();app.get(&quot;/&quot;,function(req,res)&amp;#123;	res.send(&quot;你好&quot;);&amp;#125;);	app.get(&quot;/haha&quot;,function(req,res)&amp;#123;	res.">
 <meta property="og:image" content="http://itcabin.com/2017/11/06/Express框架-中间件/01.PNG">
-<meta property="og:updated_time" content="2017-11-06T14:14:53.830Z">
+<meta property="og:updated_time" content="2017-11-07T03:11:25.865Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Express框架+中间件">
 <meta name="twitter:description" content="Express框架路由能力 12345678910111213141516171819var express = require(&quot;express&quot;);var app = express();app.get(&quot;/&quot;,function(req,res)&amp;#123;	res.send(&quot;你好&quot;);&amp;#125;);	app.get(&quot;/haha&quot;,function(req,res)&amp;#123;	res.">
@@ -136,7 +136,7 @@
 
 
 
-  <title>Express框架+中间件 | 苹果味博客</title>
+  <title>Express框架+中间件 | JOJO博客</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -172,7 +172,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">苹果味博客</span>
+        <span class="site-title">JOJO博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -312,13 +312,13 @@
     <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/11/06/Express框架-中间件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="pingguowei">
+      <meta itemprop="name" content="jojo">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/freeofwing.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="苹果味博客">
+      <meta itemprop="name" content="JOJO博客">
     </span>
 
     
@@ -420,6 +420,7 @@
       
         <h3 id="Express框架"><a href="#Express框架" class="headerlink" title="Express框架"></a>Express框架</h3><p><strong>路由能力</strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">"express"</span>);</div><div class="line"><span class="keyword">var</span> app = express();</div><div class="line"></div><div class="line">app.get(<span class="string">"/"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</div><div class="line">	res.send(<span class="string">"你好"</span>);</div><div class="line">&#125;);</div><div class="line">	app.get(<span class="string">"/haha"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</div><div class="line">	res.send(<span class="string">"这是haha页面，哈哈哈哈哈哈"</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">app.get(<span class="regexp">/^\/student\/([\d]&#123;10&#125;)$/</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</div><div class="line">	res.send(<span class="string">"学生信息，学号"</span> + req.params[<span class="number">0</span>]);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">app.get(<span class="string">"/teacher/:gonghao"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</div><div class="line">	res.send(<span class="string">"老师信息，工号"</span> + req.params.gonghao);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">app.listen(<span class="number">3000</span>);</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <p><strong>静态文件伺服能力</strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 静态文件伺服能力  默认调用public文件夹下的index.html文件</span></div><div class="line">app.use(express.static(<span class="string">'./public'</span>));</div></pre></td></tr></table></figure>
 <p><img src="/2017/11/06/Express框架-中间件/01.PNG" alt="img"></p>
@@ -474,7 +475,7 @@
   <ul class="post-copyright">
     <li class="post-copyright-author">
       <strong>本文作者：</strong>
-      pingguowei
+      jojo
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
@@ -618,8 +619,8 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/freeofwing.jpeg"
-               alt="pingguowei" />
-          <p class="site-author-name" itemprop="name">pingguowei</p>
+               alt="jojo" />
+          <p class="site-author-name" itemprop="name">jojo</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
            
@@ -713,7 +714,7 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">pingguowei</span>
+  <span class="author" itemprop="copyrightHolder">jojo</span>
 </div>
 
 

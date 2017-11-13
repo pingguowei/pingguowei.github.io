@@ -90,17 +90,17 @@
 
 
 
-<meta name="description" content="Node.js之Promise模块所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。 Promise对象有以下两个特点。（1）对象的状态不受外界影响。Promise对象代表一个异步操作，有三种状态：Pen">
+<meta name="description" content="Node.js之Promise模块所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。">
 <meta name="keywords" content="Node.js,Promise">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Node.js之Promise模块">
 <meta property="og:url" content="http://itcabin.com/2017/11/01/Node-js之Promise模块/index.html">
 <meta property="og:site_name" content="JOJO博客">
-<meta property="og:description" content="Node.js之Promise模块所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。 Promise对象有以下两个特点。（1）对象的状态不受外界影响。Promise对象代表一个异步操作，有三种状态：Pen">
-<meta property="og:updated_time" content="2017-11-13T02:36:54.892Z">
+<meta property="og:description" content="Node.js之Promise模块所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。">
+<meta property="og:updated_time" content="2017-11-13T02:41:40.665Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Node.js之Promise模块">
-<meta name="twitter:description" content="Node.js之Promise模块所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。 Promise对象有以下两个特点。（1）对象的状态不受外界影响。Promise对象代表一个异步操作，有三种状态：Pen">
+<meta name="twitter:description" content="Node.js之Promise模块所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。">
 
 
 
@@ -417,6 +417,7 @@
 
       
         <h2 id="Node-js之Promise模块"><a href="#Node-js之Promise模块" class="headerlink" title="Node.js之Promise模块"></a>Node.js之Promise模块</h2><p>所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。</p>
+<a id="more"></a>
 <h4 id="Promise对象有以下两个特点。"><a href="#Promise对象有以下两个特点。" class="headerlink" title="Promise对象有以下两个特点。"></a>Promise对象有以下两个特点。</h4><p>（1）对象的状态不受外界影响。Promise对象代表一个异步操作，有三种状态：Pending（进行中）、Resolved（已完成，又称 Fulfilled）和Rejected（已失败）。<strong>只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态</strong>。这也是Promise这个名字的由来，它的英语意思就是“承诺”，表示其他手段无法改变。<br>（2）一旦状态改变，就不会再变，任何时候都可以得到这个结果。<strong>Promise对象的状态改变，只有两种可能：从Pending变为Resolved和从Pending变为Rejected</strong>。只要这两种情况发生，状态就凝固了，不会再变了，会一直保持这个结果。就算改变已经发生了，你再对Promise对象添加回调函数，也会立即得到这个结果。这与事件（Event）完全不同，事件的特点是，如果你错过了它，再去监听，是得不到结果的。<br>有了Promise对象，就可以将异步操作以同步操作的流程表达出来，避免了层层嵌套的回调函数。此外，Promise对象提供统一的接口，使得控制异步操作更加容易。</p>
 <h4 id="JavaScript中是通过回调函数来处理异步逻辑的"><a href="#JavaScript中是通过回调函数来处理异步逻辑的" class="headerlink" title="JavaScript中是通过回调函数来处理异步逻辑的"></a>JavaScript中是通过回调函数来处理异步逻辑的</h4><p>比如读取文件的代码，如下所示</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">getAsync(<span class="string">"fileA.txt"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">error, result</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(error)&#123;</div><div class="line">        <span class="comment">// 取得失败时的处理 throw error;</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>

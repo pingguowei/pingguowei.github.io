@@ -90,17 +90,17 @@
 
 
 
-<meta name="description" content="ES6 中的let、const与var的区别使用var声明的变量和不使用var声明的变量的区别 使用var声明的变量声明前调用，那么该变量的值为undefined；不使用var声明的变量声明前调用直接报错Uncaught ReferenceError：xxx is not difined； 使用var声明的变量不可delete，不使用var声明则可以delete掉释放空间。（实则浏览器的垃圾回收机">
+<meta name="description" content="ECMAScript 6.0(ES6)规范总结(部分)相关背景介绍我们现在大多数人用的语法javascript 其实版本是ecmscript5,也是就es5。这个版本己经很多年了，且完美被各大浏览器所支持。所以很多学js的朋友可以一直分不清楚es5和javscript的关系。javascript是一门编程语言，那么它就会有版本，es5还是es6 就就是它的版本号。最新版es7己经在紧锣密布的进行中">
 <meta name="keywords" content="ES6,开发规范">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ES6 中的let、const与var的区别">
-<meta property="og:url" content="http://itcabin.com/2017/11/12/ES6-中的let、const与var的区别/index.html">
+<meta property="og:title" content="ECMAScript 6.0(ES6)规范总结">
+<meta property="og:url" content="http://itcabin.com/2017/11/20/ECMAScript-6-0-ES6-规范总结/index.html">
 <meta property="og:site_name" content="JOJO博客">
-<meta property="og:description" content="ES6 中的let、const与var的区别使用var声明的变量和不使用var声明的变量的区别 使用var声明的变量声明前调用，那么该变量的值为undefined；不使用var声明的变量声明前调用直接报错Uncaught ReferenceError：xxx is not difined； 使用var声明的变量不可delete，不使用var声明则可以delete掉释放空间。（实则浏览器的垃圾回收机">
-<meta property="og:updated_time" content="2017-11-12T13:09:19.515Z">
+<meta property="og:description" content="ECMAScript 6.0(ES6)规范总结(部分)相关背景介绍我们现在大多数人用的语法javascript 其实版本是ecmscript5,也是就es5。这个版本己经很多年了，且完美被各大浏览器所支持。所以很多学js的朋友可以一直分不清楚es5和javscript的关系。javascript是一门编程语言，那么它就会有版本，es5还是es6 就就是它的版本号。最新版es7己经在紧锣密布的进行中">
+<meta property="og:updated_time" content="2017-11-20T13:13:47.184Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ES6 中的let、const与var的区别">
-<meta name="twitter:description" content="ES6 中的let、const与var的区别使用var声明的变量和不使用var声明的变量的区别 使用var声明的变量声明前调用，那么该变量的值为undefined；不使用var声明的变量声明前调用直接报错Uncaught ReferenceError：xxx is not difined； 使用var声明的变量不可delete，不使用var声明则可以delete掉释放空间。（实则浏览器的垃圾回收机">
+<meta name="twitter:title" content="ECMAScript 6.0(ES6)规范总结">
+<meta name="twitter:description" content="ECMAScript 6.0(ES6)规范总结(部分)相关背景介绍我们现在大多数人用的语法javascript 其实版本是ecmscript5,也是就es5。这个版本己经很多年了，且完美被各大浏览器所支持。所以很多学js的朋友可以一直分不清楚es5和javscript的关系。javascript是一门编程语言，那么它就会有版本，es5还是es6 就就是它的版本号。最新版es7己经在紧锣密布的进行中">
 
 
 
@@ -128,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://itcabin.com/2017/11/12/ES6-中的let、const与var的区别/"/>
+  <link rel="canonical" href="http://itcabin.com/2017/11/20/ECMAScript-6-0-ES6-规范总结/"/>
 
 
 
 
 
-  <title>ES6 中的let、const与var的区别 | JOJO博客</title>
+  <title>ECMAScript 6.0(ES6)规范总结 | JOJO博客</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -307,7 +307,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/11/12/ES6-中的let、const与var的区别/">
+    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/11/20/ECMAScript-6-0-ES6-规范总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="jojo">
@@ -328,7 +328,7 @@
             
             
               
-                ES6 中的let、const与var的区别
+                ECMAScript 6.0(ES6)规范总结
               
             
           </h2>
@@ -343,8 +343,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-12T20:09:06+08:00">
-                2017-11-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-20T18:00:45+08:00">
+                2017-11-20
               </time>
             
 
@@ -385,8 +385,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/11/12/ES6-中的let、const与var的区别/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/11/12/ES6-中的let、const与var的区别/" itemprop="commentsCount"></span>
+                <a href="/2017/11/20/ECMAScript-6-0-ES6-规范总结/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/11/20/ECMAScript-6-0-ES6-规范总结/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -416,26 +416,40 @@
       
 
       
-        <h3 id="ES6-中的let、const与var的区别"><a href="#ES6-中的let、const与var的区别" class="headerlink" title="ES6 中的let、const与var的区别"></a>ES6 中的let、const与var的区别</h3><h4 id="使用var声明的变量和不使用var声明的变量的区别"><a href="#使用var声明的变量和不使用var声明的变量的区别" class="headerlink" title="使用var声明的变量和不使用var声明的变量的区别"></a>使用var声明的变量和不使用var声明的变量的区别</h4><ol>
-<li>使用var声明的变量声明前调用，那么该变量的值为undefined；不使用var声明的变量声明前调用直接报错Uncaught ReferenceError：xxx is not difined；</li>
-<li>使用var声明的变量不可delete，不使用var声明则可以delete掉释放空间。（实则浏览器的垃圾回收机制也会清理掉用var声明但是不再使用的的变量，比如某个仅执行一次的函数中被调用的某个var 声明的变量）</li>
-<li>未使用var声明的变量实际上是window的一个对象，而使用var声明的变量只是一个本地变量而已。</li>
-<li>在使用’use strict’的模式之下，不使用var 声明变量的语法是不被允许的，报错：Uncaugth SyntaxError;</li>
-</ol>
+        <h2 id="ECMAScript-6-0-ES6-规范总结-部分"><a href="#ECMAScript-6-0-ES6-规范总结-部分" class="headerlink" title="ECMAScript 6.0(ES6)规范总结(部分)"></a>ECMAScript 6.0(ES6)规范总结(部分)</h2><h3 id="相关背景介绍"><a href="#相关背景介绍" class="headerlink" title="相关背景介绍"></a>相关背景介绍</h3><p>我们现在大多数人用的语法javascript 其实版本是ecmscript5,也是就es5。这个版本己经很多年了，且完美被各大浏览器所支持。所以很多学js的朋友可以一直分不清楚es5和javscript的关系。javascript是一门编程语言，那么它就会有版本，es5还是es6 就就是它的版本号。最新版es7己经在紧锣密布的进行中，它最新的语法会让我们写代码更新的行云流水。</p>
 <a id="more"></a>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(a);   <span class="comment">//undefined，这里还涉及&lt;span style="color:#ff0000;"&gt;变量提升&lt;/span&gt;的概念  </span></div><div class="line"><span class="comment">//console.log(b);   //报错 Uncaught ReferenceError: b is not defined  </span></div><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;  </div><div class="line">b = <span class="number">2</span>;  </div><div class="line"><span class="built_in">console</span>.log(a);   <span class="comment">//1  </span></div><div class="line"><span class="built_in">console</span>.log(b);   <span class="comment">//2  </span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>.a);   <span class="comment">//undefined  </span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>.b);   <span class="comment">//2  </span></div><div class="line"><span class="keyword">delete</span> a;  </div><div class="line"><span class="keyword">delete</span> b;  </div><div class="line"><span class="built_in">console</span>.log(a);   <span class="comment">//1  </span></div><div class="line"><span class="built_in">console</span>.log(b);   <span class="comment">//报错 Uncaught ReferenceError: b is not defined,可见b在声明前使用和声明后delete再使用是一样的结果</span></div></pre></td></tr></table></figure>
-<h4 id="let，var，const声明的变量的区别："><a href="#let，var，const声明的变量的区别：" class="headerlink" title="let，var，const声明的变量的区别："></a>let，var，const声明的变量的区别：</h4><p>1.const是常量的意思，就是说只能被定义一次，且不可再改变，否则就会报错：Uncaught TypeError: Assignment to constant variable.另外声明前使用也会报错：Uncaught ReferenceError: a is not defined；看一个例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> foo=&#123;&#125;;</div><div class="line">foo.prop=<span class="number">123</span>;</div><div class="line"><span class="built_in">console</span>.log(foo.prop);  <span class="comment">// 123</span></div><div class="line">foo.prop=<span class="number">456</span>;</div><div class="line"><span class="built_in">console</span>.log(foo.prop);  <span class="comment">// 456</span></div><div class="line"><span class="keyword">const</span> foo=&#123;&#125;;           <span class="comment">// Identifier 'foo' has already been declared</span></div></pre></td></tr></table></figure>
-<p>2.var 和 let 就有意思了，let声明的变量声明前使用也会报错，这个与const一致；最重要的一点是let声明了一个块级作用域的变量在一个块的“}”结束的时候，该变量消失。例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">x,y</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> b=x;</div><div class="line">    <span class="keyword">let</span> c=y;</div><div class="line">    <span class="keyword">if</span>(<span class="literal">true</span>)&#123;</div><div class="line">        <span class="keyword">var</span> b=<span class="number">5</span>;</div><div class="line">        <span class="keyword">let</span> c=<span class="number">6</span>;</div><div class="line">        <span class="built_in">console</span>.log(b); <span class="comment">// 5</span></div><div class="line">        <span class="built_in">console</span>.log(c); <span class="comment">// 6,这里的let c在下一行'&#125;'之后消失</span></div><div class="line">    &#125;</div><div class="line">    <span class="built_in">console</span>.log(b); <span class="comment">// 5</span></div><div class="line">    <span class="built_in">console</span>.log(c); <span class="comment">// 3 这里仍然是第三行的let c;</span></div><div class="line">&#125;(<span class="number">2</span>,<span class="number">3</span>));</div></pre></td></tr></table></figure>
-<p>3.再看一个例子</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> array1=[],array2=[];</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</div><div class="line">    array1[i]=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(i);</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>;j&lt;<span class="number">10</span>;j++)&#123;</div><div class="line">    array2[j]=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(j);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">array1[<span class="number">6</span>]();    <span class="comment">// 10</span></div><div class="line">array2[<span class="number">6</span>]();    <span class="comment">// 6</span></div></pre></td></tr></table></figure>
-<p>所以说let是一个比较保守的变量。这里变量为i的for循环中，i是一个全局变量，array1[i]是一个console.log(i)的函数，而i的最终结果为10，故而每次调用array1[i],实际上都是console.log(10);而let作为仅在其代码块有效的变量，当前的j仅在本轮的循环中有效，就是说每一次循环，j其实都是一个新产生的变量。所以<strong>let变量适合用于循环体中</strong>。</p>
-<p>4.再看一个例子</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> temp=<span class="number">1</span>;</div><div class="line"><span class="keyword">if</span>(<span class="literal">true</span>)&#123;</div><div class="line">    temp=<span class="number">2</span>;     <span class="comment">//  temp is not defined,let声明的变量声明前使用也会报错</span></div><div class="line">    <span class="keyword">let</span> temp;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这个例子中tmp=2的赋值会报错，因为if中的let对tmp变量的声明，导致该tmp绑定了这个作用域，而let不会像var那样“变量提升”，所以未声明赋值会报错。<strong>ES6中明确规定：如果区块中存在let和const命令，则这个区块对这些命令声明的变量从一开始就形成了封闭做作用域，只要在声明之前做任何使用，都会报错。这在语法上称为“暂时性死区”（temporal dead zone ，简称TDZ）。</strong></p>
-<p>5.var声明的变量为全局变量，而let，const声明的变量不为全局变量，使用window访问不到，如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a=<span class="number">1</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>.a);  <span class="comment">// 1</span></div><div class="line"><span class="keyword">let</span> b=<span class="number">2</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>.b);  <span class="comment">// undefined</span></div></pre></td></tr></table></figure>
+<h3 id="babel-一个es6的解析器"><a href="#babel-一个es6的解析器" class="headerlink" title="babel 一个es6的解析器"></a>babel 一个es6的解析器</h3><p>在我们正式讲解ES6语法之前，我们得先了解下<a href="https://babeljs.io/" target="_blank" rel="external">Babel。</a></p>
+<p>Babel是一个广泛使用的ES6转码器，可以将ES6代码转为ES5代码，从而在现有环境执行。大家可以选择自己习惯的工具来使用使用Babel,我最喜欢的构建工具就是webpack。具体过程可直接在Babel官网查看：</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><h4 id="class、extends与super"><a href="#class、extends与super" class="headerlink" title="class、extends与super"></a>class、extends与super</h4><p>ES6提供了更接近传统语言的写法，引入了Class（类）这个概念。新的class写法让对象原型的写法更加清晰、更像面向对象编程的语法，也更加通俗易懂。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span></span>&#123;</div><div class="line">	<span class="keyword">constructor</span>()&#123;</div><div class="line">		<span class="keyword">this</span>.type=<span class="string">'animal'</span></div><div class="line">	&#125;</div><div class="line">	says(say)&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span>.type+<span class="string">' says '</span>+say);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> animal=<span class="keyword">new</span> Animal();</div><div class="line">animal.says(<span class="string">'hello'</span>);	<span class="comment">// animal says hello</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</div><div class="line">	<span class="keyword">constructor</span>()&#123;</div><div class="line">		<span class="keyword">super</span>();</div><div class="line">		<span class="keyword">this</span>.type=<span class="string">'cat'</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> cat=<span class="keyword">new</span> Cat();</div><div class="line">cat.says(<span class="string">'hello'</span>);	<span class="comment">// cat says hello</span></div></pre></td></tr></table></figure>
+<p>上面代码首先用<code>class</code>定义了一个“类”，可以看到里面有一个constructor方法，这就是构造方法，而this关键字则代表实例对象。简单地说，constructor内定义的方法和属性是实例对象自己的，而constructor外定义的方法和属性则是所有实例对象可以共享的。</p>
+<p><code>Class</code>之间可以通过<code>extends</code>关键字实现继承，这比ES5的通过修改原型链实现继承，要清晰和方便很多。上面定义了一个Cat类，该类通过extends关键字，继承了Animal类的所有属性和方法。</p>
+<p><code>super</code>关键字，它指代父类的实例（即父类的this对象）。子类必须在<code>constructor</code>方法中调用<code>super</code>方法，否则新建实例时会报错。这是因为子类没有自己的<code>this</code>对象，而是继承父类的this对象，然后对其进行加工。如果不调用super方法，子类就得不到this对象。</p>
+<p><code>ES6</code>的继承机制，实质是先创造父类的实例对象<code>this</code>（所以必须先调用s<code>uper</code>方法），然后再用子类的构造函数修改<code>this</code>。</p>
+<h4 id="arrow-function"><a href="#arrow-function" class="headerlink" title="arrow function"></a>arrow function</h4><p>这个恐怕是ES6最最常用的一个新特性了，用它来写function比原来的写法要简洁清晰很多:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>&#123; <span class="keyword">return</span> i+<span class="number">1</span>;&#125;	<span class="comment">// ES5</span></div><div class="line">(i)=&gt;i+<span class="number">1</span>		<span class="comment">// ES6</span></div></pre></td></tr></table></figure>
+<p>如果方程比较复杂，则需要用<code>{}</code>把代码包起来：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params">x,y</span>)</span>&#123;</div><div class="line">	x++;</div><div class="line">	y--;</div><div class="line">	<span class="keyword">return</span> x+y;</div><div class="line">&#125;	</div><div class="line">(x,y)=&gt;&#123;x++;y--;<span class="keyword">return</span> x+y&#125;</div></pre></td></tr></table></figure>
+<p>除了看上去更简洁以外，<code>arrow function</code>还有一项超级无敌的功能！<br>长期以来，<code>JavaScript</code>语言的<code>this</code>对象一直是一个令人头痛的问题，在对象方法中使用<code>this</code>，必须非常小心。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span></span>&#123;</div><div class="line">	<span class="keyword">constructor</span>()&#123;</div><div class="line">		<span class="keyword">this</span>.type=<span class="string">'animal'</span>;</div><div class="line">	&#125;</div><div class="line">	says(say)&#123;</div><div class="line">		setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			<span class="built_in">console</span>.log(<span class="keyword">this</span>.type+<span class="string">' says '</span>+say);</div><div class="line">		&#125;,<span class="number">1000</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> animal=<span class="keyword">new</span> Animal();</div><div class="line">animal.says(<span class="string">'hi'</span>);		<span class="comment">// undefined says hi</span></div></pre></td></tr></table></figure>
+<p>运行上面的代码会报错，这是因为<code>setTimeout</code>中的<code>this</code>指向的是全局对象。所以为了让它能够正确的运行，传统的解决方法有两种：</p>
+<h5 id="1-第一种是将this传给self-再用self来指代this"><a href="#1-第一种是将this传给self-再用self来指代this" class="headerlink" title="1.第一种是将this传给self,再用self来指代this"></a>1.第一种是将this传给self,再用self来指代this</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">says(say)&#123;</div><div class="line">		<span class="keyword">var</span> self = <span class="keyword">this</span>;</div><div class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(self.type + <span class="string">' says '</span> + say)</div><div class="line">        &#125;, <span class="number">1000</span>)</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h5 id="2-第二种方法是用bind-this-即"><a href="#2-第二种方法是用bind-this-即" class="headerlink" title="2.第二种方法是用bind(this),即"></a>2.第二种方法是用bind(this),即</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">says(say)&#123;</div><div class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.type + <span class="string">' says '</span> + say)</div><div class="line">        &#125;.bind(<span class="keyword">this</span>), <span class="number">1000</span>)</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>但现在我们有了箭头函数，就不需要这么麻烦了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</div><div class="line">    <span class="keyword">constructor</span>()&#123;</div><div class="line">        <span class="keyword">this</span>.type = <span class="string">'animal'</span></div><div class="line">    &#125;</div><div class="line">    says(say)&#123;</div><div class="line">        setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</div><div class="line">			<span class="built_in">console</span>.log(<span class="keyword">this</span>.type+<span class="string">' says '</span>+say);</div><div class="line">		&#125;,<span class="number">1000</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"> <span class="keyword">var</span> animal = <span class="keyword">new</span> Animal();</div><div class="line"> animal.says(<span class="string">'hi'</span>);  <span class="comment">// animal says hi</span></div></pre></td></tr></table></figure>
+<p>当我们使用箭头函数时，函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象。并不是因为箭头函数内部有绑定this的机制，<strong>实际原因是箭头函数根本没有自己的this，它的this是继承外面的，因此内部的this就是外层代码块的this</strong>。</p>
+<h4 id="template-string"><a href="#template-string" class="headerlink" title="template string"></a>template string</h4><p>这个东西也是非常有用，当我们要插入大段的html内容到文档中时，传统的写法非常麻烦，所以之前我们通常会引用一些模板工具库，比如mustache等等。</p>
+<p>先看下面一段代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"#result"</span>).append(</div><div class="line">	<span class="string">"There are &lt;b&gt;"</span> + basket.count + <span class="string">"&lt;/b&gt; "</span> +</div><div class="line">	<span class="string">"items in your basket, "</span> +</div><div class="line">	<span class="string">"&lt;em&gt;"</span> + basket.onSale +</div><div class="line">	<span class="string">"&lt;/em&gt; are on sale!"</span></div><div class="line">  );</div></pre></td></tr></table></figure>
+<p>我们要用一堆的’+’号来连接文本与变量，而使用ES6的新特性模板字符串``后，我们可以直接这么来写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"#result"</span>).append(<span class="string">`</span></div><div class="line">  There are &lt;b&gt;<span class="subst">$&#123;basket.count&#125;</span>&lt;/b&gt; items</div><div class="line">   in your basket, &lt;em&gt;<span class="subst">$&#123;basket.onSale&#125;</span>&lt;/em&gt;</div><div class="line">  are on sale!</div><div class="line">`);</div></pre></td></tr></table></figure>
+<h4 id="destructuring"><a href="#destructuring" class="headerlink" title="destructuring"></a>destructuring</h4><p>ES6允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构（Destructuring）。</p>
+<p>看下面的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> cat = <span class="string">'ken'</span>;</div><div class="line"><span class="keyword">let</span> dog = <span class="string">'lili'</span>;</div><div class="line"><span class="keyword">let</span> zoo = &#123;<span class="attr">cat</span>: cat, <span class="attr">dog</span>: dog&#125;;</div><div class="line"><span class="built_in">console</span>.log(zoo);  <span class="comment">// Object &#123;cat: "ken", dog: "lili"&#125;</span></div></pre></td></tr></table></figure>
+<p>用ES6完全可以像下面这么写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> cat = <span class="string">'ken'</span></div><div class="line"><span class="keyword">let</span> dog = <span class="string">'lili'</span></div><div class="line"><span class="keyword">let</span> zoo = &#123;cat, dog&#125;</div><div class="line"><span class="built_in">console</span>.log(zoo)  <span class="comment">// Object &#123;cat: "ken", dog: "lili"&#125;</span></div></pre></td></tr></table></figure>
+<p>反过来可以这么写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> dog = &#123;<span class="attr">type</span>: <span class="string">'animal'</span>, <span class="attr">many</span>: <span class="number">2</span>&#125;</div><div class="line"><span class="keyword">let</span> &#123; type, many&#125; = dog</div><div class="line"><span class="built_in">console</span>.log(type, many)   <span class="comment">// animal 2</span></div></pre></td></tr></table></figure>
 
       
     </div>
@@ -464,7 +478,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://itcabin.com/2017/11/12/ES6-中的let、const与var的区别/" title="ES6 中的let、const与var的区别">http://itcabin.com/2017/11/12/ES6-中的let、const与var的区别/</a>
+      <a href="http://itcabin.com/2017/11/20/ECMAScript-6-0-ES6-规范总结/" title="ECMAScript 6.0(ES6)规范总结">http://itcabin.com/2017/11/20/ECMAScript-6-0-ES6-规范总结/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -495,18 +509,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/20/ECMAScript-6-0-ES6-规范总结/" rel="next" title="ECMAScript 6.0(ES6)规范总结">
-                <i class="fa fa-chevron-left"></i> ECMAScript 6.0(ES6)规范总结
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/11/09/Koa2框架开发记录/" rel="prev" title="Koa2框架开发记录">
-                Koa2框架开发记录 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/11/12/ES6-中的let、const与var的区别/" rel="prev" title="ES6 中的let、const与var的区别">
+                ES6 中的let、const与var的区别 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -676,7 +686,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ES6-中的let、const与var的区别"><span class="nav-number">1.</span> <span class="nav-text">ES6 中的let、const与var的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用var声明的变量和不使用var声明的变量的区别"><span class="nav-number">1.1.</span> <span class="nav-text">使用var声明的变量和不使用var声明的变量的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#let，var，const声明的变量的区别："><span class="nav-number">1.2.</span> <span class="nav-text">let，var，const声明的变量的区别：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ECMAScript-6-0-ES6-规范总结-部分"><span class="nav-number">1.</span> <span class="nav-text">ECMAScript 6.0(ES6)规范总结(部分)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#相关背景介绍"><span class="nav-number">1.1.</span> <span class="nav-text">相关背景介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#babel-一个es6的解析器"><span class="nav-number">1.2.</span> <span class="nav-text">babel 一个es6的解析器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">1.3.</span> <span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#class、extends与super"><span class="nav-number">1.3.1.</span> <span class="nav-text">class、extends与super</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#arrow-function"><span class="nav-number">1.3.2.</span> <span class="nav-text">arrow function</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-第一种是将this传给self-再用self来指代this"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">1.第一种是将this传给self,再用self来指代this</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-第二种方法是用bind-this-即"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">2.第二种方法是用bind(this),即</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#template-string"><span class="nav-number">1.3.3.</span> <span class="nav-text">template string</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#destructuring"><span class="nav-number">1.3.4.</span> <span class="nav-text">destructuring</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

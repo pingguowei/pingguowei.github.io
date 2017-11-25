@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Node.js基础学习," />
+  <meta name="keywords" content="Node.js,Sequelize," />
 
 
 
@@ -90,20 +90,17 @@
 
 
 
-<meta name="description" content="Node.js简介简单的说 Node.js 就是运行在服务端的 JavaScript。 Node.js 是一个基于Chrome JavaScript 运行时建立的一个平台。 Node.js是一个事件驱动I/O服务端JavaScript环境，基于Google的V8引擎，V8引擎执行Javascript的速度非常快，性能非常好。">
-<meta name="keywords" content="Node.js基础学习">
+<meta name="description" content="Sequelize入门使用​    Sequelize是一个基于promise的关系型数据库ORM框架，这个库完全采用JavaScript开发并且能够用在Node.JS环境中，易于使用，支持多SQL方言(dialect)，。它当前支持MySQL,、MariaDB、SQLite、PostgreSQL、Sql Server 数据库。 ​    因为是基于promise规范，在调用后的处理上不再是cal">
+<meta name="keywords" content="Node.js,Sequelize">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Node.js基础学习01--创建第一个应用">
-<meta property="og:url" content="http://itcabin.com/2017/05/23/Node-js基础学习01-创建第一个应用/index.html">
+<meta property="og:title" content="Sequelize入门使用">
+<meta property="og:url" content="http://itcabin.com/2017/11/25/Sequelize入门使用/index.html">
 <meta property="og:site_name" content="JOJO博客">
-<meta property="og:description" content="Node.js简介简单的说 Node.js 就是运行在服务端的 JavaScript。 Node.js 是一个基于Chrome JavaScript 运行时建立的一个平台。 Node.js是一个事件驱动I/O服务端JavaScript环境，基于Google的V8引擎，V8引擎执行Javascript的速度非常快，性能非常好。">
-<meta property="og:image" content="http://itcabin.com/2017/05/23/Node-js基础学习01-创建第一个应用/01.PNG">
-<meta property="og:image" content="http://itcabin.com/2017/05/23/Node-js基础学习01-创建第一个应用/02.PNG">
-<meta property="og:updated_time" content="2017-05-23T14:53:11.045Z">
+<meta property="og:description" content="Sequelize入门使用​    Sequelize是一个基于promise的关系型数据库ORM框架，这个库完全采用JavaScript开发并且能够用在Node.JS环境中，易于使用，支持多SQL方言(dialect)，。它当前支持MySQL,、MariaDB、SQLite、PostgreSQL、Sql Server 数据库。 ​    因为是基于promise规范，在调用后的处理上不再是cal">
+<meta property="og:updated_time" content="2017-11-25T03:06:10.010Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Node.js基础学习01--创建第一个应用">
-<meta name="twitter:description" content="Node.js简介简单的说 Node.js 就是运行在服务端的 JavaScript。 Node.js 是一个基于Chrome JavaScript 运行时建立的一个平台。 Node.js是一个事件驱动I/O服务端JavaScript环境，基于Google的V8引擎，V8引擎执行Javascript的速度非常快，性能非常好。">
-<meta name="twitter:image" content="http://itcabin.com/2017/05/23/Node-js基础学习01-创建第一个应用/01.PNG">
+<meta name="twitter:title" content="Sequelize入门使用">
+<meta name="twitter:description" content="Sequelize入门使用​    Sequelize是一个基于promise的关系型数据库ORM框架，这个库完全采用JavaScript开发并且能够用在Node.JS环境中，易于使用，支持多SQL方言(dialect)，。它当前支持MySQL,、MariaDB、SQLite、PostgreSQL、Sql Server 数据库。 ​    因为是基于promise规范，在调用后的处理上不再是cal">
 
 
 
@@ -131,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://itcabin.com/2017/05/23/Node-js基础学习01-创建第一个应用/"/>
+  <link rel="canonical" href="http://itcabin.com/2017/11/25/Sequelize入门使用/"/>
 
 
 
 
 
-  <title>Node.js基础学习01--创建第一个应用 | JOJO博客</title>
+  <title>Sequelize入门使用 | JOJO博客</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -310,7 +307,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/05/23/Node-js基础学习01-创建第一个应用/">
+    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/11/25/Sequelize入门使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="jojo">
@@ -331,7 +328,7 @@
             
             
               
-                Node.js基础学习01--创建第一个应用
+                Sequelize入门使用
               
             
           </h2>
@@ -346,8 +343,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-23T22:32:57+08:00">
-                2017-05-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-25T09:45:02+08:00">
+                2017-11-25
               </time>
             
 
@@ -388,8 +385,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/05/23/Node-js基础学习01-创建第一个应用/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/05/23/Node-js基础学习01-创建第一个应用/" itemprop="commentsCount"></span>
+                <a href="/2017/11/25/Sequelize入门使用/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/11/25/Sequelize入门使用/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -419,33 +416,35 @@
       
 
       
-        <h3 id="Node-js简介"><a href="#Node-js简介" class="headerlink" title="Node.js简介"></a>Node.js简介</h3><p>简单的说 Node.js 就是运行在服务端的 JavaScript。</p>
-<p>Node.js 是一个基于Chrome JavaScript 运行时建立的一个平台。</p>
-<p>Node.js是一个事件驱动I/O服务端JavaScript环境，基于Google的V8引擎，V8引擎执行Javascript的速度非常快，性能非常好。</p>
+        <h2 id="Sequelize入门使用"><a href="#Sequelize入门使用" class="headerlink" title="Sequelize入门使用"></a>Sequelize入门使用</h2><p>​    Sequelize是一个基于promise的关系型数据库ORM框架，这个库完全采用JavaScript开发并且能够用在Node.JS环境中，易于使用，支持多SQL方言(dialect)，。它当前支持MySQL,、MariaDB、SQLite、PostgreSQL、Sql Server 数据库。</p>
+<p>​    因为是基于promise规范，在调用后的处理上不再是callback方式，而是统一的链式调用方式，调用直观，易读。<strong>本文以Sequelize操作SQLSERVER数据库为例</strong>。</p>
 <a id="more"></a>
-<h3 id="Node-js-创建第一个应用"><a href="#Node-js-创建第一个应用" class="headerlink" title="Node.js 创建第一个应用"></a>Node.js 创建第一个应用</h3><p>在我们创建 Node.js 第一个 “Hello, World!” 应用前，让我们先了解下 Node.js 应用是由哪几部分组成的：</p>
-<ol>
-<li><strong>引入 required 模块：</strong>我们可以使用 <strong>require</strong> 指令来载入 Node.js 模块。</li>
-<li><strong>创建服务器：</strong>服务器可以监听客户端的请求，类似于 Apache 、Nginx 等 HTTP 服务器。</li>
-<li><strong>接收请求与响应请求</strong> 服务器很容易创建，客户端可以使用浏览器或终端发送 HTTP 请求，服务器接收请求后返回响应数据。</li>
-</ol>
-<h3 id="创建-Node-js-应用"><a href="#创建-Node-js-应用" class="headerlink" title="创建 Node.js 应用"></a>创建 Node.js 应用</h3><h4 id="步骤一、引入-required-模块"><a href="#步骤一、引入-required-模块" class="headerlink" title="步骤一、引入 required 模块"></a>步骤一、引入 required 模块</h4><p>我们使用 <strong>require</strong> 指令来载入 http 模块，并将实例化的 HTTP 赋值给变量 http，实例如下:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</div></pre></td></tr></table></figure>
-<h4 id="步骤二、创建服务器"><a href="#步骤二、创建服务器" class="headerlink" title="步骤二、创建服务器"></a>步骤二、创建服务器</h4><p>接下来我们使用 http.createServer() 方法创建服务器，并使用 listen 方法绑定 8888 端口。 函数通过 request, response 参数来接收和响应数据。</p>
-<p>实例如下，在你项目的根目录下创建一个叫 server.js 的文件，并写入以下代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http=<span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"></div><div class="line">http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">request,response</span>)</span>&#123;</div><div class="line">	<span class="comment">// 发送HTTP头部</span></div><div class="line">	<span class="comment">// HTTP 状态值：200：ok</span></div><div class="line">	<span class="comment">// 内容类型：text/plain</span></div><div class="line">	response.writeHead(<span class="number">200</span>,&#123;<span class="string">'Content-Type'</span>:<span class="string">'text/plain'</span>&#125;);</div><div class="line">	<span class="comment">// 发送响应数据"Hello World\n"</span></div><div class="line">	response.end(<span class="string">'Hello World\n'</span>);</div><div class="line">&#125;).listen(<span class="number">8888</span>);</div><div class="line"></div><div class="line"><span class="comment">// 终端打印信息如下</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'Server running at http://127.0.0.1:8888/'</span>)</div></pre></td></tr></table></figure>
-<p>以上代码我们完成了一个可以工作的 HTTP 服务器。</p>
-<p>使用 <strong>node</strong> 命令执行以上的代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">node server.js</div><div class="line">Server running at http:<span class="comment">//127.0.0.1:8888/</span></div></pre></td></tr></table></figure>
-<p><img src="/2017/05/23/Node-js基础学习01-创建第一个应用/01.PNG" alt="img"></p>
-<p>接下来，打开浏览器访问 <a href="http://127.0.0.1:8888/，你会看到一个写着" target="_blank" rel="external">http://127.0.0.1:8888/，你会看到一个写着</a> “Hello World”的网页。</p>
-<p><img src="/2017/05/23/Node-js基础学习01-创建第一个应用/02.PNG" alt="img"></p>
-<p><strong>分析Node.js 的 HTTP 服务器：</strong></p>
-<ul>
-<li>第一行请求（require）Node.js 自带的 http 模块，并且把它赋值给 http 变量。</li>
-<li>接下来我们调用 http 模块提供的函数： createServer 。这个函数会返回 一个对象，这个对象有一个叫做 listen 的方法，这个方法有一个数值参数， 指定这个 HTTP 服务器监听的端口号。</li>
-</ul>
-
+<h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><p>在工程文件夹下运行以下命令安装Sequelize模块，操作SQLSERVER还需要安装tedious模块</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm install sequelize --save</div><div class="line">npm install tedious --save</div></pre></td></tr></table></figure>
+<h3 id="设置连接"><a href="#设置连接" class="headerlink" title="设置连接"></a>设置连接</h3><p>首先引入sequelize库</p>
+<p>第一个参数’lwp’是数据库名</p>
+<p>第二个参数’sa’是登录用户名</p>
+<p>第三个参数’123456’是登录用户对应的密码</p>
+<p>第四个参数：</p>
+<p>host:数据库主机地址</p>
+<p>dialect:’mysql’|’sqlite’|’postgres’|’mssql’</p>
+<p>pool:数据库连接池设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var Sequelize = require(&apos;sequelize&apos;);</div><div class="line"></div><div class="line">var sequelize=new Sequelize(&apos;lwp&apos;,&apos;sa&apos;,&apos;123456&apos;,&#123;</div><div class="line">	host:&apos;127.0.0.1&apos;,</div><div class="line">    dialect:&apos;mssql&apos;,</div><div class="line">    </div><div class="line">    pool: &#123;</div><div class="line">      max: 5,</div><div class="line">      min: 0,</div><div class="line">      acquire: 30000,</div><div class="line">      idle: 10000</div><div class="line">  	&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h3><p>使用<strong>.authenticate()</strong>方法测试是否连接成功</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sequelize</div><div class="line">    .authenticate()</div><div class="line">    .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'Connection has been established successfully.'</span>);</div><div class="line">    &#125;)</div><div class="line">    .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</div><div class="line">        <span class="built_in">console</span>.error(<span class="string">'Unable to connect to the database:'</span>, err);</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+<h3 id="创建表对应的模型"><a href="#创建表对应的模型" class="headerlink" title="创建表对应的模型"></a>创建表对应的模型</h3><p>映射：可以与已存在的表结构完全对应，也可以选择需要的属性列</p>
+<p>sequelize.define的第三个参数是一个json对象，可以在里面设置tableName；sequelize默认会把define方法定义的单数表名变成复数的。设置freezeTableName: true则不会加上’s’；sequelize默认会加上时间戳，设置timestamps: false则没有</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Teacher=sequelize.define(<span class="string">'Teacher'</span>,&#123;</div><div class="line">    <span class="attr">Id</span>:&#123;</div><div class="line">        <span class="attr">type</span>: Sequelize.DataTypes.UUID,</div><div class="line">        <span class="attr">primaryKey</span>:<span class="literal">true</span>,</div><div class="line">        <span class="attr">defaultValue</span>: Sequelize.DataTypes.UUIDV4,</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">Name</span>:&#123;</div><div class="line">        <span class="attr">type</span>:Sequelize.STRING,</div><div class="line">        <span class="attr">allowNull</span>:<span class="literal">false</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">Gender</span>:&#123;</div><div class="line">        <span class="attr">type</span>:Sequelize.INTEGER,</div><div class="line">        <span class="attr">allowNull</span>:<span class="literal">false</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">Age</span>:&#123;</div><div class="line">        <span class="attr">type</span>:Sequelize.INTEGER,</div><div class="line">        <span class="attr">allowNull</span>:<span class="literal">false</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">Salary</span>:&#123;</div><div class="line">        <span class="attr">type</span>:Sequelize.DOUBLE,</div><div class="line">        <span class="attr">allowNull</span>:<span class="literal">false</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">Birthday</span>:&#123;</div><div class="line">        <span class="attr">type</span>: Sequelize.DataTypes.DATE,</div><div class="line">        <span class="attr">allowNull</span>: <span class="literal">false</span>,</div><div class="line">        <span class="attr">defaultValue</span>: Sequelize.DataTypes.NOW</div><div class="line">    &#125;</div><div class="line">&#125;,&#123;</div><div class="line">    <span class="attr">autoIncrement</span>:<span class="literal">false</span>,</div><div class="line">    <span class="attr">charset</span>:<span class="string">'utf8'</span>,</div><div class="line">    <span class="attr">collate</span>: <span class="string">'utf8_general_ci'</span>,</div><div class="line">    <span class="attr">freezeTableName</span>:<span class="literal">true</span>,</div><div class="line">    <span class="attr">timestamps</span>: <span class="literal">false</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="同步模型导数据库"><a href="#同步模型导数据库" class="headerlink" title="同步模型导数据库"></a>同步模型导数据库</h3><p>如果数据库中已经存在该模型对应的表，则不会进行同步操作，如果想要强制进行数据结构的同步，可以通过force参数指定</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Teacher.sync(&#123;force: true&#125;);</div></pre></td></tr></table></figure>
+<h3 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Teacher.create(&#123;</div><div class="line">    <span class="attr">Name</span>:<span class="string">'dema'</span>,</div><div class="line">    <span class="attr">Gender</span>:<span class="number">1</span>,</div><div class="line">    <span class="attr">Age</span>:<span class="number">18</span>,</div><div class="line">    <span class="attr">Salary</span>:<span class="number">3000</span></div><div class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(result);</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'添加成功...'</span>);</div><div class="line">&#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(err.message);</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'添加失败...'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h3><p>调用模型对象的findAll方法进行查询操作，在参数中可以制定where条件。</p>
+<p>where条件甚至可以支持数据库自身特有的函数。<strong>具体参考：<a href="http://sequelize.readthedocs.io/en/latest/docs/querying/&gt;" target="_blank" rel="external">http://sequelize.readthedocs.io/en/latest/docs/querying/&gt;</a></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Teacher.findAll(&#123;</div><div class="line">    where:&#123;</div><div class="line">        Name:&#123;</div><div class="line">            $like:&apos;sa%&apos;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;).then(function(result)&#123;</div><div class="line">    console.log(&apos;query all teachers&apos;);</div><div class="line">    for(var i=0,teacher;teacher=result[i++];)&#123;</div><div class="line">        console.log(&apos;Name:&apos;+teacher.Name+&apos;,Age:&apos;+teacher.Age+&apos;,Salary:&apos;+teacher.Salary);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h3><p>调用模型对象的update方法进行更新操作，在第一个参数中指定更新的字段和值，在第二个参数中指定条件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Teacher.update(&#123;</div><div class="line">    <span class="attr">Name</span>:<span class="string">'newName'</span>,</div><div class="line">    <span class="attr">Age</span>:<span class="number">28</span>,</div><div class="line">    <span class="attr">Salary</span>:<span class="number">3000</span></div><div class="line">&#125;,&#123;</div><div class="line">    <span class="attr">where</span>:&#123;</div><div class="line">        <span class="attr">Name</span>:<span class="string">'dema'</span></div><div class="line">    &#125;</div><div class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'updated success...'</span>);   </div><div class="line">    <span class="built_in">console</span>.log(result); </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="删除记录"><a href="#删除记录" class="headerlink" title="删除记录"></a>删除记录</h3><p>调用模型对象的destroy方法进行删除操作，在参数中指定删除条件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Teacher.destroy(&#123;</div><div class="line">    <span class="attr">where</span>:&#123;</div><div class="line">        <span class="attr">Name</span>:&#123;</div><div class="line">            <span class="attr">$like</span>:<span class="string">'sa%'</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'delete success'</span>);</div><div class="line">    <span class="built_in">console</span>.log(result);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -473,7 +472,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://itcabin.com/2017/05/23/Node-js基础学习01-创建第一个应用/" title="Node.js基础学习01--创建第一个应用">http://itcabin.com/2017/05/23/Node-js基础学习01-创建第一个应用/</a>
+      <a href="http://itcabin.com/2017/11/25/Sequelize入门使用/" title="Sequelize入门使用">http://itcabin.com/2017/11/25/Sequelize入门使用/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -489,7 +488,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Node-js基础学习/" rel="tag"># Node.js基础学习</a>
+            <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+          
+            <a href="/tags/Sequelize/" rel="tag"># Sequelize</a>
           
         </div>
       
@@ -502,18 +503,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/24/Node-js基础学习02-回调函数、事件循环/" rel="next" title="Node.js基础学习02--回调函数、事件循环">
-                <i class="fa fa-chevron-left"></i> Node.js基础学习02--回调函数、事件循环
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/22/Node-js安装及配置/" rel="prev" title="Node.js安装及配置">
-                Node.js安装及配置 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/11/20/ECMAScript-6-0-ES6-规范总结/" rel="prev" title="ECMAScript 6.0(ES6)规范总结">
+                ECMAScript 6.0(ES6)规范总结 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -683,7 +680,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-js简介"><span class="nav-number">1.</span> <span class="nav-text">Node.js简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-js-创建第一个应用"><span class="nav-number">2.</span> <span class="nav-text">Node.js 创建第一个应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建-Node-js-应用"><span class="nav-number">3.</span> <span class="nav-text">创建 Node.js 应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤一、引入-required-模块"><span class="nav-number">3.1.</span> <span class="nav-text">步骤一、引入 required 模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤二、创建服务器"><span class="nav-number">3.2.</span> <span class="nav-text">步骤二、创建服务器</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sequelize入门使用"><span class="nav-number">1.</span> <span class="nav-text">Sequelize入门使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装依赖"><span class="nav-number">1.1.</span> <span class="nav-text">安装依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置连接"><span class="nav-number">1.2.</span> <span class="nav-text">设置连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试连接"><span class="nav-number">1.3.</span> <span class="nav-text">测试连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建表对应的模型"><span class="nav-number">1.4.</span> <span class="nav-text">创建表对应的模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同步模型导数据库"><span class="nav-number">1.5.</span> <span class="nav-text">同步模型导数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入数据"><span class="nav-number">1.6.</span> <span class="nav-text">插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询数据"><span class="nav-number">1.7.</span> <span class="nav-text">查询数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改数据"><span class="nav-number">1.8.</span> <span class="nav-text">修改数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除记录"><span class="nav-number">1.9.</span> <span class="nav-text">删除记录</span></a></li></ol></li></ol></div>
             
 
           </div>

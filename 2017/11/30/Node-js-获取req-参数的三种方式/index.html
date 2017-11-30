@@ -90,17 +90,17 @@
 
 
 
-<meta name="description" content="Node.js 获取req 参数的三种方式express获取参数有三种方法：官网介绍如下  Checks route params (req,params), ex: /user/:id Checks query string params (req.query), ex: ?id=12 Checks urlencoded body params (req,body), ex: id=  第一种情">
+<meta name="description" content="Node.js 获取req 参数的三种方式express获取参数有三种方法：官网介绍如下  Checks route params (req,params), ex: /user/:id Checks query string params (req.query), ex: ?id=12 Checks urlencoded body params (req,body), ex: id=">
 <meta name="keywords" content="Node.js,req">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Node.js 获取req 参数的三种方式">
 <meta property="og:url" content="http://itcabin.com/2017/11/30/Node-js-获取req-参数的三种方式/index.html">
 <meta property="og:site_name" content="JOJO博客">
-<meta property="og:description" content="Node.js 获取req 参数的三种方式express获取参数有三种方法：官网介绍如下  Checks route params (req,params), ex: /user/:id Checks query string params (req.query), ex: ?id=12 Checks urlencoded body params (req,body), ex: id=  第一种情">
-<meta property="og:updated_time" content="2017-11-30T14:20:26.509Z">
+<meta property="og:description" content="Node.js 获取req 参数的三种方式express获取参数有三种方法：官网介绍如下  Checks route params (req,params), ex: /user/:id Checks query string params (req.query), ex: ?id=12 Checks urlencoded body params (req,body), ex: id=">
+<meta property="og:updated_time" content="2017-11-30T14:25:45.408Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Node.js 获取req 参数的三种方式">
-<meta name="twitter:description" content="Node.js 获取req 参数的三种方式express获取参数有三种方法：官网介绍如下  Checks route params (req,params), ex: /user/:id Checks query string params (req.query), ex: ?id=12 Checks urlencoded body params (req,body), ex: id=  第一种情">
+<meta name="twitter:description" content="Node.js 获取req 参数的三种方式express获取参数有三种方法：官网介绍如下  Checks route params (req,params), ex: /user/:id Checks query string params (req.query), ex: ?id=12 Checks urlencoded body params (req,body), ex: id=">
 
 
 
@@ -422,6 +422,7 @@
 <li>Checks query string params (<strong>req.query</strong>), ex: ?id=12</li>
 <li>Checks urlencoded body params (<strong>req,body</strong>), ex: id=</li>
 </ul>
+<a id="more"></a>
 <h3 id="第一种情况：req-params"><a href="#第一种情况：req-params" class="headerlink" title="第一种情况：req.params"></a>第一种情况：req.params</h3><p>浏览器url：<a href="http://127.0.0.1:9002/server/info/deleteServiceById/6b2f864f-05dd-4b2b-8743-ebed1537eb2f，服务器端代码" target="_blank" rel="external">http://127.0.0.1:9002/server/info/deleteServiceById/6b2f864f-05dd-4b2b-8743-ebed1537eb2f，服务器端代码</a></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">* 通过服务ID删除服务</div><div class="line">*/</div><div class="line">router.route(<span class="string">'/info/deleteServiceById/:id'</span>)</div><div class="line">  .get(serverManageController.deleteServiceById);</div></pre></td></tr></table></figure>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">deleteServiceById:<span class="function">(<span class="params">req,res,next</span>)=&gt;</span>&#123;</div><div class="line">	<span class="keyword">const</span> params = req.params;			<span class="comment">// 通过req.params拿到url中的参数</span></div><div class="line">	<span class="keyword">return</span> <span class="keyword">new</span> promise(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</div><div class="line">		<span class="keyword">if</span>(params.id)&#123;</div><div class="line">			<span class="keyword">return</span> resolve(params);</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			reject(statusInfo.Parameter_Error);</div><div class="line">		&#125;</div><div class="line">	&#125;).then(<span class="function"><span class="params">data</span>=&gt;</span>&#123;</div><div class="line">		<span class="keyword">return</span> serverManegeModule.deleteServiceById(data);</div><div class="line">	&#125;).then(<span class="function"><span class="params">data</span>=&gt;</span>&#123;</div><div class="line">		res.sendData(data);</div><div class="line">	&#125;).catch(<span class="function"><span class="params">err</span>=&gt;</span>&#123;</div><div class="line">		next(err,req,res);</div><div class="line">	&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>

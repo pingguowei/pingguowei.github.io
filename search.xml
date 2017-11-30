@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[JOJO音乐收藏]]></title>
+    <url>%2F2017%2F11%2F30%2FJOJO%E9%9F%B3%E4%B9%90%E6%94%B6%E8%97%8F%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
     <title><![CDATA[Sequelize入门使用]]></title>
     <url>%2F2017%2F11%2F25%2FSequelize%E5%85%A5%E9%97%A8%E4%BD%BF%E7%94%A8%2F</url>
     <content type="text"><![CDATA[Sequelize入门使用​ Sequelize是一个基于promise的关系型数据库ORM框架，这个库完全采用JavaScript开发并且能够用在Node.JS环境中，易于使用，支持多SQL方言(dialect)，。它当前支持MySQL,、MariaDB、SQLite、PostgreSQL、Sql Server 数据库。 ​ 因为是基于promise规范，在调用后的处理上不再是callback方式，而是统一的链式调用方式，调用直观，易读。本文以Sequelize操作SQLSERVER数据库为例。 安装依赖在工程文件夹下运行以下命令安装Sequelize模块，操作SQLSERVER还需要安装tedious模块 12npm install sequelize --savenpm install tedious --save 设置连接首先引入sequelize库 第一个参数’lwp’是数据库名 第二个参数’sa’是登录用户名 第三个参数’123456’是登录用户对应的密码 第四个参数： host:数据库主机地址 dialect:’mysql’|’sqlite’|’postgres’|’mssql’ pool:数据库连接池设置 12345678910111213var Sequelize = require(&apos;sequelize&apos;);var sequelize=new Sequelize(&apos;lwp&apos;,&apos;sa&apos;,&apos;123456&apos;,&#123; host:&apos;127.0.0.1&apos;, dialect:&apos;mssql&apos;, pool: &#123; max: 5, min: 0, acquire: 30000, idle: 10000 &#125;&#125;); 测试连接使用.authenticate()方法测试是否连接成功 12345678sequelize .authenticate() .then(() =&gt; &#123; console.log('Connection has been established successfully.'); &#125;) .catch(err =&gt; &#123; console.error('Unable to connect to the database:', err); &#125;); 创建表对应的模型映射：可以与已存在的表结构完全对应，也可以选择需要的属性列 sequelize.define的第三个参数是一个json对象，可以在里面设置tableName；sequelize默认会把define方法定义的单数表名变成复数的。设置freezeTableName: true则不会加上’s’；sequelize默认会加上时间戳，设置timestamps: false则没有 12345678910111213141516171819202122232425262728293031323334var Teacher=sequelize.define('Teacher',&#123; Id:&#123; type: Sequelize.DataTypes.UUID, primaryKey:true, defaultValue: Sequelize.DataTypes.UUIDV4, &#125;, Name:&#123; type:Sequelize.STRING, allowNull:false &#125;, Gender:&#123; type:Sequelize.INTEGER, allowNull:false &#125;, Age:&#123; type:Sequelize.INTEGER, allowNull:false &#125;, Salary:&#123; type:Sequelize.DOUBLE, allowNull:false &#125;, Birthday:&#123; type: Sequelize.DataTypes.DATE, allowNull: false, defaultValue: Sequelize.DataTypes.NOW &#125;&#125;,&#123; autoIncrement:false, charset:'utf8', collate: 'utf8_general_ci', freezeTableName:true, timestamps: false&#125;); 同步模型导数据库如果数据库中已经存在该模型对应的表，则不会进行同步操作，如果想要强制进行数据结构的同步，可以通过force参数指定 1Teacher.sync(&#123;force: true&#125;); 插入数据123456789101112Teacher.create(&#123; Name:'dema', Gender:1, Age:18, Salary:3000&#125;).then(function(result)&#123; console.log(result); console.log('添加成功...');&#125;).catch(function(err)&#123; console.log(err.message); console.log('添加失败...');&#125;); 查询数据调用模型对象的findAll方法进行查询操作，在参数中可以制定where条件。 where条件甚至可以支持数据库自身特有的函数。具体参考：http://sequelize.readthedocs.io/en/latest/docs/querying/&gt; 123456789101112Teacher.findAll(&#123; where:&#123; Name:&#123; $like:&apos;sa%&apos; &#125; &#125;&#125;).then(function(result)&#123; console.log(&apos;query all teachers&apos;); for(var i=0,teacher;teacher=result[i++];)&#123; console.log(&apos;Name:&apos;+teacher.Name+&apos;,Age:&apos;+teacher.Age+&apos;,Salary:&apos;+teacher.Salary); &#125;&#125;); 修改数据调用模型对象的update方法进行更新操作，在第一个参数中指定更新的字段和值，在第二个参数中指定条件。 123456789101112Teacher.update(&#123; Name:'newName', Age:28, Salary:3000&#125;,&#123; where:&#123; Name:'dema' &#125;&#125;).then(function(result)&#123; console.log('updated success...'); console.log(result); &#125;); 删除记录调用模型对象的destroy方法进行删除操作，在参数中指定删除条件。 12345678910Teacher.destroy(&#123; where:&#123; Name:&#123; $like:'sa%' &#125; &#125;&#125;).then(function(result)&#123; console.log('delete success'); console.log(result);&#125;);]]></content>
@@ -468,11 +473,6 @@
         <tag>jQuery常用语法</tag>
         <tag>DOM</tag>
       </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[苹果味喜欢的音乐]]></title>
-    <url>%2F2017%2F05%2F13%2F%E8%8B%B9%E6%9E%9C%E5%91%B3%E5%96%9C%E6%AC%A2%E7%9A%84%E9%9F%B3%E4%B9%90%2F</url>
-    <content type="text"></content>
   </entry>
   <entry>
     <title><![CDATA[JavaScript数组及JSON操作]]></title>

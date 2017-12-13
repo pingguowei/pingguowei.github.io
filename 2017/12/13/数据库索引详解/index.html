@@ -1,0 +1,1169 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="SQL,索引," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="数据库索引详解​    SQL索引在数据库优化中占有一个非常大的比例， 一个好的索引的设计，可以让你的效率提高几十甚至几百 什么是索引?​    SQL索引有两种，聚集索引和非聚集索引，索引主要目的是提高了SQL Server系统的性能，加快数据的查询速度与减少系统的响应时间 .">
+<meta name="keywords" content="SQL,索引">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库索引详解">
+<meta property="og:url" content="http://itcabin.com/2017/12/13/数据库索引详解/index.html">
+<meta property="og:site_name" content="JOJO博客">
+<meta property="og:description" content="数据库索引详解​    SQL索引在数据库优化中占有一个非常大的比例， 一个好的索引的设计，可以让你的效率提高几十甚至几百 什么是索引?​    SQL索引有两种，聚集索引和非聚集索引，索引主要目的是提高了SQL Server系统的性能，加快数据的查询速度与减少系统的响应时间 .">
+<meta property="og:updated_time" content="2017-12-13T14:47:40.761Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据库索引详解">
+<meta name="twitter:description" content="数据库索引详解​    SQL索引在数据库优化中占有一个非常大的比例， 一个好的索引的设计，可以让你的效率提高几十甚至几百 什么是索引?​    SQL索引有两种，聚集索引和非聚集索引，索引主要目的是提高了SQL Server系统的性能，加快数据的查询速度与减少系统的响应时间 .">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '苹果味'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://itcabin.com/2017/12/13/数据库索引详解/"/>
+
+
+
+
+
+  <title>数据库索引详解 | JOJO博客</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JOJO博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/12/13/数据库索引详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jojo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/jojo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JOJO博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                数据库索引详解
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-13T22:45:29+08:00">
+                2017-12-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/12/13/数据库索引详解/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/12/13/数据库索引详解/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="数据库索引详解"><a href="#数据库索引详解" class="headerlink" title="数据库索引详解"></a>数据库索引详解</h3><p>​    SQL索引在数据库优化中占有一个非常大的比例， 一个好的索引的设计，可以让你的效率提高几十甚至几百</p>
+<h4 id="什么是索引"><a href="#什么是索引" class="headerlink" title="什么是索引?"></a>什么是索引?</h4><p>​    SQL索引有两种，聚集索引和非聚集索引，索引主要目的是提高了SQL Server系统的性能，加快数据的查询速度与减少系统的响应时间 .</p>
+<a id="more"></a>
+<p>​    <strong>图书馆的例子</strong>：一个图书馆那么多书，怎么管理呢？建立一个字母开头的目录，例如：a开头的书，在第一排，b开头的在第二排，这样在找什么书就好说了，这个就是一个聚集索引，可是很多人借书找某某作者的，不知道书名怎么办？图书管理员在写一个目录，某某作者的书分别在第几排，第几排，这就是一个非聚集索引</p>
+<p>​    看了上面的例子，下面的一句话大家就很容易理解了：<strong>聚集索引存储记录是物理上连续存在，而非聚集索引是逻辑上的连续，物理存储并不连续</strong>。就像字段，聚集索引是连续的，a后面肯定是b，非聚集索引就不连续了，就像图书馆的某个作者的书，有可能在第1个货架上和第10个货架上。还有一个小知识点就是：<strong>聚集索引一个表只能有一个，而非聚集索引一个表可以存在多个</strong>。</p>
+<h4 id="索引的存储机制"><a href="#索引的存储机制" class="headerlink" title="索引的存储机制"></a>索引的存储机制</h4><p>​    首先，<strong>无索引的表</strong>，查询时，是按照顺序存续的方法扫描每个记录来查找符合条件的记录，这样效率十分低下,举个例子，如果我们将字典的汉字随即打乱，没有前面的按照拼音或者部首查询，那么我们想找一个字，按照顺序的方式去一页页的找，这样效率有多底，大家可以想象。</p>
+<pre><code>聚集索引和非聚集索引的根本区别是表记录的排列顺序和与索引的排列顺序是否一致，其实理解起来非常简单，还是举字典的例子：如果按照拼音查询，那么都是从a-z的，是具有连续性的，a后面就是b，b后面就是c，**聚集索引就是这样的，他是和表的物理排列顺序是一样的**。非聚集索引就和按照部首查询是一样是，可能按照偏房查询的时候，根据偏旁‘弓’字旁，索引出两个汉字，张和弘，但是这两个其实一个在100页，一个在1000页，（这里只是举个例子），**他们的索引顺序和数据库表的排列顺序是不一样的，这个样的就是非聚集索引**。
+</code></pre><p>​     原理明白了，那他们是怎么存储的呢？在这里简单的说一下，聚集索引就是在数据库被开辟一个物理空间存放他的排列的值，例如1-100，所以当插入数据时，他会重新排列整个整个物理空间，而<strong>非聚集索引其实可以看作是一个含有聚集索引的表，他只包含原表中非聚集索引的列和指向实际物理表的指针</strong>。他只记录一个指针，其实就有点和堆栈差不多的感觉了。</p>
+<h4 id="什么情况下设置索引"><a href="#什么情况下设置索引" class="headerlink" title="什么情况下设置索引"></a>什么情况下设置索引</h4><table>
+<thead>
+<tr>
+<th>动作描述</th>
+<th>使用聚集索引</th>
+<th>使用非聚集索引</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>外键列</td>
+<td>应</td>
+<td>应</td>
+</tr>
+<tr>
+<td>主键列</td>
+<td>应</td>
+<td>应</td>
+</tr>
+<tr>
+<td>列经常被分组排序(order by)</td>
+<td>应</td>
+<td>应</td>
+</tr>
+<tr>
+<td>返回某范围内的数据</td>
+<td>应</td>
+<td>不应</td>
+</tr>
+<tr>
+<td>小数目的不同值</td>
+<td>应</td>
+<td>不应</td>
+</tr>
+<tr>
+<td>大数目的不同值</td>
+<td>不应</td>
+<td>应</td>
+</tr>
+<tr>
+<td>频繁更新的列</td>
+<td>不应</td>
+<td>应</td>
+</tr>
+<tr>
+<td>频繁修改索引列</td>
+<td>不应</td>
+<td>应</td>
+</tr>
+<tr>
+<td>一个或极少不同值</td>
+<td>不应</td>
+<td>不应</td>
+</tr>
+</tbody>
+</table>
+<p><strong>建立索引的原则：</strong></p>
+<ol>
+<li>定义主键的数据列一定要建立索引。</li>
+<li>定义有外键的数据列一定要建立索引。</li>
+<li>对于经常查询的数据列最好建立索引。</li>
+<li>对于需要在指定范围内的快速或频繁查询的数据列。</li>
+<li>经常用在WHERE子句中的数据列。</li>
+<li>经常出现在关键字order by、group by、distinct后面的字段，建立索引。如果建立的是复合索引，索引的字段顺序要和这些关键字后面的字段顺序一致，否则索引不会被使用。</li>
+<li>对于那些查询中很少涉及的列，重复值比较多的列不要建立索引。</li>
+<li>对于定义为text、image和bit的数据类型的列不要建立索引。</li>
+<li>对于经常存取的列避免建立索引 。</li>
+<li>限制表上的索引数目。对一个存在大量更新操作的表，所建索引的数目一般不要超过3个，最多不要超过5个。索引虽说提高了访问速度，但太多索引会影响数据的更新操作。</li>
+<li>对复合索引，按照字段在查询条件中出现的频度建立索引。在复合索引中，记录首先按照第一个字段排序。对于在第一个字段上取值相同的记录，系统再按照第二个字段的取值排序，以此类推。因此只有复合索引的第一个字段出现在查询条件中，该索引才可能被使用,因此将应用频度高的字段，放置在复合索引的前面，会使系统最大可能地使用此索引，发挥索引的作用。</li>
+</ol>
+<h4 id="如何创建索引"><a href="#如何创建索引" class="headerlink" title="如何创建索引"></a>如何创建索引</h4><h5 id="创建索引的语法："><a href="#创建索引的语法：" class="headerlink" title="创建索引的语法："></a>创建索引的语法：</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> [<span class="keyword">UNIQUE</span>][CLUSTERED | NONCLUSTERED]  <span class="keyword">INDEX</span>  index_name <span class="keyword">ON</span> &#123;table_name | view_name&#125; [<span class="keyword">WITH</span> [index_property [,....n]]</div></pre></td></tr></table></figure>
+<p>说明：</p>
+<p>​    UNIQUE: 建立唯一索引。</p>
+<p>​    <strong>CLUSTERED: 建立聚集索引。</strong></p>
+<p>​    <strong>NONCLUSTERED: 建立非聚集索引。</strong></p>
+<p>​    Index_property: 索引属性。</p>
+<pre><code>UNIQUE索引既可以采用聚集索引结构，也可以采用非聚集索引的结构，如果不指明采用的索引结构，则SQL         Server系统默认为采用非聚集索引结构
+</code></pre><h5 id="删除索引语法："><a href="#删除索引语法：" class="headerlink" title="删除索引语法："></a>删除索引语法：</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">DROP</span> <span class="keyword">INDEX</span> table_name.index_name[,table_name.index_name]</div></pre></td></tr></table></figure>
+<p>说明：table_name: 索引所在的表名称。</p>
+<p>​        index_name : 要删除的索引名称。</p>
+<h5 id="显示索引信息："><a href="#显示索引信息：" class="headerlink" title="显示索引信息："></a>显示索引信息：</h5><p>使用系统存储过程：sp_helpindex 查看指定表的索引信息。</p>
+<p>执行代码如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Exec sp_helpindex book1;</div></pre></td></tr></table></figure>
+<h4 id="适当创建索引覆盖"><a href="#适当创建索引覆盖" class="headerlink" title="适当创建索引覆盖"></a>适当创建索引覆盖</h4><p>​    假设你在Sales表(SelesID,SalesDate,SalesPersonID,ProductID,Qty)的外键列(ProductID)上创建了一个索引，<strong>假设ProductID列是一个高选中性列，那么任何在where子句中使用索引列(ProductID)的select查询都会更快，如果在外键上没有创建索引，将会发生全部扫描</strong>，但还有办法可以进一步提升查询性能。</p>
+<p>假设Sales表有10,000行记录，下面的SQL语句选中400行(总行数的4%)：　</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> SalesDate, SalesPersonID <span class="keyword">FROM</span> Sales <span class="keyword">WHERE</span> ProductID = <span class="number">112</span></div></pre></td></tr></table></figure>
+<p>我们来看看这条SQL语句在SQL执行引擎中是如何执行的：</p>
+<ol>
+<li>Sales表在ProductID列上有一个非聚集索引，因此它查找非聚集索引树找出ProductID=112的记录;</li>
+<li>包含ProductID = 112记录的索引页也包括所有的聚集索引键(所有的主键键值，即SalesID);</li>
+<li>针对每一个主键(这里是400)，SQL Server引擎查找聚集索引树找出真实的行在对应页面中的位置;</li>
+</ol>
+<p>SQL Server引擎从对应的行查找SalesDate和SalesPersonID列的值。</p>
+<p>​    　在上面的步骤中，对ProductID = 112的每个主键记录(这里是400)，SQL Server引擎要搜索400次聚集索引树以检索查询中指定的其它列(SalesDate，SalesPersonID)。</p>
+<p>​    如果非聚集索引页中包括了聚集索引键和其它两列(SalesDate,，SalesPersonID)的值，SQL Server引擎可能不会执行上面的第3和4步，直接从非聚集索引树查找ProductID列速度还会快一些，直接从索引页读取这三列的数值。</p>
+<p>​    有一种方法实现了这个功能，它被称为“覆盖索引”，在表列上创建覆盖索引时，需要指定哪些额外的列值需要和聚集索引键值(主键)一起存储在索引页中。下面是在Sales 表ProductID列上创建覆盖索引的例子：　</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> NCLIX_Sales_ProductID<span class="comment">--Index name</span></div><div class="line">　　<span class="keyword">ON</span> dbo.Sales(ProductID)<span class="comment">--Column on which index is to be created</span></div><div class="line">　　<span class="keyword">INCLUDE</span>(SalesDate, SalesPersonID)<span class="comment">--Additional column values to include</span></div></pre></td></tr></table></figure>
+<p>应该在那些select查询中常使用到的列上创建覆盖索引，但覆盖索引中包括过多的列也不行，因为覆盖索引列的值是存储在<a href="http://product.it168.com/list/b/0205_1.shtml" target="_blank" rel="external">内存</a>中的，这样会消耗过多内存，引发性能下降。</p>
+<h4 id="索引实战（摘抄）"><a href="#索引实战（摘抄）" class="headerlink" title="索引实战（摘抄）"></a>索引实战（摘抄）</h4><p>​    之所以这章摘抄，是因为下面这个文章已经写的太好了，估计我写出来也无法比这个好了，所以就摘抄了</p>
+<p>人们在使用SQL时往往会陷入一个误区，即太关注于所得的结果是否正确，而忽略了不同的实现方法之间可能存在的性能差异，这种性能差异在大型的或是复杂的数据库环境中（如联机事务处理OLTP或决策支持系统DSS）中表现得尤为明显。</p>
+<p>笔者在工作实践中发现，不良的SQL往往<strong>来自于不恰当的索引设计、不充份的连接条件和不可优化的where子句。</strong></p>
+<p>在对它们进行适当的优化后，其运行速度有了明显地提高！</p>
+<p>下面我将从这三个方面分别进行总结:</p>
+<p>为了更直观地说明问题，所有实例中的SQL运行时间均经过测试，不超过１秒的均表示为（&lt; 1秒）。—-</p>
+<p>测试环境: 主机：HP LH II—- 主频：330MHZ—- 内存：128兆—-</p>
+<p>操作系统：Operserver5.0.4—-</p>
+<p>数据库：Sybase11.0.3</p>
+<h5 id="一、不合理的索引设计"><a href="#一、不合理的索引设计" class="headerlink" title="一、不合理的索引设计"></a>一、不合理的索引设计</h5><p>例：表record有620000行，试看在不同的索引下，下面几个 SQL的运行情况：</p>
+<p>—- 1.在date上建有一<strong>非个群集索引</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> <span class="built_in">record</span> <span class="keyword">where</span> <span class="built_in">date</span> &gt;<span class="string">'19991201'</span> <span class="keyword">and</span> <span class="built_in">date</span> &lt; <span class="string">'19991214'</span><span class="keyword">and</span> amount &gt;<span class="number">2000</span> (<span class="number">25</span>秒)</div><div class="line"></div><div class="line"><span class="keyword">select</span> <span class="built_in">date</span> ,<span class="keyword">sum</span>(amount) <span class="keyword">from</span> <span class="built_in">record</span> <span class="keyword">group</span> <span class="keyword">by</span> <span class="built_in">date</span>(<span class="number">55</span>秒)</div><div class="line"></div><div class="line"><span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> <span class="built_in">record</span> <span class="keyword">where</span> <span class="built_in">date</span> &gt;<span class="string">'19990901'</span> <span class="keyword">and</span> place <span class="keyword">in</span> (<span class="string">'BJ'</span>,<span class="string">'SH'</span>) (<span class="number">27</span>秒)</div><div class="line"></div><div class="line"><span class="comment">---- 分析：----</span></div><div class="line"></div><div class="line"><span class="built_in">date</span>上有大量的重复值，在非群集索引下，数据在物理上随机存放在数据页上，在范围查找时，必须执行一次表扫描才能找到这一范围内的全部行。</div></pre></td></tr></table></figure>
+<p>—- 2.在date上的一个群集索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> <span class="built_in">record</span> <span class="keyword">where</span> <span class="built_in">date</span> &gt;<span class="string">'19991201'</span> <span class="keyword">and</span> <span class="built_in">date</span> &lt; <span class="string">'19991214'</span> <span class="keyword">and</span> amount &gt;<span class="number">2000</span> （<span class="number">14</span>秒）</div><div class="line"></div><div class="line"><span class="keyword">select</span> <span class="built_in">date</span>,<span class="keyword">sum</span>(amount) <span class="keyword">from</span> <span class="built_in">record</span> <span class="keyword">group</span> <span class="keyword">by</span> <span class="built_in">date</span>（<span class="number">28</span>秒）</div><div class="line"></div><div class="line"><span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> <span class="built_in">record</span> <span class="keyword">where</span> <span class="built_in">date</span> &gt;<span class="string">'19990901'</span> <span class="keyword">and</span> place <span class="keyword">in</span> (<span class="string">'BJ'</span>,<span class="string">'SH'</span>)（<span class="number">14</span>秒）</div><div class="line"></div><div class="line"><span class="comment">---- 分析：---- 在群集索引下，数据在物理上按顺序在数据页上，重复值也排列在一起，因而在范围查找时，可以先找到这个范围的起末点，且只在这个范围内扫描数据页，避免了大范围扫描，提高了查询速度。</span></div></pre></td></tr></table></figure>
+<p>—- 3.在place，date，amount上的组合索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> <span class="built_in">record</span> <span class="keyword">where</span> <span class="built_in">date</span> &gt;<span class="string">'19991201'</span> <span class="keyword">and</span> <span class="built_in">date</span> &lt; <span class="string">'19991214'</span> <span class="keyword">and</span> amount &gt;<span class="number">2000</span> （<span class="number">26</span>秒）</div><div class="line"></div><div class="line"><span class="keyword">select</span> <span class="built_in">date</span>,<span class="keyword">sum</span>(amount) <span class="keyword">from</span> <span class="built_in">record</span> <span class="keyword">group</span> <span class="keyword">by</span> <span class="built_in">date</span>（<span class="number">27</span>秒）</div><div class="line"></div><div class="line"><span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> <span class="built_in">record</span> <span class="keyword">where</span> <span class="built_in">date</span> &gt;<span class="string">'19990901'</span> <span class="keyword">and</span> place <span class="keyword">in</span> (<span class="string">'BJ, '</span>SH<span class="string">')（&lt; 1秒）</span></div><div class="line"></div><div class="line">---- 分析：---- 这是一个不很合理的组合索引，因为它的前导列是place，第一和第二条SQL没有引用place，因此也没有利用上索引；第三个SQL使用了place，且引用的所有列都包含在组合索引中，形成了索引覆盖，所以它的速度是非常快的。</div></pre></td></tr></table></figure>
+<p>—- 4.在date，place，amount上的组合索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> <span class="built_in">record</span> <span class="keyword">where</span> <span class="built_in">date</span> &gt;<span class="string">'19991201'</span> <span class="keyword">and</span> <span class="built_in">date</span> &lt; <span class="string">'19991214'</span> <span class="keyword">and</span> amount &gt;<span class="number">2000</span>(&lt; <span class="number">1</span>秒)</div><div class="line"></div><div class="line"><span class="keyword">select</span> <span class="built_in">date</span>,<span class="keyword">sum</span>(amount) <span class="keyword">from</span> <span class="built_in">record</span> <span class="keyword">group</span> <span class="keyword">by</span> <span class="built_in">date</span>（<span class="number">11</span>秒）</div><div class="line"></div><div class="line"><span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> <span class="built_in">record</span> <span class="keyword">where</span> <span class="built_in">date</span> &gt;<span class="string">'19990901'</span> <span class="keyword">and</span> place <span class="keyword">in</span> (<span class="string">'BJ'</span>,<span class="string">'SH'</span>)（&lt; <span class="number">1</span>秒）</div><div class="line"></div><div class="line"><span class="comment">---- 分析：---- 这是一个合理的组合索引。它将date作为前导列，使每个SQL都可以利用索引，并且在第一和第三个SQL中形成了索引覆盖，因而性能达到了最优。</span></div></pre></td></tr></table></figure>
+<p>—- 5.总结：—-</p>
+<p>缺省情况下建立的索引是非群集索引，但有时它并不是最佳的；合理的索引设计要建立在对各种查询的分析和预测上。</p>
+<p>一般来说：</p>
+<ol>
+<li><p>有大量重复值、且经常有范围查询（between, &gt;,&lt; ，&gt;=,&lt; =）和order by、group by发生的列，可考虑建立群集索引；</p>
+</li>
+<li><p>经常同时存取多列，且每列都含有重复值可考虑建立组合索引；</p>
+</li>
+<li><h5 id="组合索引要尽量使关键查询形成索引覆盖，其前导列一定是使用最频繁的列。"><a href="#组合索引要尽量使关键查询形成索引覆盖，其前导列一定是使用最频繁的列。" class="headerlink" title="组合索引要尽量使关键查询形成索引覆盖，其前导列一定是使用最频繁的列。"></a>组合索引要尽量使关键查询形成索引覆盖，其前导列一定是使用最频繁的列。</h5></li>
+</ol>
+<h5 id="二、不充份的连接条件："><a href="#二、不充份的连接条件：" class="headerlink" title="二、不充份的连接条件："></a>二、不充份的连接条件：</h5><p>例：表card有7896行，在card_no上有一个非聚集索引，表account有191122行，在account_no上有一个非聚集索引，试看在不同的表连接条件下，两个SQL的执行情况：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> <span class="keyword">sum</span>(a.amount) <span class="keyword">from</span> <span class="keyword">account</span> a,card b <span class="keyword">where</span> a.card_no = b.card_no（<span class="number">20</span>秒）</div><div class="line"></div><div class="line"><span class="keyword">select</span> <span class="keyword">sum</span>(a.amount) <span class="keyword">from</span> <span class="keyword">account</span> a,card b <span class="keyword">where</span> a.card_no = b.card_no <span class="keyword">and</span> a.account_no=b.account_no（&lt; <span class="number">1</span>秒）</div><div class="line"></div><div class="line"><span class="comment">---- 分析：---- 在第一个连接条件下，最佳查询方案是将account作外层表，card作内层表，利用card上的索引，其I/O次数可由以下公式估算为：</span></div><div class="line"></div><div class="line">外层表<span class="keyword">account</span>上的<span class="number">22541</span>页+（外层表<span class="keyword">account</span>的<span class="number">191122</span>行*内层表card上对应外层表第一行所要查找的<span class="number">3</span>页）=<span class="number">595907</span>次I/O</div><div class="line"></div><div class="line">在第二个连接条件下，最佳查询方案是将card作外层表，<span class="keyword">account</span>作内层表，利用<span class="keyword">account</span>上的索引，其I/O次数可由以下公式估算为：外层表card上的<span class="number">1944</span>页+（外层表card的<span class="number">7896</span>行*内层表<span class="keyword">account</span>上对应外层表每一行所要查找的<span class="number">4</span>页）= <span class="number">33528</span>次I/O</div><div class="line"></div><div class="line">可见，只有充份的连接条件，真正的最佳方案才会被执行。</div></pre></td></tr></table></figure>
+<p>总结：</p>
+<ol>
+<li>多表操作在被实际执行前，查询优化器会根据连接条件，列出几组可能的连接方案并从中找出系统开销最小的最佳方案。连接条件要充份考虑带有索引的表、行数多的表；内外表的选择可由公式：<strong>外层表中的匹配行数*内层表中每一次查找的次数确定，乘积最小为最佳方案</strong>。</li>
+<li>查看执行方案的方法– 用set showplanon，打开showplan选项，就可以看到连接顺序、使用何种索引的信息；想看更详细的信息，需用sa角色执行dbcc(3604,310,302)。</li>
+</ol>
+<h5 id="三、不可优化的where子句"><a href="#三、不可优化的where子句" class="headerlink" title="三、不可优化的where子句"></a>三、不可优化的where子句</h5><p>1.例：下列SQL条件语句中的列都建有恰当的索引，但执行速度却非常慢：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="built_in">record</span> <span class="keyword">where</span> <span class="keyword">substring</span>(card_no,<span class="number">1</span>,<span class="number">4</span>)=<span class="string">'5378'</span>(<span class="number">13</span>秒)</div><div class="line"></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="built_in">record</span> <span class="keyword">where</span> amount/<span class="number">30</span>&lt; <span class="number">1000</span>（<span class="number">11</span>秒）</div><div class="line"></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="built_in">record</span> <span class="keyword">where</span> <span class="keyword">convert</span>(<span class="built_in">char</span>(<span class="number">10</span>),<span class="built_in">date</span>,<span class="number">112</span>)=<span class="string">'19991201'</span>（<span class="number">10</span>秒）</div></pre></td></tr></table></figure>
+<p>分析：</p>
+<p><strong>where子句中对列的任何操作结果都是在SQL运行时逐列计算得到的，因此它不得不进行表搜索</strong>，而没有使用该列上面的索引；</p>
+<p>如果这些结果在查询编译时就能得到，那么就可以被SQL优化器优化，使用索引，避免表搜索，因此将SQL重写成下面这样：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="built_in">record</span> <span class="keyword">where</span> card_no <span class="keyword">like</span><span class="string">'5378%'</span>	（&lt; <span class="number">1</span>秒）</div><div class="line"></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="built_in">record</span> <span class="keyword">where</span> amount&lt; <span class="number">1000</span>*<span class="number">30</span>	（&lt; <span class="number">1</span>秒）</div><div class="line"></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="built_in">record</span> <span class="keyword">where</span> <span class="built_in">date</span>= <span class="string">'1999/12/01'</span>	（&lt; <span class="number">1</span>秒）</div></pre></td></tr></table></figure>
+<p>2.例：表stuff有200000行，id_no上有非群集索引，请看下面这个SQL：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> <span class="keyword">stuff</span> <span class="keyword">where</span> id_no <span class="keyword">in</span>(<span class="string">'0'</span>,<span class="string">'1'</span>)（<span class="number">23</span>秒）</div></pre></td></tr></table></figure>
+<p>分析：—- where条件中的’in’在逻辑上相当于’or’，所以语法分析器会将in (‘0’,’1’)转化为id_no =’0’ or id_no=’1’来执行。</p>
+<p>我们期望它会根据每个or子句分别查找，再将结果相加，这样可以利用id_no上的索引；</p>
+<p>但实际上（根据showplan）,它却采用了”OR策略”，即先取出满足每个or子句的行，存入临时数据库的工作表中，再建立唯一索引以去掉重复行，最后从这个临时表中计算结果。因此，实际过程没有利用id_no上索引，并且完成时间还要受tempdb数据库性能的影响。</p>
+<p>实践证明，表的行数越多，工作表的性能就越差，当stuff有620000行时，执行时间竟达到220秒！还不如将or子句分开：</p>
+<p>select count(<em>) from stuff where id_no=’0’select count(</em>) from stuff where id_no=’1’</p>
+<p>得到两个结果，再作一次加法合算。因为每句都使用了索引，执行时间只有3秒，在620000行下，时间也只有4秒。</p>
+<p>或者，用更好的方法，写一个简单的存储过程：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> proc count_stuff asdeclare @a intdeclare @b intdeclare @c intdeclare @d <span class="built_in">char</span>(<span class="number">10</span>)beginselect @a=<span class="keyword">count</span>(*) <span class="keyword">from</span> <span class="keyword">stuff</span> <span class="keyword">where</span> id_no=<span class="string">'0'</span><span class="keyword">select</span> @b=<span class="keyword">count</span>(*) <span class="keyword">from</span> <span class="keyword">stuff</span> <span class="keyword">where</span> id_no=<span class="string">'1'</span>endselect @c=@a+@bselect @d=<span class="keyword">convert</span>(<span class="built_in">char</span>(<span class="number">10</span>),@c)print @d</div></pre></td></tr></table></figure>
+<p>直接算出结果，执行时间同上面一样快！</p>
+<p>—- 总结：—- 可见，<strong>所谓优化即where子句利用了索引，不可优化即发生了表扫描或额外开销。</strong></p>
+<ol>
+<li>任何对列的操作都将导致表扫描，它包括数据库函数、计算表达式等等，查询时要尽可能将操作移至等号右边。</li>
+<li>in、or子句常会使用工作表，使索引失效；如果不产生大量重复值，可以考虑把子句拆开；拆开的子句中应该包含索引。</li>
+<li>要善于使用存储过程，它使SQL变得更加灵活和高效。</li>
+</ol>
+<p>从以上这些例子可以看出，SQL优化的实质就是在结果正确的前提下，用优化器可以识别的语句，充份利用索引，减少表扫描的I/O次数，尽量避免表搜索的发生。其实SQL的性能优化是一个复杂的过程，上述这些只是在应用层次的一种体现，深入研究还会涉及数据库层的资源配置、网络层的流量控制以及操作系统层的总体设计。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      jojo
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://itcabin.com/2017/12/13/数据库索引详解/" title="数据库索引详解">http://itcabin.com/2017/12/13/数据库索引详解/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SQL/" rel="tag"># SQL</a>
+          
+            <a href="/tags/索引/" rel="tag"># 索引</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/13/索引、普通索引、唯一索引、主键索引、联合主键、复合主键/" rel="prev" title="索引、普通索引、唯一索引、主键索引、联合主键、复合主键">
+                索引、普通索引、唯一索引、主键索引、联合主键、复合主键 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/jojo.jpg"
+               alt="jojo" />
+          <p class="site-author-name" itemprop="name">jojo</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库索引详解"><span class="nav-number">1.</span> <span class="nav-text">数据库索引详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是索引"><span class="nav-number">1.1.</span> <span class="nav-text">什么是索引?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#索引的存储机制"><span class="nav-number">1.2.</span> <span class="nav-text">索引的存储机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么情况下设置索引"><span class="nav-number">1.3.</span> <span class="nav-text">什么情况下设置索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何创建索引"><span class="nav-number">1.4.</span> <span class="nav-text">如何创建索引</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建索引的语法："><span class="nav-number">1.4.1.</span> <span class="nav-text">创建索引的语法：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除索引语法："><span class="nav-number">1.4.2.</span> <span class="nav-text">删除索引语法：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#显示索引信息："><span class="nav-number">1.4.3.</span> <span class="nav-text">显示索引信息：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#适当创建索引覆盖"><span class="nav-number">1.5.</span> <span class="nav-text">适当创建索引覆盖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#索引实战（摘抄）"><span class="nav-number">1.6.</span> <span class="nav-text">索引实战（摘抄）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、不合理的索引设计"><span class="nav-number">1.6.1.</span> <span class="nav-text">一、不合理的索引设计</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#组合索引要尽量使关键查询形成索引覆盖，其前导列一定是使用最频繁的列。"><span class="nav-number">1.6.2.</span> <span class="nav-text">组合索引要尽量使关键查询形成索引覆盖，其前导列一定是使用最频繁的列。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、不充份的连接条件："><span class="nav-number">1.6.3.</span> <span class="nav-text">二、不充份的连接条件：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三、不可优化的where子句"><span class="nav-number">1.6.4.</span> <span class="nav-text">三、不可优化的where子句</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jojo</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysYWLmXQ';
+      var conf = 'c9827a47febaff8473e65037e09159c4';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

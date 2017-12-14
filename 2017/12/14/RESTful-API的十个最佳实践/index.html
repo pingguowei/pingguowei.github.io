@@ -1,0 +1,1075 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="RESTful API," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="RESTful API的十个最佳实践​    通常我们使用RESTFul（Representational State Transfer）的设计方式来设计Web api，这通常用来分离API结构了业务逻辑，它使用典型的HTTP方法，诸如GET,POST.DELETE,PUT来和资源进行交互。 以下是设计RESTful API的十个最佳实践：">
+<meta name="keywords" content="RESTful API">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RESTful API的十个最佳实践">
+<meta property="og:url" content="http://itcabin.com/2017/12/14/RESTful-API的十个最佳实践/index.html">
+<meta property="og:site_name" content="JOJO博客">
+<meta property="og:description" content="RESTful API的十个最佳实践​    通常我们使用RESTFul（Representational State Transfer）的设计方式来设计Web api，这通常用来分离API结构了业务逻辑，它使用典型的HTTP方法，诸如GET,POST.DELETE,PUT来和资源进行交互。 以下是设计RESTful API的十个最佳实践：">
+<meta property="og:updated_time" content="2017-12-14T15:32:32.312Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RESTful API的十个最佳实践">
+<meta name="twitter:description" content="RESTful API的十个最佳实践​    通常我们使用RESTFul（Representational State Transfer）的设计方式来设计Web api，这通常用来分离API结构了业务逻辑，它使用典型的HTTP方法，诸如GET,POST.DELETE,PUT来和资源进行交互。 以下是设计RESTful API的十个最佳实践：">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '苹果味'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://itcabin.com/2017/12/14/RESTful-API的十个最佳实践/"/>
+
+
+
+
+
+  <title>RESTful API的十个最佳实践 | JOJO博客</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JOJO博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/12/14/RESTful-API的十个最佳实践/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jojo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/jojo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JOJO博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                RESTful API的十个最佳实践
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-14T23:29:29+08:00">
+                2017-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/RESTful/" itemprop="url" rel="index">
+                    <span itemprop="name">RESTful</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/12/14/RESTful-API的十个最佳实践/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/12/14/RESTful-API的十个最佳实践/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="RESTful-API的十个最佳实践"><a href="#RESTful-API的十个最佳实践" class="headerlink" title="RESTful API的十个最佳实践"></a>RESTful API的十个最佳实践</h3><p>​    通常我们使用RESTFul（<strong>Representational State Transfer</strong>）的设计方式来设计Web api，这通常用来分离API结构了业务逻辑，它使用典型的HTTP方法，诸如GET,POST.DELETE,PUT来和资源进行交互。</p>
+<p>以下是设计RESTful API的十个最佳实践：</p>
+<a id="more"></a>
+<h4 id="1-使用名词而不是动词"><a href="#1-使用名词而不是动词" class="headerlink" title="1.使用名词而不是动词"></a>1.使用名词而不是动词</h4><p>为了易于理解，为资源使用下面的API结构：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Resource</th>
+<th style="text-align:center">Get</th>
+<th style="text-align:center">Post</th>
+<th style="text-align:center">Put</th>
+<th style="text-align:center">Delete</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">/cars</td>
+<td style="text-align:center">返回一个car的列表</td>
+<td style="text-align:center">创建一个新的car</td>
+<td style="text-align:center">更新car的信息</td>
+<td style="text-align:center">删除所有的car</td>
+</tr>
+<tr>
+<td style="text-align:center">/cars/2</td>
+<td style="text-align:center">返回指定的car</td>
+<td style="text-align:center">Method not allowed（405）</td>
+<td style="text-align:center">更新指定的car的信息</td>
+<td style="text-align:center">删除指定的car</td>
+</tr>
+</tbody>
+</table>
+<p>不要使用动词</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/getAllCars</div><div class="line">/createNewCar</div><div class="line">/deleteAllRedCars</div></pre></td></tr></table></figure>
+<h4 id="2-Get方法和查询参数不应该改变资源状态"><a href="#2-Get方法和查询参数不应该改变资源状态" class="headerlink" title="2.Get方法和查询参数不应该改变资源状态"></a>2.Get方法和查询参数不应该改变资源状态</h4><p>使用<strong>Put,Post和Delete</strong>方法替代<strong>Get</strong>方法来改变资源状态。不要使用Get来使状态改变：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">GET /users/711？activate or</div><div class="line">GET /users/711/activate</div></pre></td></tr></table></figure>
+<h4 id="3-使用名词的复数形式"><a href="#3-使用名词的复数形式" class="headerlink" title="3.使用名词的复数形式"></a>3.使用名词的复数形式</h4><p>不要混合使用单数和复数形式，而应该为所有资源一直保持使用复数形式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/cars instead <span class="keyword">of</span> /car</div><div class="line">/users instead <span class="keyword">of</span> /user</div><div class="line">/products instead <span class="keyword">of</span> /product</div><div class="line">/settings instead <span class="keyword">of</span> /setting</div></pre></td></tr></table></figure>
+<h4 id="4-为关系使用子资源"><a href="#4-为关系使用子资源" class="headerlink" title="4.为关系使用子资源"></a>4.为关系使用子资源</h4><p>假如资源连接到其它资源，则使用子资源形式：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">GET /cars/711/drivers/ Returns a list of drivers for car 711</div><div class="line">GET /cars/711/drivers/4 Returns driver #4 for car 711</div></pre></td></tr></table></figure>
+<h4 id="5-使用HTTP头决定序列化格式"><a href="#5-使用HTTP头决定序列化格式" class="headerlink" title="5.使用HTTP头决定序列化格式"></a>5.使用HTTP头决定序列化格式</h4><p>在客户端和服务端都需要知道使用什么格式来进行通信，这个格式应该在HTTP头中指定:</p>
+<ul>
+<li>Content-Type：定义请求的格式；</li>
+<li>Accept ：定义允许的响应格式的列表</li>
+</ul>
+<h4 id="6-使用HATEOAS"><a href="#6-使用HATEOAS" class="headerlink" title="6.使用HATEOAS"></a>6.使用HATEOAS</h4><p><strong>H</strong>ypermedia <strong>a</strong>s <strong>t</strong>he <strong>E</strong>ngine <strong>o</strong>f <strong>A</strong>pplication <strong>S</strong>tate是一个指导原则，它规定超文本链接应该被用于在API中创建更好的资源导航：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"id"</span>: <span class="number">711</span>,</div><div class="line">    <span class="attr">"manufacturer"</span>: <span class="string">"bmw"</span>,</div><div class="line">    <span class="attr">"model"</span>: <span class="string">"X5"</span>,</div><div class="line">    <span class="attr">"seats"</span>: <span class="number">5</span>,</div><div class="line">    <span class="attr">"drivers"</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"id"</span>: <span class="string">"23"</span>,</div><div class="line">            <span class="attr">"name"</span>: <span class="string">"Stefan Jauker"</span>,</div><div class="line">            <span class="attr">"links"</span>: [</div><div class="line">                &#123;</div><div class="line">                    <span class="attr">"rel"</span>: <span class="string">"self"</span>,</div><div class="line">                    <span class="attr">"href"</span>: <span class="string">"/api/v1/drivers/23"</span></div><div class="line">                &#125;</div><div class="line">            ]</div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="7-为集合提供过滤、排序、字段选择以及分页"><a href="#7-为集合提供过滤、排序、字段选择以及分页" class="headerlink" title="7.为集合提供过滤、排序、字段选择以及分页"></a>7.为集合提供过滤、排序、字段选择以及分页</h4><h5 id="过滤"><a href="#过滤" class="headerlink" title="过滤"></a>过滤</h5><p>为所有字段或者查询语句提供独立的查询参数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">GET /cars?color=red Returns a list <span class="keyword">of</span> red cars</div><div class="line">GET /cars?seats&lt;=<span class="number">2</span> Returns a list <span class="keyword">of</span> cars <span class="keyword">with</span> a maximum <span class="keyword">of</span> <span class="number">2</span> seats</div></pre></td></tr></table></figure>
+<h5 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h5><p>允许跨越多字段的正序或者倒序排列：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /cars?sort=-manufactorer,+model</div></pre></td></tr></table></figure>
+<p>字段选择</p>
+<p>一些情况下，我们只需要在列表中查询几个有标识意义的字段，我们不需要从服务端把所有字段的值都请求出来，所以<strong>需要支持API选择查询字段的能力，这也可以提到网络传输性能和速度</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /cars?fields=manufacturer,model,id,color</div></pre></td></tr></table></figure>
+<h5 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h5><p>使用offset和limit来获取固定数量的资源结果，当其中一个参数没有出现时，应该提供各自的默认值，比如默认取第一页，或者默认取20条数据：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">GET /cars?offset=<span class="number">10</span>&amp;limit=<span class="number">5</span></div><div class="line">GET /cars?&amp;limit=<span class="number">5</span>  <span class="comment">// Get first five result</span></div><div class="line">GEt /cars?&amp;offset=<span class="number">5</span>  <span class="comment">// Get default amount result offset 5</span></div></pre></td></tr></table></figure>
+<p>使用自定义的头X-Total-Count发回给调用段实际的资源数量。</p>
+<p>前一页后一页的链接也应该在HTTP头链接中得到支持，遵从下文中的链接原则而不要构建你自己的头：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Link: &lt;https://blog.mwaysolutions.com/sample/api/v1/cars?offset=15&amp;limit=5&gt;; rel="next",</div><div class="line">&lt;https://blog.mwaysolutions.com/sample/api/v1/cars?offset=50&amp;limit=3&gt;; rel="last",</div><div class="line">&lt;https://blog.mwaysolutions.com/sample/api/v1/cars?offset=0&amp;limit=5&gt;; rel="first",</div><div class="line">&lt;https://blog.mwaysolutions.com/sample/api/v1/cars?offset=5&amp;limit=5&gt;; rel="prev",</div></pre></td></tr></table></figure>
+<h4 id="8-版本化你的API"><a href="#8-版本化你的API" class="headerlink" title="8.版本化你的API"></a>8.版本化你的API</h4><p>确保强制实行API版本，并且不要发布一个没有版本的API，使用简单的序列数字，避免使用2.5.0这样的形式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/blog/api/v1</div></pre></td></tr></table></figure>
+<h4 id="9-使用HTTP状态码处理错误"><a href="#9-使用HTTP状态码处理错误" class="headerlink" title="9. 使用HTTP状态码处理错误"></a>9. 使用HTTP状态码处理错误</h4><p>忽略错误处理的API是很难使用的，简单的返回500和调用堆栈是非常不友好也非常无用的：</p>
+<h5 id="使用HTTP状态码"><a href="#使用HTTP状态码" class="headerlink" title="使用HTTP状态码"></a>使用HTTP状态码</h5><h5 id="HTTP标准提供了70多个状态码来描述返回值，我们不需要完全用到他们，下文中列出10个使用率较高的："><a href="#HTTP标准提供了70多个状态码来描述返回值，我们不需要完全用到他们，下文中列出10个使用率较高的：" class="headerlink" title="HTTP标准提供了70多个状态码来描述返回值，我们不需要完全用到他们，下文中列出10个使用率较高的："></a>HTTP标准提供了70多个状态码来描述返回值，我们不需要完全用到他们，下文中列出10个使用率较高的：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="number">200</span> – OK – 一切正常</div><div class="line"><span class="number">201</span> – OK – 新资源已经被创建</div><div class="line"><span class="number">204</span> – OK – 资源删除成功</div><div class="line"></div><div class="line"><span class="number">304</span> – 没有变化，客户端可以使用缓存数据</div><div class="line"></div><div class="line"><span class="number">400</span> – Bad Request – 调用不合法，确切的错误应该在error payload中描述，例如：“<span class="built_in">JSON</span> 不合法 ”</div><div class="line"><span class="number">401</span> – 未认证，调用需要用户通过认证</div><div class="line"><span class="number">403</span> – 不允许的，服务端正常解析和请求，但是调用被回绝或者不被允许</div><div class="line"><span class="number">404</span> – 未找到，指定的资源不存在</div><div class="line"><span class="number">422</span> – 不可指定的请求体 – 只有服务器不能处理实体时使用，比如图像不能被格式化，或者重要字段丢失。</div><div class="line"></div><div class="line"><span class="number">500</span> – Internal Server <span class="built_in">Error</span> – 标准服务端错误，API开发人员应该尽量避开这种错误</div></pre></td></tr></table></figure>
+<h5 id="使用error-payloads"><a href="#使用error-payloads" class="headerlink" title="使用error payloads"></a>使用error payloads</h5><p>所有的异常都应该被映射到error payloads中，下文中的例子是一个json payload的模板：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"errors"</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"userMessage"</span>: <span class="string">"Sorry, the requested resource does not exist"</span>,</div><div class="line">            <span class="attr">"internalMessage"</span>: <span class="string">"No car found in the database"</span>,</div><div class="line">            <span class="attr">"code"</span>: <span class="number">34</span>,</div><div class="line">            <span class="attr">"more info"</span>: <span class="string">"http://dev.mwaysolutions.com/blog/api/v1/errors/12345"</span></div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="10-允许重写HTTP方法"><a href="#10-允许重写HTTP方法" class="headerlink" title="10.允许重写HTTP方法"></a>10.允许重写HTTP方法</h4><p>一些代理只支持GET和POST方法，为了在这种限制下支持RESTful API，API需要重写HTTP方法。</p>
+<p>使用自定义的X-HTTP-Method-Override  HTTP头来重写POST方法。</p>
+<blockquote>
+<p>原文地址：<a href="https://www.cnblogs.com/xiaoyaojian/p/4612503.html" target="_blank" rel="external">https://www.cnblogs.com/xiaoyaojian/p/4612503.html</a></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      jojo
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://itcabin.com/2017/12/14/RESTful-API的十个最佳实践/" title="RESTful API的十个最佳实践">http://itcabin.com/2017/12/14/RESTful-API的十个最佳实践/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/RESTful-API/" rel="tag"># RESTful API</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/14/SQL-Server存储过程详解/" rel="next" title="SQL Server存储过程详解">
+                <i class="fa fa-chevron-left"></i> SQL Server存储过程详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/13/数据库索引详解/" rel="prev" title="数据库索引详解">
+                数据库索引详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/jojo.jpg"
+               alt="jojo" />
+          <p class="site-author-name" itemprop="name">jojo</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#RESTful-API的十个最佳实践"><span class="nav-number">1.</span> <span class="nav-text">RESTful API的十个最佳实践</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-使用名词而不是动词"><span class="nav-number">1.1.</span> <span class="nav-text">1.使用名词而不是动词</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Get方法和查询参数不应该改变资源状态"><span class="nav-number">1.2.</span> <span class="nav-text">2.Get方法和查询参数不应该改变资源状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-使用名词的复数形式"><span class="nav-number">1.3.</span> <span class="nav-text">3.使用名词的复数形式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-为关系使用子资源"><span class="nav-number">1.4.</span> <span class="nav-text">4.为关系使用子资源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-使用HTTP头决定序列化格式"><span class="nav-number">1.5.</span> <span class="nav-text">5.使用HTTP头决定序列化格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-使用HATEOAS"><span class="nav-number">1.6.</span> <span class="nav-text">6.使用HATEOAS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-为集合提供过滤、排序、字段选择以及分页"><span class="nav-number">1.7.</span> <span class="nav-text">7.为集合提供过滤、排序、字段选择以及分页</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#过滤"><span class="nav-number">1.7.1.</span> <span class="nav-text">过滤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#排序"><span class="nav-number">1.7.2.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分页"><span class="nav-number">1.7.3.</span> <span class="nav-text">分页</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-版本化你的API"><span class="nav-number">1.8.</span> <span class="nav-text">8.版本化你的API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-使用HTTP状态码处理错误"><span class="nav-number">1.9.</span> <span class="nav-text">9. 使用HTTP状态码处理错误</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用HTTP状态码"><span class="nav-number">1.9.1.</span> <span class="nav-text">使用HTTP状态码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HTTP标准提供了70多个状态码来描述返回值，我们不需要完全用到他们，下文中列出10个使用率较高的："><span class="nav-number">1.9.2.</span> <span class="nav-text">HTTP标准提供了70多个状态码来描述返回值，我们不需要完全用到他们，下文中列出10个使用率较高的：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用error-payloads"><span class="nav-number">1.9.3.</span> <span class="nav-text">使用error payloads</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-允许重写HTTP方法"><span class="nav-number">1.10.</span> <span class="nav-text">10.允许重写HTTP方法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jojo</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysYWLmXQ';
+      var conf = 'c9827a47febaff8473e65037e09159c4';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

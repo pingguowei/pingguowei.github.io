@@ -1,0 +1,1060 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="SQL,触发器," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="SQL Server触发器详解​    触发器是一种特殊类型的存储过程，它不同于之前的我们介绍的存储过程。触发器主要是通过事件进行触发被自动调用执行的。而存储过程可以通过存储过程的名称被调用。 什么是触发器​    触发器对表进行插入、更新、删除的时候会自动执行的特殊存储过程。触发器一般用在check约束更加复杂的约束上面。触发器和普通的存储过程的区别是：触发器是当对某一个表进行操作。诸如：upd">
+<meta name="keywords" content="SQL,触发器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL Server触发器详解">
+<meta property="og:url" content="http://itcabin.com/2017/12/14/SQL-Server触发器详解/index.html">
+<meta property="og:site_name" content="JOJO博客">
+<meta property="og:description" content="SQL Server触发器详解​    触发器是一种特殊类型的存储过程，它不同于之前的我们介绍的存储过程。触发器主要是通过事件进行触发被自动调用执行的。而存储过程可以通过存储过程的名称被调用。 什么是触发器​    触发器对表进行插入、更新、删除的时候会自动执行的特殊存储过程。触发器一般用在check约束更加复杂的约束上面。触发器和普通的存储过程的区别是：触发器是当对某一个表进行操作。诸如：upd">
+<meta property="og:updated_time" content="2017-12-14T15:33:27.866Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL Server触发器详解">
+<meta name="twitter:description" content="SQL Server触发器详解​    触发器是一种特殊类型的存储过程，它不同于之前的我们介绍的存储过程。触发器主要是通过事件进行触发被自动调用执行的。而存储过程可以通过存储过程的名称被调用。 什么是触发器​    触发器对表进行插入、更新、删除的时候会自动执行的特殊存储过程。触发器一般用在check约束更加复杂的约束上面。触发器和普通的存储过程的区别是：触发器是当对某一个表进行操作。诸如：upd">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '苹果味'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://itcabin.com/2017/12/14/SQL-Server触发器详解/"/>
+
+
+
+
+
+  <title>SQL Server触发器详解 | JOJO博客</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JOJO博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://itcabin.com/2017/12/14/SQL-Server触发器详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jojo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/jojo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JOJO博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                SQL Server触发器详解
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-14T23:30:53+08:00">
+                2017-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SQL/" itemprop="url" rel="index">
+                    <span itemprop="name">SQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/12/14/SQL-Server触发器详解/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/12/14/SQL-Server触发器详解/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="SQL-Server触发器详解"><a href="#SQL-Server触发器详解" class="headerlink" title="SQL Server触发器详解"></a>SQL Server触发器详解</h3><p>​    触发器是一种特殊类型的存储过程，它不同于之前的我们介绍的存储过程。触发器主要是通过事件进行触发被自动调用执行的。而存储过程可以通过存储过程的名称被调用。</p>
+<h4 id="什么是触发器"><a href="#什么是触发器" class="headerlink" title="什么是触发器"></a>什么是触发器</h4><p>​    <strong>触发器对表进行插入、更新、删除的时候会自动执行的特殊存储过程</strong>。触发器一般用在check约束更加复杂的约束上面。触发器和普通的存储过程的区别是：触发器是当对某一个表进行操作。诸如：update、insert、delete这些操作的时候，系统会自动调用执行该表上对应的触发器。SQL Server 2005中触发器可以分为两类：DML触发器和DDL触发器，其中DDL触发器它们会影响多种数据定义语言语句而激发，这些语句有create、alter、drop语句。</p>
+<a id="more"></a>
+<h4 id="DML触发器分为："><a href="#DML触发器分为：" class="headerlink" title="DML触发器分为："></a>DML触发器分为：</h4><h5 id="1、after触发器（之后触发"><a href="#1、after触发器（之后触发" class="headerlink" title="1、after触发器（之后触发)"></a>1、after触发器（之后触发)</h5><p>a、insert触发器</p>
+<p>b、update触发器</p>
+<p>c、delete触发器</p>
+<h5 id="2、instead-of-触发器（之前触发）"><a href="#2、instead-of-触发器（之前触发）" class="headerlink" title="2、instead of 触发器（之前触发）"></a>2、instead of 触发器（之前触发）</h5><p>​     其中after触发器要求只有执行某一操作insert、update、delete之后触发器才被触发，且只能定义在表上。而instead of触发器表示并不执行其定义的操作（insert、update、delete）而仅是执行触发器本身。<strong>既可以在表上定义instead of触发器，也可以在视图上定义</strong>。</p>
+<p>​    <strong>触发器有两个特殊的表：插入表（instered表）和删除表（deleted表）。这两张是逻辑表也是虚表</strong>。有系统在内存中创建着两张表，不会存储在数据库中。而且两张表的都是只读的，只能读取数据而不能修改数据。这两张表的结果总是与被改触发器应用的表的结构相同。当触发器完成工作后，这两张表就会被删除。Inserted表的数据是插入或是修改后的数据，而deleted表的数据是更新前的或是删除的数据。</p>
+<table>
+<thead>
+<tr>
+<th>对表的操作</th>
+<th>Inserted逻辑表</th>
+<th>Deleted逻辑表</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>增加记录（insert）</td>
+<td>存放增加的记录</td>
+<td>无</td>
+</tr>
+<tr>
+<td>删除记录（delete）</td>
+<td>无</td>
+<td>存放被删除的记录</td>
+</tr>
+<tr>
+<td>修改记录（update）</td>
+<td>存放更新后的记录</td>
+<td>存放更新前的记录</td>
+</tr>
+</tbody>
+</table>
+<pre><code>Update数据的时候就是先删除表记录，然后增加一条记录。这样在inserted和deleted表就都有update后的数据记录了。注意的是：**触发器本身就是一个事务，所以在触发器里面可以对修改数据进行一些特殊的检查。如果不满足可以利用事务回滚，撤销操作。**
+</code></pre><h4 id="创建触发器"><a href="#创建触发器" class="headerlink" title="创建触发器"></a>创建触发器</h4><h5 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> tgr_name</div><div class="line"><span class="keyword">on</span> table_name</div><div class="line"><span class="keyword">with</span> encryption <span class="comment">--加密触发器</span></div><div class="line">	<span class="keyword">for</span> update...</div><div class="line"><span class="keyword">as</span> </div><div class="line">	Transact-<span class="keyword">SQL</span></div></pre></td></tr></table></figure>
+<h4 id="创建insert类型触发器"><a href="#创建insert类型触发器" class="headerlink" title="创建insert类型触发器"></a>创建insert类型触发器</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--创建insert插入类型触发器</span></div><div class="line">if (object_id('tgr_classes_insert', 'tr') is not null)</div><div class="line">    <span class="keyword">drop</span> <span class="keyword">trigger</span> tgr_classes_insert</div><div class="line"><span class="keyword">go</span></div><div class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> tgr_classes_insert</div><div class="line"><span class="keyword">on</span> classes</div><div class="line">    <span class="keyword">for</span> <span class="keyword">insert</span> <span class="comment">--插入触发</span></div><div class="line"><span class="keyword">as</span></div><div class="line">    <span class="comment">--定义变量</span></div><div class="line">    <span class="keyword">declare</span> @<span class="keyword">id</span> <span class="built_in">int</span>, @<span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">20</span>), @temp <span class="built_in">int</span>;</div><div class="line">    <span class="comment">--在inserted表中查询已经插入记录信息</span></div><div class="line">    <span class="keyword">select</span> @<span class="keyword">id</span> = <span class="keyword">id</span>, @<span class="keyword">name</span> = <span class="keyword">name</span> <span class="keyword">from</span> inserted;</div><div class="line">    <span class="keyword">set</span> @<span class="keyword">name</span> = @<span class="keyword">name</span> + <span class="keyword">convert</span>(<span class="built_in">varchar</span>, @<span class="keyword">id</span>);</div><div class="line">    <span class="keyword">set</span> @temp = @<span class="keyword">id</span> / <span class="number">2</span>;    </div><div class="line">    <span class="keyword">insert</span> <span class="keyword">into</span> student <span class="keyword">values</span>(@<span class="keyword">name</span>, <span class="number">18</span> + @<span class="keyword">id</span>, @temp, @<span class="keyword">id</span>);</div><div class="line">    print '添加学生成功！';</div><div class="line">go</div><div class="line"><span class="comment">--插入数据</span></div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> classes <span class="keyword">values</span>(<span class="string">'5班'</span>, <span class="keyword">getDate</span>());</div><div class="line"><span class="comment">--查询数据</span></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> classes;</div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">id</span>;</div></pre></td></tr></table></figure>
+<h5 id="创建delete类型触发器"><a href="#创建delete类型触发器" class="headerlink" title="创建delete类型触发器"></a>创建delete类型触发器</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--delete删除类型触发器</span></div><div class="line">if (object_id('tgr_classes_delete', 'TR') is not null)</div><div class="line">    <span class="keyword">drop</span> <span class="keyword">trigger</span> tgr_classes_delete</div><div class="line"><span class="keyword">go</span></div><div class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> tgr_classes_delete</div><div class="line"><span class="keyword">on</span> classes</div><div class="line">    <span class="keyword">for</span> <span class="keyword">delete</span> <span class="comment">--删除触发</span></div><div class="line"><span class="keyword">as</span></div><div class="line">    print <span class="string">'备份数据中……'</span>;    </div><div class="line">    if (object_id('classesBackup', 'U') is not null)</div><div class="line">        <span class="comment">--存在classesBackup，直接插入数据</span></div><div class="line">        <span class="keyword">insert</span> <span class="keyword">into</span> classesBackup <span class="keyword">select</span> <span class="keyword">name</span>, createDate <span class="keyword">from</span> deleted;</div><div class="line">    else</div><div class="line">        <span class="comment">--不存在classesBackup创建再插入</span></div><div class="line">        <span class="keyword">select</span> * <span class="keyword">into</span> classesBackup <span class="keyword">from</span> deleted;</div><div class="line">    print '备份数据成功！';</div><div class="line">go</div><div class="line"><span class="comment">--</span></div><div class="line"><span class="comment">--不显示影响行数</span></div><div class="line"><span class="comment">--set nocount on;</span></div><div class="line"><span class="keyword">delete</span> classes <span class="keyword">where</span> <span class="keyword">name</span> = <span class="string">'5班'</span>;</div><div class="line"><span class="comment">--查询数据</span></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> classes;</div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> classesBackup;</div></pre></td></tr></table></figure>
+<p>delete触发器会在删除数据的时候，将刚才删除的数据保存在deleted表中。</p>
+<h5 id="创建update类型的触发器"><a href="#创建update类型的触发器" class="headerlink" title="创建update类型的触发器"></a>创建update类型的触发器</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--update更新类型触发器</span></div><div class="line">if (object_id('tgr_classes_update', 'TR') is not null)</div><div class="line">    <span class="keyword">drop</span> <span class="keyword">trigger</span> tgr_classes_update</div><div class="line"><span class="keyword">go</span></div><div class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> tgr_classes_update</div><div class="line"><span class="keyword">on</span> classes</div><div class="line">    <span class="keyword">for</span> <span class="keyword">update</span></div><div class="line"><span class="keyword">as</span></div><div class="line">    <span class="keyword">declare</span> @oldName <span class="built_in">varchar</span>(<span class="number">20</span>), @newName <span class="built_in">varchar</span>(<span class="number">20</span>);</div><div class="line">    <span class="comment">--更新前的数据</span></div><div class="line">    <span class="keyword">select</span> @oldName = <span class="keyword">name</span> <span class="keyword">from</span> deleted;</div><div class="line">    if (exists (<span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="keyword">name</span> <span class="keyword">like</span> <span class="string">'%'</span>+ @oldName + <span class="string">'%'</span>))</div><div class="line">        <span class="keyword">begin</span></div><div class="line">            <span class="comment">--更新后的数据</span></div><div class="line">            <span class="keyword">select</span> @newName = <span class="keyword">name</span> <span class="keyword">from</span> inserted;</div><div class="line">            <span class="keyword">update</span> student <span class="keyword">set</span> <span class="keyword">name</span> = <span class="keyword">replace</span>(<span class="keyword">name</span>, @oldName, @newName) <span class="keyword">where</span> <span class="keyword">name</span> <span class="keyword">like</span> <span class="string">'%'</span>+ @oldName + <span class="string">'%'</span>;</div><div class="line">            print '级联修改数据成功！';</div><div class="line">        <span class="keyword">end</span></div><div class="line">    <span class="keyword">else</span></div><div class="line">        print <span class="string">'无需修改student表！'</span>;</div><div class="line">go</div><div class="line"><span class="comment">--查询数据</span></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">id</span>;</div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> classes;</div><div class="line"><span class="keyword">update</span> classes <span class="keyword">set</span> <span class="keyword">name</span> = <span class="string">'五班'</span> <span class="keyword">where</span> <span class="keyword">name</span> = <span class="string">'5班'</span>;</div></pre></td></tr></table></figure>
+<p> update触发器会在更新数据后，将更新前的数据保存在deleted表中，更新后的数据保存在inserted表中。</p>
+<h5 id="update更新列级触发器"><a href="#update更新列级触发器" class="headerlink" title="update更新列级触发器"></a>update更新列级触发器</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">if (object_id('tgr_classes_update_column', 'TR') is not null)</div><div class="line">    <span class="keyword">drop</span> <span class="keyword">trigger</span> tgr_classes_update_column</div><div class="line"><span class="keyword">go</span></div><div class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> tgr_classes_update_column</div><div class="line"><span class="keyword">on</span> classes</div><div class="line">    <span class="keyword">for</span> <span class="keyword">update</span></div><div class="line"><span class="keyword">as</span></div><div class="line">    <span class="comment">--列级触发器：是否更新了班级创建时间</span></div><div class="line">    <span class="keyword">if</span> (<span class="keyword">update</span>(createDate))</div><div class="line">    <span class="keyword">begin</span></div><div class="line">        raisError(<span class="string">'系统提示：班级创建时间不能修改！'</span>, <span class="number">16</span>, <span class="number">11</span>);</div><div class="line">        <span class="keyword">rollback</span> tran;</div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">go</span></div><div class="line"><span class="comment">--测试</span></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">id</span>;</div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> classes;</div><div class="line"><span class="keyword">update</span> classes <span class="keyword">set</span> createDate = <span class="keyword">getDate</span>() <span class="keyword">where</span> <span class="keyword">id</span> = <span class="number">3</span>;</div><div class="line"><span class="keyword">update</span> classes <span class="keyword">set</span> <span class="keyword">name</span> = <span class="string">'四班'</span> <span class="keyword">where</span> <span class="keyword">id</span> = <span class="number">7</span>;</div></pre></td></tr></table></figure>
+<h4 id="instead-of类型触发器"><a href="#instead-of类型触发器" class="headerlink" title="instead of类型触发器"></a>instead of类型触发器</h4><p> instead of触发器表示并不执行其定义的操作（insert、update、delete）而仅是执行触发器本身的内容。</p>
+<h5 id="创建语法"><a href="#创建语法" class="headerlink" title="创建语法"></a>创建语法</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> tgr_name</div><div class="line"><span class="keyword">on</span> table_name</div><div class="line"><span class="keyword">with</span> encryption</div><div class="line">    instead <span class="keyword">of</span> update...</div><div class="line"><span class="keyword">as</span></div><div class="line">    T-<span class="keyword">SQL</span></div></pre></td></tr></table></figure>
+<h5 id="创建instead-of触发器"><a href="#创建instead-of触发器" class="headerlink" title="创建instead of触发器"></a>创建instead of触发器</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">if (object_id('tgr_classes_inteadOf', 'TR') is not null)</div><div class="line">    <span class="keyword">drop</span> <span class="keyword">trigger</span> tgr_classes_inteadOf</div><div class="line"><span class="keyword">go</span></div><div class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> tgr_classes_inteadOf</div><div class="line"><span class="keyword">on</span> classes</div><div class="line">    instead <span class="keyword">of</span> <span class="keyword">delete</span><span class="comment">/*, update, insert*/</span></div><div class="line"><span class="keyword">as</span></div><div class="line">    <span class="keyword">declare</span> @<span class="keyword">id</span> <span class="built_in">int</span>, @<span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">20</span>);</div><div class="line">    <span class="comment">--查询被删除的信息，并赋值</span></div><div class="line">    <span class="keyword">select</span> @<span class="keyword">id</span> = <span class="keyword">id</span>, @<span class="keyword">name</span> = <span class="keyword">name</span> <span class="keyword">from</span> deleted;</div><div class="line">    print 'id: ' + convert(varchar, @id) + ', name: ' + @name;</div><div class="line">    <span class="comment">--先删除student的信息</span></div><div class="line">    <span class="keyword">delete</span> student <span class="keyword">where</span> cid = @<span class="keyword">id</span>;</div><div class="line">    <span class="comment">--再删除classes的信息</span></div><div class="line">    <span class="keyword">delete</span> classes <span class="keyword">where</span> <span class="keyword">id</span> = @<span class="keyword">id</span>;</div><div class="line">    print '删除[ id: ' + convert(varchar, @id) + ', name: ' + @name + ' ] 的信息成功！';</div><div class="line">go</div><div class="line"><span class="comment">--test</span></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">id</span>;</div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> classes;</div><div class="line"><span class="keyword">delete</span> classes <span class="keyword">where</span> <span class="keyword">id</span> = <span class="number">7</span>;</div></pre></td></tr></table></figure>
+<h5 id="显示自定义消息raiserror"><a href="#显示自定义消息raiserror" class="headerlink" title="显示自定义消息raiserror"></a>显示自定义消息raiserror</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">if (object_id('tgr_message', 'TR') is not null)</div><div class="line">    <span class="keyword">drop</span> <span class="keyword">trigger</span> tgr_message</div><div class="line"><span class="keyword">go</span></div><div class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> tgr_message</div><div class="line"><span class="keyword">on</span> student</div><div class="line">    <span class="keyword">after</span> <span class="keyword">insert</span>, <span class="keyword">update</span></div><div class="line"><span class="keyword">as</span> raisError(<span class="string">'tgr_message触发器被触发'</span>, <span class="number">16</span>, <span class="number">10</span>);</div><div class="line">go</div><div class="line"><span class="comment">--test</span></div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> student <span class="keyword">values</span>(<span class="string">'lily'</span>, <span class="number">22</span>, <span class="number">1</span>, <span class="number">7</span>);</div><div class="line"><span class="keyword">update</span> student <span class="keyword">set</span> sex = <span class="number">0</span> <span class="keyword">where</span> <span class="keyword">name</span> = <span class="string">'lucy'</span>;</div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">id</span>;</div></pre></td></tr></table></figure>
+<p>修改触发器</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--禁用触发器</span></div><div class="line">disable trigger tgr_message on student;</div><div class="line"><span class="comment">--启用触发器</span></div><div class="line">enable trigger tgr_message on student;</div></pre></td></tr></table></figure>
+<h5 id="查询创建的触发器信息"><a href="#查询创建的触发器信息" class="headerlink" title="查询创建的触发器信息"></a>查询创建的触发器信息</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--查询已存在的触发器</span></div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> sys.triggers;</div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> sys.objects <span class="keyword">where</span> <span class="keyword">type</span> = <span class="string">'TR'</span>;</div><div class="line"></div><div class="line"><span class="comment">--查看触发器触发事件</span></div><div class="line"><span class="keyword">select</span> te.* <span class="keyword">from</span> sys.trigger_events te <span class="keyword">join</span> sys.triggers t</div><div class="line"><span class="keyword">on</span> t.object_id = te.object_id</div><div class="line"><span class="keyword">where</span> t.parent_class = <span class="number">0</span> <span class="keyword">and</span> t.name = <span class="string">'tgr_valid_data'</span>;</div><div class="line"></div><div class="line"><span class="comment">--查看创建触发器语句</span></div><div class="line">exec sp_helptext 'tgr_message';</div></pre></td></tr></table></figure>
+<p><em>示例，验证插入数据</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">if ((object_id(&apos;tgr_valid_data&apos;, &apos;TR&apos;) is not null))</div><div class="line">    drop trigger tgr_valid_data</div><div class="line">go</div><div class="line">create trigger tgr_valid_data</div><div class="line">on student</div><div class="line">after insert</div><div class="line">as</div><div class="line">    declare @age int,</div><div class="line">            @name varchar(20);</div><div class="line">    select @name = s.name, @age = s.age from inserted s;</div><div class="line">    if (@age &lt; 18)</div><div class="line">    begin</div><div class="line">        raisError(&apos;插入新数据的age有问题&apos;, 16, 1);</div><div class="line">        rollback tran;</div><div class="line">    end</div><div class="line">go</div><div class="line">--test</div><div class="line">insert into student values(&apos;forest&apos;, 2, 0, 7);</div><div class="line">insert into student values(&apos;forest&apos;, 22, 0, 7);</div><div class="line">select * from student order by id;</div></pre></td></tr></table></figure>
+<p><em>示例，操作日志</em>(<strong>重要Demo示例</strong>)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">if (object_id('log', 'U') is not null)</div><div class="line">    <span class="keyword">drop</span> <span class="keyword">table</span> <span class="keyword">log</span></div><div class="line"><span class="keyword">go</span></div><div class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">log</span>(</div><div class="line">    <span class="keyword">id</span> <span class="built_in">int</span> <span class="keyword">identity</span>(<span class="number">1</span>, <span class="number">1</span>) primary <span class="keyword">key</span>,</div><div class="line">    <span class="keyword">action</span> <span class="built_in">varchar</span>(<span class="number">20</span>),</div><div class="line">    createDate datetime <span class="keyword">default</span> <span class="keyword">getDate</span>()</div><div class="line">)</div><div class="line"><span class="keyword">go</span></div><div class="line"><span class="keyword">if</span> (<span class="keyword">exists</span> (<span class="keyword">select</span> * <span class="keyword">from</span> sys.objects <span class="keyword">where</span> <span class="keyword">name</span> = <span class="string">'tgr_student_log'</span>))</div><div class="line">    <span class="keyword">drop</span> <span class="keyword">trigger</span> tgr_student_log</div><div class="line"><span class="keyword">go</span></div><div class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> tgr_student_log</div><div class="line"><span class="keyword">on</span> student</div><div class="line"><span class="keyword">after</span> <span class="keyword">insert</span>, <span class="keyword">update</span>, <span class="keyword">delete</span></div><div class="line"><span class="keyword">as</span></div><div class="line">    <span class="keyword">if</span> ((<span class="keyword">exists</span> (<span class="keyword">select</span> <span class="number">1</span> <span class="keyword">from</span> inserted)) <span class="keyword">and</span> (<span class="keyword">exists</span> (<span class="keyword">select</span> <span class="number">1</span> <span class="keyword">from</span> deleted)))</div><div class="line">    <span class="keyword">begin</span></div><div class="line">        <span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">log</span>(<span class="keyword">action</span>) <span class="keyword">values</span>(<span class="string">'updated'</span>);</div><div class="line">    <span class="keyword">end</span></div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">exists</span> (<span class="keyword">select</span> <span class="number">1</span> <span class="keyword">from</span> inserted) <span class="keyword">and</span> <span class="keyword">not</span> <span class="keyword">exists</span> (<span class="keyword">select</span> <span class="number">1</span> <span class="keyword">from</span> deleted))</div><div class="line">    <span class="keyword">begin</span></div><div class="line">        <span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">log</span>(<span class="keyword">action</span>) <span class="keyword">values</span>(<span class="string">'inserted'</span>);</div><div class="line">    <span class="keyword">end</span></div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">not</span> <span class="keyword">exists</span> (<span class="keyword">select</span> <span class="number">1</span> <span class="keyword">from</span> inserted) <span class="keyword">and</span> <span class="keyword">exists</span> (<span class="keyword">select</span> <span class="number">1</span> <span class="keyword">from</span> deleted))</div><div class="line">    <span class="keyword">begin</span></div><div class="line">        <span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">log</span>(<span class="keyword">action</span>) <span class="keyword">values</span>(<span class="string">'deleted'</span>);</div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">go</span></div><div class="line"><span class="comment">--test</span></div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> student <span class="keyword">values</span>(<span class="string">'king'</span>, <span class="number">22</span>, <span class="number">1</span>, <span class="number">7</span>);</div><div class="line"><span class="keyword">update</span> student <span class="keyword">set</span> sex = <span class="number">0</span> <span class="keyword">where</span> <span class="keyword">name</span> = <span class="string">'king'</span>;</div><div class="line"><span class="keyword">delete</span> student <span class="keyword">where</span> <span class="keyword">name</span> = <span class="string">'king'</span>;</div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">log</span>;</div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">id</span>;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>原文地址：<a href="https://www.cnblogs.com/hoojo/archive/2011/07/20/2111316.html" target="_blank" rel="external">https://www.cnblogs.com/hoojo/archive/2011/07/20/2111316.html</a></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      jojo
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://itcabin.com/2017/12/14/SQL-Server触发器详解/" title="SQL Server触发器详解">http://itcabin.com/2017/12/14/SQL-Server触发器详解/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SQL/" rel="tag"># SQL</a>
+          
+            <a href="/tags/触发器/" rel="tag"># 触发器</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/14/SQL-Server存储过程详解/" rel="prev" title="SQL Server存储过程详解">
+                SQL Server存储过程详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/jojo.jpg"
+               alt="jojo" />
+          <p class="site-author-name" itemprop="name">jojo</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-Server触发器详解"><span class="nav-number">1.</span> <span class="nav-text">SQL Server触发器详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是触发器"><span class="nav-number">1.1.</span> <span class="nav-text">什么是触发器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DML触发器分为："><span class="nav-number">1.2.</span> <span class="nav-text">DML触发器分为：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、after触发器（之后触发"><span class="nav-number">1.2.1.</span> <span class="nav-text">1、after触发器（之后触发)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、instead-of-触发器（之前触发）"><span class="nav-number">1.2.2.</span> <span class="nav-text">2、instead of 触发器（之前触发）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建触发器"><span class="nav-number">1.3.</span> <span class="nav-text">创建触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#语法"><span class="nav-number">1.3.1.</span> <span class="nav-text">语法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建insert类型触发器"><span class="nav-number">1.4.</span> <span class="nav-text">创建insert类型触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建delete类型触发器"><span class="nav-number">1.4.1.</span> <span class="nav-text">创建delete类型触发器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建update类型的触发器"><span class="nav-number">1.4.2.</span> <span class="nav-text">创建update类型的触发器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#update更新列级触发器"><span class="nav-number">1.4.3.</span> <span class="nav-text">update更新列级触发器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#instead-of类型触发器"><span class="nav-number">1.5.</span> <span class="nav-text">instead of类型触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建语法"><span class="nav-number">1.5.1.</span> <span class="nav-text">创建语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建instead-of触发器"><span class="nav-number">1.5.2.</span> <span class="nav-text">创建instead of触发器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#显示自定义消息raiserror"><span class="nav-number">1.5.3.</span> <span class="nav-text">显示自定义消息raiserror</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查询创建的触发器信息"><span class="nav-number">1.5.4.</span> <span class="nav-text">查询创建的触发器信息</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jojo</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysYWLmXQ';
+      var conf = 'c9827a47febaff8473e65037e09159c4';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
